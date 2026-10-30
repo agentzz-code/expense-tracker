@@ -2,42 +2,180 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#101713">
 <title>Finance — Personal Finance</title>
 <style>
+/* ===== Design tokens ===== */
 :root{color-scheme:dark;--bg:#0d1410;--surface:#151f19;--surface2:#1b2921;--line:#293a30;--text:#eef5ef;--muted:#91a398;--green:#75e0a5;--red:#f08080;--amber:#e9c27c;--blue:#88b8ed;--r:18px}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% -20%,#1d3828 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:248px;padding:25px 17px;background:#111a14;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:5}.brand{display:flex;gap:11px;align-items:center;font-size:20px;font-weight:750;margin:2px 8px 38px}.logo{width:37px;height:37px;border-radius:12px;background:linear-gradient(145deg,#9af0bd,#45b87c);color:#0b2114;display:grid;place-items:center;font-weight:900}.nav-label{color:#718278;font-size:10px;letter-spacing:1.6px;font-weight:800;margin:0 10px 12px}.nav{display:grid;gap:5px}.nav button,.mobile button{border:0;background:transparent;color:var(--muted);padding:11px 13px;text-align:left;border-radius:11px;display:flex;align-items:center;gap:12px}.nav button.active,.nav button:hover{background:#20362a;color:var(--green)}.nav .ico{width:19px;text-align:center;font-size:16px}.sidebottom{margin-top:auto}.sidebottom p{font-size:11px;color:#718278;padding:0 10px}.main{margin-left:248px;padding:27px 34px 50px;max-width:1700px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px}.eyebrow{color:#82958a;font-size:10px;letter-spacing:1.7px;font-weight:800;margin:0 0 4px}.top h1{font-size:27px;margin:0}.topright{display:flex;gap:10px;align-items:center}.pill,.tag{border:1px solid var(--line);background:#17231b;border-radius:30px;padding:8px 12px;color:var(--muted);font-size:11px}.avatar{width:38px;height:38px;border-radius:50%;border:1px solid #3b5945;background:#213a2b;color:var(--green);font-weight:800}.page{display:none;animation:fade .2s ease}.page.active{display:block}@keyframes fade{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}.welcome{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:19px}.welcome h2{font-size:20px;margin:0 0 3px}.muted{color:var(--muted)}.small{font-size:12px}.btn{border:1px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--text);padding:10px 14px}.btn.primary{background:var(--green);border-color:var(--green);color:#0b2114;font-weight:750}.btn:hover{filter:brightness(1.1)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:15px}.card{background:linear-gradient(145deg,#19251d,#141d17);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0;box-shadow:0 10px 30px #00000012}.statlabel{font-size:12px;color:var(--muted)}.statvalue{font-size:25px;font-weight:750;margin:11px 0 3px;letter-spacing:-.6px;overflow-wrap:anywhere}.statvalue small{font-size:11px;color:var(--muted);font-weight:500}.positive{color:var(--green)}.negative{color:var(--red)}.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-bottom:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.cardhead h3{font-size:14px;margin:0}.space-list{display:grid;gap:13px}.space-row{display:flex;align-items:center;gap:10px;color:var(--muted)}.space-row strong{margin-left:auto;color:var(--text)}.dot{width:9px;height:9px;border-radius:50%;background:var(--green)}.dot.blue{background:var(--blue)}.dot.purple{background:#c39af1}.empty{text-align:center;padding:23px 10px;color:var(--muted)}.empty .symbol{font-size:25px;color:var(--green)}.empty h4{color:var(--text);margin:8px 0 3px}.barline{height:8px;border-radius:10px;background:#26362c;overflow:hidden;margin:10px 0}.barline span{display:block;height:100%;width:0;background:var(--green);border-radius:10px}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:14px 0}.field{background:#111a14;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:10px 12px;min-width:0}.field::placeholder{color:#738379}input.field,select.field{height:40px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:600px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #26352b;font-size:12px}th{color:#8fa195;font-weight:600}td{color:#dce7de}.section-title{margin:0 0 5px;font-size:20px}.section-desc{margin:0;color:var(--muted);font-size:12px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 17px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.formgroup{display:grid;gap:6px}.formgroup label{font-size:11px;color:var(--muted)}.formgroup.full{grid-column:1/-1}.notice{border:1px solid #66532d;background:#302819;color:#e9d2a4;padding:12px 14px;border-radius:12px;font-size:12px;margin-bottom:15px}.tag.green{color:var(--green);border-color:#315640}.tag.amber{color:var(--amber);border-color:#66532d}.mobile{display:none}.hidden{display:none!important}.footer{text-align:center;color:#65766b;font-size:10px;padding:30px 0 5px}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 70% -20%,#1d3828 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{min-height:100vh}
+
+/* ===== Sidebar ===== */
+.sidebar{position:fixed;inset:0 auto 0 0;width:248px;padding:25px 17px;background:#111a14;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:5}
+.brand{display:flex;gap:11px;align-items:center;font-size:20px;font-weight:750;margin:2px 8px 38px}
+.logo{width:37px;height:37px;border-radius:12px;background:linear-gradient(145deg,#9af0bd,#45b87c);color:#0b2114;display:grid;place-items:center;font-weight:900}
+.nav-label{color:#718278;font-size:10px;letter-spacing:1.6px;font-weight:800;margin:0 10px 12px}
+.nav{display:grid;gap:5px}
+.nav button,.mobile button{border:0;background:transparent;color:var(--muted);padding:11px 13px;text-align:left;border-radius:11px;display:flex;align-items:center;gap:12px}
+.nav button.active,.nav button:hover{background:#20362a;color:var(--green)}
+.nav .ico{width:19px;text-align:center;font-size:16px}
+.sidebottom{margin-top:auto}.sidebottom p{font-size:11px;color:#718278;padding:0 10px}
+
+/* ===== Main area ===== */
+.main{margin-left:248px;padding:27px 34px 50px;max-width:1700px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px}
+.eyebrow{color:#82958a;font-size:10px;letter-spacing:1.7px;font-weight:800;margin:0 0 4px}
+.top h1{font-size:27px;margin:0}
+.topright{display:flex;gap:10px;align-items:center}
+.pill,.tag{border:1px solid var(--line);background:#17231b;border-radius:30px;padding:8px 12px;color:var(--muted);font-size:11px}
+.avatar{width:38px;height:38px;border-radius:50%;border:1px solid #3b5945;background:#213a2b;color:var(--green);font-weight:800}
+
+/* ===== Pages ===== */
+.page{display:none;animation:fade .2s ease}.page.active{display:block}
+@keyframes fade{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ===== Typography & layout ===== */
+.welcome{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:19px}
+.welcome h2{font-size:20px;margin:0 0 3px}
+.muted{color:var(--muted)}.small{font-size:12px}
+.btn{border:1px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--text);padding:10px 14px}
+.btn.primary{background:var(--green);border-color:var(--green);color:#0b2114;font-weight:750}
+.btn:hover{filter:brightness(1.1)}
 button:disabled{opacity:.6;cursor:not-allowed}
+
+/* ===== Cards & stats ===== */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:15px}
+.card{background:linear-gradient(145deg,#19251d,#141d17);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0;box-shadow:0 10px 30px #00000012}
+.statlabel{font-size:12px;color:var(--muted)}
+.statvalue{font-size:25px;font-weight:750;margin:11px 0 3px;letter-spacing:-.6px;overflow-wrap:anywhere}
+.statvalue small{font-size:11px;color:var(--muted);font-weight:500}
+.positive{color:var(--green)}.negative{color:var(--red)}
+
+/* ===== Grid layouts ===== */
+.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-bottom:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+
+/* ===== Card header ===== */
+.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.cardhead h3{font-size:14px;margin:0}
+
+/* ===== Space list (overview) ===== */
+.space-list{display:grid;gap:13px}
+.space-row{display:flex;align-items:center;gap:10px;color:var(--muted)}
+.space-row strong{margin-left:auto;color:var(--text)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--green)}.dot.blue{background:var(--blue)}.dot.purple{background:#c39af1}
+
+/* ===== Empty state ===== */
+.empty{text-align:center;padding:23px 10px;color:var(--muted)}.empty .symbol{font-size:25px;color:var(--green)}.empty h4{color:var(--text);margin:8px 0 3px}
+
+/* ===== Forms ===== */
+.field{background:#111a14;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:10px 12px;min-width:0}
+.field::placeholder{color:#738379}input.field,select.field{height:40px}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:14px 0}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.formgroup{display:grid;gap:6px}.formgroup label{font-size:11px;color:var(--muted)}.formgroup.full{grid-column:1/-1}
+
+/* ===== Table ===== */
+.tablewrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #26352b;font-size:12px}
+th{color:#8fa195;font-weight:600}td{color:#dce7de}
+
+/* ===== Section headers ===== */
+.section-title{margin:0 0 5px;font-size:20px}
+.section-desc{margin:0;color:var(--muted);font-size:12px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 17px}
+
+/* ===== Notices ===== */
+.notice{border:1px solid #66532d;background:#302819;color:#e9d2a4;padding:12px 14px;border-radius:12px;font-size:12px;margin-bottom:15px}
+.tag.green{color:var(--green);border-color:#315640}
+.tag.amber{color:var(--amber);border-color:#66532d}
+
+/* ===== Auth screens ===== */
 .auth-loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;color:var(--muted);padding:20px;background:radial-gradient(ellipse at 70% -20%,#1d3828 0,transparent 38%),var(--bg);z-index:20}
 .auth-screen{position:fixed;inset:0;overflow:auto;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 70% -20%,#1d3828 0,transparent 38%),var(--bg);z-index:20}
 .auth-card{width:min(420px,100%);padding:26px}
 .auth-brand{display:flex;gap:12px;align-items:center;margin-bottom:20px}
-.auth-brand h1{font-size:20px;margin:0}
-.auth-brand p{margin:2px 0 0}
+.auth-brand h1{font-size:20px;margin:0}.auth-brand p{margin:2px 0 0}
 .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border:1px solid var(--line);border-radius:14px;background:#111a14;margin-bottom:16px}
 .auth-tabs button{border:0;background:transparent;color:var(--muted);padding:10px;border-radius:10px}
 .auth-tabs button.active{background:#20362a;color:var(--green)}
-.auth-form{display:grid;gap:14px}
-.auth-form .field{width:100%}
+.auth-form{display:grid;gap:14px}.auth-form .field{width:100%}
 .auth-submit{width:100%;height:42px}
 .auth-hint{margin:0;font-size:11px;color:var(--muted)}
 .auth-message{border:1px solid #66532d;background:#302819;color:#e9d2a4;padding:11px 13px;border-radius:12px;font-size:12px;margin-bottom:14px}
 .auth-message.error{border-color:#6b3434;background:#2e1a1a;color:#f5b5b5}
+
+/* ===== Mobile navigation ===== */
+.mobile{display:none}
+
+/* ===== Extras from extra_1.css ===== */
+.btn.small{padding:6px 10px;font-size:12px}
+.amount{text-align:right;white-space:nowrap}
+.table-actions{text-align:right;white-space:nowrap}
+.rec-list{display:grid;gap:8px}
+.rec-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:#131d16}
+.rec-main{min-width:0;overflow-wrap:anywhere}
+.rec-main .sub,.rec-row .sub{font-size:12px;color:var(--muted)}
+.rec-amount{text-align:right;font-weight:700;white-space:nowrap}
+.rec-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.progress{height:8px;border-radius:10px;background:#26362c;overflow:hidden;margin:8px 0 0}
+.progress span{display:block;height:100%;width:0;background:var(--green);border-radius:10px}
+.progress.warn span{background:var(--amber)}
+.progress.over span{background:var(--red)}
+.warn-text{color:var(--amber)}
+.form-card{margin-bottom:0}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hint{font-size:11px;color:var(--muted);margin:0}
+.pill.ok{color:var(--green)}.pill.warn{color:var(--amber)}.pill.bad{color:var(--red)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);max-width:min(560px,92vw);background:#2e1a1a;color:#f5b5b5;border:1px solid #6b3434;padding:12px 16px;border-radius:12px;z-index:30;font-size:13px;box-shadow:0 10px 30px #0008}
+#toast.ok{background:#17231b;color:var(--green);border-color:#315640}
+.barline{height:8px;border-radius:10px;background:#26362c;overflow:hidden;margin:10px 0}
+.barline span{display:block;height:100%;width:0;background:var(--green);border-radius:10px}
+
+/* ===== Rates page ===== */
+.rate-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:#131d16;margin-bottom:8px}
+.rate-cell{min-width:0}.rate-cell .sub{font-size:11px;color:var(--muted)}
+
+/* ===== Responsive ===== */
 @media(max-width:1100px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}}
-@media(max-width:700px){.sidebar{display:none}.main{margin:0;padding:20px 14px 100px}.top h1{font-size:23px}.welcome{align-items:flex-start;flex-direction:column}.stats{gap:9px}.card{padding:15px;border-radius:15px}.statvalue{font-size:21px}.grid3{grid-template-columns:1fr}.mobile{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:10px;padding:7px 4px;background:#17231beF;border:1px solid #3a4a3d;border-radius:17px;backdrop-filter:blur(18px);z-index:10}.mobile button{display:block;text-align:center;padding:9px 1px;font-size:10px}.mobile button.active{color:var(--green);background:#20362a}.mobile button span{display:block;font-size:15px}.topright .pill{display:none}}
+@media(max-width:700px){
+  .sidebar{display:none}
+  .main{margin:0;padding:20px 14px 100px}
+  .top h1{font-size:23px}
+  .welcome{align-items:flex-start;flex-direction:column}
+  .stats{gap:9px}.card{padding:15px;border-radius:15px}.statvalue{font-size:21px}
+  .grid3{grid-template-columns:1fr}
+  .mobile{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:10px;padding:7px 4px;background:#17231bef;border:1px solid #3a4a3d;border-radius:17px;backdrop-filter:blur(18px);z-index:10}
+  .mobile button{display:block;text-align:center;padding:9px 1px;font-size:10px}
+  .mobile button.active{color:var(--green);background:#20362a}
+  .mobile button span{display:block;font-size:15px}
+  .topright .pill{display:none}
+  .rec-row{grid-template-columns:1fr}.rec-amount{text-align:left}.rec-actions{justify-content:flex-start}
+  .rate-row{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
+}
+.hidden{display:none!important}
+.footer{text-align:center;color:#65766b;font-size:10px;padding:30px 0 5px}
 </style>
 </head>
 <body>
-<div id="authLoading" class="auth-loading" role="status"><div class="logo">F</div><p id="authLoadingMsg">Checking secure session…</p></div>
 
+<!-- ===== Auth: loading ===== -->
+<div id="authLoading" class="auth-loading" role="status">
+  <div class="logo">F</div>
+  <p id="authLoadingMsg">Checking secure session…</p>
+</div>
+
+<!-- ===== Auth: sign-in / register ===== -->
 <section id="authScreen" class="auth-screen hidden" aria-labelledby="authTitle">
   <div class="auth-card card">
     <div class="auth-brand"><div class="logo">F</div><div><h1 id="authTitle">Finance</h1><p class="muted small">Sign in to your private financial records.</p></div></div>
     <div class="auth-tabs" role="tablist">
-      <button type="button" role="tab" id="tabSignIn" class="active" aria-selected="true" aria-controls="signInForm" data-auth-mode="signin">Sign in</button>
-      <button type="button" role="tab" id="tabRegister" aria-selected="false" aria-controls="registerForm" data-auth-mode="register">Create account</button>
+      <button type="button" role="tab" id="tabSignIn" class="active" aria-selected="true" aria-controls="signInForm" data-label="Sign in">Sign in</button>
+      <button type="button" role="tab" id="tabRegister" aria-selected="false" aria-controls="registerForm" data-label="Create account">Create account</button>
     </div>
     <div id="authMessage" class="auth-message hidden" role="alert"></div>
     <form id="signInForm" class="auth-form" novalidate>
@@ -54,6 +192,7 @@ button:disabled{opacity:.6;cursor:not-allowed}
   </div>
 </section>
 
+<!-- ===== App shell ===== -->
 <div class="app hidden" id="appShell">
 <aside class="sidebar">
   <div class="brand"><div class="logo">F</div>Finance</div>
@@ -65,131 +204,341 @@ button:disabled{opacity:.6;cursor:not-allowed}
     <button data-page="rates"><span class="ico">⇄</span>Exchange rates</button>
     <button data-page="budgets"><span class="ico">▤</span>Budgets</button>
     <button data-page="cards"><span class="ico">▭</span>Credit cards</button>
-    <button data-page="debts"><span class="ico">⇅</span>Debts & loans</button>
+    <button data-page="debts"><span class="ico">⇅</span>Debts &amp; loans</button>
     <button data-page="savings"><span class="ico">◈</span>Savings</button>
     <button data-page="reports"><span class="ico">▥</span>Reports</button>
   </nav>
-  <div class="sidebottom"><nav class="nav"><button data-page="settings"><span class="ico">⚙</span>Settings</button></nav><p>One clear view of your finances.</p></div>
+  <div class="sidebottom">
+    <nav class="nav"><button data-page="settings"><span class="ico">⚙</span>Settings</button></nav>
+    <p>One clear view of your finances.</p>
+  </div>
 </aside>
-<main class="main">
-<header class="top"><div><p class="eyebrow">YOUR FINANCES</p><h1 id="pageTitle">Overview</h1></div><div class="topright"><span class="pill">IQD · Primary currency</span><button class="avatar" title="Owner account">F</button><button class="btn" id="signOutBtn" type="button">Sign out</button></div></header>
 
+<main class="main">
+<header class="top">
+  <div><p class="eyebrow">YOUR FINANCES</p><h1 id="pageTitle">Overview</h1></div>
+  <div class="topright">
+    <span class="pill">IQD · Primary currency</span>
+    <button class="avatar" title="Owner account">F</button>
+    <button class="btn" id="signOutBtn" type="button">Sign out</button>
+  </div>
+</header>
+
+<!-- ===== Overview page ===== -->
 <section class="page active" id="page-overview">
   <div class="welcome"><div><h2>Financial overview</h2><div class="muted small">Personal, Family, and Business — together.</div></div><button class="btn primary" data-page="transactions">＋ Add transaction</button></div>
-  <div class="notice">Setup required: these are empty placeholders, not real balances. Connect the owner's secure account, configure exchange rates, and enter opening balances before relying on reports.</div>
+  <div class="notice" id="overviewNotice">Loading your records…</div>
   <div class="stats">
-    <article class="card"><div class="statlabel">Total balance</div><div class="statvalue">— <small>IQD</small></div><div class="muted small">Across all accounts</div></article>
-    <article class="card"><div class="statlabel">Income this month</div><div class="statvalue positive">— <small>IQD</small></div><div class="muted small">No records yet</div></article>
-    <article class="card"><div class="statlabel">Expenses this month</div><div class="statvalue negative">— <small>IQD</small></div><div class="muted small">No records yet</div></article>
-    <article class="card"><div class="statlabel">Net savings</div><div class="statvalue">— <small>IQD</small></div><div class="muted small">Income less expenses</div></article>
+    <article class="card"><div class="statlabel">Total balance</div><div class="statvalue" id="ovTotal">— <small>IQD</small></div><div class="muted small" id="ovTotalNote">Across IQD accounts</div></article>
+    <article class="card"><div class="statlabel">Income this month</div><div class="statvalue positive" id="ovIncome">— <small>IQD</small></div><div class="muted small">Recorded income at saved rates</div></article>
+    <article class="card"><div class="statlabel">Expenses this month</div><div class="statvalue negative" id="ovExpense">— <small>IQD</small></div><div class="muted small">Card purchases included; transfers excluded</div></article>
+    <article class="card"><div class="statlabel">Net savings</div><div class="statvalue" id="ovNet">— <small>IQD</small></div><div class="muted small">Income less expenses this month</div></article>
   </div>
   <div class="grid2">
-    <article class="card"><div class="cardhead"><h3>Financial spaces</h3><span class="tag">Unified ledger</span></div><div class="space-list"><div class="space-row"><i class="dot"></i>Personal <strong>— IQD</strong></div><div class="space-row"><i class="dot blue"></i>Family <strong>— IQD</strong></div><div class="space-row"><i class="dot purple"></i>Business <strong>— IQD</strong></div></div><p class="muted small">Spaces are reporting labels, not separate accounts.</p></article>
-    <article class="card"><div class="cardhead"><h3>Exchange rates</h3><span class="tag amber">Not connected</span></div><p class="muted small">Official, Iraqi market, and manual rates with separate buy/sell values.</p><div class="statvalue">— <small>IQD / USD</small></div><p class="muted small">Last successful update: unavailable</p><button class="btn" data-page="rates">Configure rates</button></article>
+    <article class="card"><div class="cardhead"><h3>Financial spaces</h3><span class="tag">Unified ledger</span></div>
+      <div class="space-list">
+        <div class="space-row"><i class="dot"></i>Personal <strong id="spacePersonal">— IQD</strong></div>
+        <div class="space-row"><i class="dot blue"></i>Family <strong id="spaceFamily">— IQD</strong></div>
+        <div class="space-row"><i class="dot purple"></i>Business <strong id="spaceBusiness">— IQD</strong></div>
+      </div>
+      <p class="muted small">Net this month. Spaces are reporting labels, not separate accounts.</p>
+    </article>
+    <article class="card"><div class="cardhead"><h3>Exchange rates</h3><span class="tag amber">Manual only</span></div>
+      <p class="muted small">Enter rates manually on the Exchange rates page. Each transaction preserves its rate permanently.</p>
+      <div class="statvalue" id="ovRateDisplay">— <small>IQD / USD</small></div>
+      <p class="muted small" id="ovRateNote">No rate entered yet</p>
+      <button class="btn" data-page="rates">Configure rates</button>
+    </article>
   </div>
   <div class="grid2">
-    <article class="card"><div class="cardhead"><h3>Income vs expenses</h3><span class="muted small">Monthly</span></div><div class="empty"><div class="symbol">▥</div><h4>Waiting for transactions</h4><p class="small">Charts will appear when real data is added.</p></div></article>
-    <article class="card"><div class="cardhead"><h3>Recent activity</h3><button class="btn" data-page="transactions">View all</button></div><div class="empty"><div class="symbol">↗</div><h4>No transactions yet</h4><p class="small">Income, expenses, and transfers will appear here.</p></div></article>
+    <article class="card"><div class="cardhead"><h3>Income vs expenses</h3><span class="muted small">This month, IQD</span></div><div id="ovBars"></div></article>
+    <article class="card"><div class="cardhead"><h3>Recent activity</h3><button class="btn" data-page="transactions">View all</button></div><div class="rec-list" id="ovRecent"></div></article>
   </div>
   <div class="grid3">
-    <article class="card"><div class="cardhead"><h3>Budgets</h3><span class="tag">0 active</span></div><p class="muted small">Monthly limits and category spending.</p></article>
-    <article class="card"><div class="cardhead"><h3>Upcoming obligations</h3></div><p class="muted small">Bills, card payments, and debt due dates.</p></article>
-    <article class="card"><div class="cardhead"><h3>Savings goals</h3></div><p class="muted small">Track targets and contributions.</p></article>
+    <article class="card"><div class="cardhead"><h3>Budgets</h3><span class="tag" id="ovBudgetTag">0 active</span></div><p class="muted small" id="ovBudgetNote">Monthly limits and category spending.</p></article>
+    <article class="card"><div class="cardhead"><h3>Upcoming obligations</h3></div><div class="rec-list" id="ovObligations"></div></article>
+    <article class="card"><div class="cardhead"><h3>Savings goals</h3></div><p class="muted small" id="ovGoals">Track targets and contributions.</p></article>
   </div>
 </section>
 
+<!-- ===== Transactions page ===== -->
 <section class="page" id="page-transactions">
   <div class="section-head"><div><h2 class="section-title">Transactions</h2><p class="section-desc">Income, expenses, and transfers in one searchable history.</p></div><button class="btn primary" id="showTxForm">＋ New transaction</button></div>
-  <div class="notice">Prototype only: entries are not saved or synced yet. Firebase and secure storage must be connected before recording real finances.</div>
-  <div class="card hidden" id="txForm"><div class="cardhead"><h3>New transaction</h3><button class="btn" id="hideTxForm">Close</button></div><form id="transactionForm" class="formgrid">
-    <div class="formgroup"><label>Type</label><select class="field" id="txType"><option>Expense</option><option>Income</option><option>Transfer</option></select></div>
-    <div class="formgroup"><label>Amount</label><input class="field" type="number" min="0" step="any" placeholder="0.00" required></div>
-    <div class="formgroup"><label>Currency</label><select class="field"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
-    <div class="formgroup"><label>Date</label><input class="field" type="date" required></div>
-    <div class="formgroup"><label>Financial space</label><select class="field"><option>Personal</option><option>Family</option><option>Business</option></select></div>
-    <div class="formgroup"><label>Category</label><input class="field" placeholder="Choose or create category"></div>
-    <div class="formgroup"><label>Account</label><input class="field" placeholder="Select account"></div>
-    <div class="formgroup"><label>Payment method</label><select class="field"><option>Cash</option><option>Bank transfer</option><option>Debit card</option><option>Credit card</option><option>Other</option></select></div>
-    <div class="formgroup full"><label>Description / notes</label><textarea class="field" rows="2" placeholder="Optional details"></textarea></div>
-    <div class="formgroup full"><button class="btn primary" type="submit">Preview entry</button></div>
-  </form></div>
-  <div class="toolbar"><input class="field" placeholder="Search transactions…" style="flex:1"><select class="field"><option>All types</option><option>Income</option><option>Expense</option><option>Transfer</option></select><select class="field"><option>All spaces</option><option>Personal</option><option>Family</option><option>Business</option></select><select class="field"><option>All currencies</option><option>IQD</option><option>USD</option><option>EUR</option></select></div>
-  <div class="card tablewrap"><table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Space</th><th>Account</th><th>Amount</th></tr></thead><tbody><tr><td colspan="6" class="muted" style="text-align:center;padding:35px">No transactions recorded.</td></tr></tbody></table></div>
-  <p class="muted small">Planned: edit/delete, date filters, receipt and invoice attachments, custom categories and subcategories, CSV/XLSX/PDF exports.</p>
+  <div class="notice">Saved to your private account. Balances are calculated from these records. Foreign-currency entries keep the exchange rate you entered at the time and never change later.</div>
+  <div class="card hidden" id="txForm">
+    <div class="cardhead"><h3 id="txFormTitle">New transaction</h3><button class="btn" id="hideTxForm" type="button">Close</button></div>
+    <form id="transactionForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="txType">Type</label><select class="field" id="txType"><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select></div>
+      <div class="formgroup"><label for="txAmount">Amount</label><input class="field" id="txAmount" type="number" min="0" step="any" placeholder="0.00" required></div>
+      <div class="formgroup"><label for="txCurrency">Currency</label><select class="field" id="txCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="txDate">Date</label><input class="field" id="txDate" type="date" required></div>
+      <div class="formgroup"><label for="txSpace">Financial space</label><select class="field" id="txSpace"><option value="personal">Personal</option><option value="family">Family</option><option value="business">Business</option></select></div>
+      <div class="formgroup"><label for="txCategory">Category</label><input class="field" id="txCategory" list="categoryList" maxlength="60" placeholder="Choose or create category"><datalist id="categoryList"></datalist></div>
+      <div class="formgroup" id="txFromGroup"><label for="txFrom" id="txFromLabel">Paid from</label><select class="field" id="txFrom"></select></div>
+      <div class="formgroup" id="txToGroup"><label for="txTo" id="txToLabel">To</label><select class="field" id="txTo"></select></div>
+      <div class="formgroup hidden" id="txToAmountGroup"><label for="txToAmount" id="txToAmountLabel">Amount received</label><input class="field" id="txToAmount" type="number" min="0" step="any" placeholder="0.00"></div>
+      <div class="formgroup hidden" id="txRateGroup"><label for="txRate" id="txRateLabel">Exchange rate used</label><input class="field" id="txRate" type="number" min="0" step="any" placeholder="Enter the rate you actually used"><p class="hint">Saved with this entry. Entering a new rate later never changes history.</p></div>
+      <div class="formgroup"><label for="txPayment">Payment method</label><select class="field" id="txPayment"><option value="cash">Cash</option><option value="bank">Bank transfer</option><option value="debit">Debit card</option><option value="credit">Credit card</option><option value="other">Other</option></select></div>
+      <div class="formgroup full"><label for="txDesc">Description / notes</label><textarea class="field" id="txDesc" rows="2" maxlength="500" placeholder="Optional details"></textarea></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="txSubmit">Save transaction</button><button class="btn" type="button" id="txCancel">Cancel</button></div>
+    </form>
+    <div class="auth-message error hidden" id="txError" role="alert"></div>
+  </div>
+  <div class="toolbar">
+    <input class="field" id="txSearch" placeholder="Search transactions…" style="flex:1">
+    <select class="field" id="txFilterType"><option value="all">All types</option><option value="income">Income</option><option value="expense">Expense</option><option value="transfer">Transfer</option></select>
+    <select class="field" id="txFilterSpace"><option value="all">All spaces</option><option value="personal">Personal</option><option value="family">Family</option><option value="business">Business</option></select>
+    <select class="field" id="txFilterCurrency"><option value="all">All currencies</option><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select>
+  </div>
+  <div class="card tablewrap"><table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Space</th><th>Account</th><th class="amount">Amount</th><th></th></tr></thead><tbody id="txTableBody"><tr><td colspan="7" class="muted" style="text-align:center;padding:35px">Loading transactions…</td></tr></tbody></table></div>
+  <p class="muted small">Planned: receipt and invoice attachments, custom categories and subcategories, date-range filters, CSV/XLSX/PDF exports.</p>
 </section>
 
+<!-- ===== Accounts page ===== -->
 <section class="page" id="page-accounts">
-  <div class="section-head"><div><h2 class="section-title">Accounts</h2><p class="section-desc">Cash and multiple bank accounts, shown separately and combined.</p></div><button class="btn primary">＋ Add account</button></div>
-  <div class="grid3"><article class="card"><div class="statlabel">Cash on hand</div><div class="statvalue">— <small>IQD</small></div><p class="muted small">Opening balances not configured</p></article><article class="card"><div class="statlabel">Bank accounts</div><div class="statvalue">—</div><p class="muted small">No bank accounts added</p></article><article class="card"><div class="statlabel">Combined balance</div><div class="statvalue">— <small>IQD</small></div><p class="muted small">Converted using saved valuations</p></article></div>
-  <div class="grid2" style="margin-top:14px"><article class="card"><div class="cardhead"><h3>Account list</h3><span class="tag">Multiple currencies</span></div><div class="empty"><div class="symbol">▣</div><h4>No accounts yet</h4><p class="small">Add cash, bank, or other accounts.</p></div></article><article class="card"><div class="cardhead"><h3>Transfers & reconciliation</h3></div><p class="muted small">Transfers between owned accounts won't count as income or expenses. Cross-currency transfers retain both amounts, applied rate, and fees.</p><p class="muted small">Reconcile actual bank/cash balances, record differences with reasons, and keep an adjustment history.</p></article></div>
+  <div class="section-head"><div><h2 class="section-title">Accounts</h2><p class="section-desc">Cash and multiple bank accounts, shown separately and combined.</p></div><button class="btn primary" id="addAccountBtn">＋ Add account</button></div>
+  <div class="grid3">
+    <article class="card"><div class="statlabel">Cash on hand</div><div class="statvalue" id="cashTotal">— <small>IQD</small></div><p class="muted small" id="cashNote">No cash accounts yet</p></article>
+    <article class="card"><div class="statlabel">Bank accounts</div><div class="statvalue" id="bankCount">—</div><p class="muted small">Bank accounts added</p></article>
+    <article class="card"><div class="statlabel">Combined balance</div><div class="statvalue" id="combinedTotal">— <small>IQD</small></div><p class="muted small" id="combinedNote">IQD accounts only until exchange rates are connected</p></article>
+  </div>
+  <article class="card form-card hidden" id="accountFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="accountFormTitle">New account</h3><button class="btn" type="button" id="accountCancel">Close</button></div>
+    <form id="accountForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="accName">Account name</label><input class="field" id="accName" maxlength="80" placeholder="e.g. Main bank account" required></div>
+      <div class="formgroup"><label for="accType">Type</label><select class="field" id="accType"><option value="cash">Cash</option><option value="bank">Bank</option><option value="other">Other</option></select></div>
+      <div class="formgroup"><label for="accCurrency">Currency</label><select class="field" id="accCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="accOpening">Opening balance</label><input class="field" id="accOpening" type="number" step="any" placeholder="0" required></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="accountSubmit">Save account</button></div>
+    </form>
+    <div class="auth-message error hidden" id="accountError" role="alert"></div>
+  </article>
+  <div class="grid2" style="margin-top:14px">
+    <article class="card"><div class="cardhead"><h3>Account list</h3><span class="tag">Multiple currencies</span></div><div class="rec-list" id="accountList"></div></article>
+    <article class="card"><div class="cardhead"><h3>Transfers &amp; reconciliation</h3></div><p class="muted small">Transfers between owned accounts are recorded on the Transactions page and never count as income or expenses.</p><p class="muted small">Reconciliation and cross-currency fee tracking are planned.</p></article>
+  </div>
 </section>
 
+<!-- ===== Exchange rates page ===== -->
 <section class="page" id="page-rates">
-  <div class="section-head"><div><h2 class="section-title">Exchange rates</h2><p class="section-desc">The conversion engine is a core part of this app.</p></div><button class="btn primary">＋ Enter manual rate</button></div>
-  <div class="notice">No live rates are connected. Do not use placeholder values for real exchanges. Sources and refresh services must be verified before enabling automatic updates.</div>
-  <div class="grid3"><article class="card"><div class="statlabel">Official rate</div><div class="statvalue">— <small>IQD / USD</small></div><span class="tag amber">Not available</span></article><article class="card"><div class="statlabel">Iraqi market rate</div><div class="statvalue">— <small>IQD / USD</small></div><span class="tag amber">Not available</span></article><article class="card"><div class="statlabel">Manual rate</div><div class="statvalue">— <small>IQD / USD</small></div><span class="tag">Not entered</span></article></div>
-  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Rate settings</h3></div><ul class="muted small"><li>Separate buying and selling rates.</li><li>Choose the rate type per currency.</li><li>Automatic daily refresh and manual refresh.</li><li>History with source and exact date/time.</li><li>Configurable alerts for significant changes and stale rates.</li><li>Keep each transaction's recorded rate permanently; current rates must never silently revalue history.</li><li>Opening balances preserve their original recorded valuation.</li></ul></article>
+  <div class="section-head"><div><h2 class="section-title">Exchange rates</h2><p class="section-desc">Enter and track rates manually. Each transaction permanently preserves its rate.</p></div><button class="btn primary" id="addRateBtn">＋ Enter rate</button></div>
+  <div class="notice">These rates are for reference and for transactions. Changing a rate here never alters historical transaction values — each transaction's saved rate is permanent.</div>
+  <div class="grid3" id="rateStatGrid">
+    <article class="card"><div class="statlabel">USD / IQD</div><div class="statvalue" id="rateUSD">— <small>IQD</small></div><p class="muted small" id="rateUSDNote">Not entered</p></article>
+    <article class="card"><div class="statlabel">EUR / IQD</div><div class="statvalue" id="rateEUR">— <small>IQD</small></div><p class="muted small" id="rateEURNote">Not entered</p></article>
+    <article class="card"><div class="statlabel">TRY / IQD</div><div class="statvalue" id="rateTRY">— <small>IQD</small></div><p class="muted small" id="rateTRYNote">Not entered</p></article>
+  </div>
+  <article class="card form-card hidden" id="rateFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="rateFormTitle">Enter rate</h3><button class="btn" type="button" id="rateCancel">Close</button></div>
+    <form id="rateForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="rateCurrency">Currency</label><select class="field" id="rateCurrency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="TRY">TRY</option><option value="GBP">GBP</option></select></div>
+      <div class="formgroup"><label for="rateSource">Source</label><select class="field" id="rateSource"><option value="official">Official</option><option value="market">Iraqi market</option><option value="manual">Manual / agreed</option></select></div>
+      <div class="formgroup"><label for="rateBuy">Buy rate (IQD per 1 unit)</label><input class="field" id="rateBuy" type="number" min="0" step="any" placeholder="e.g. 1310" required></div>
+      <div class="formgroup"><label for="rateSell">Sell rate (IQD per 1 unit)</label><input class="field" id="rateSell" type="number" min="0" step="any" placeholder="e.g. 1300" required></div>
+      <div class="formgroup"><label for="rateDate">Effective date</label><input class="field" id="rateDate" type="date" required></div>
+      <div class="formgroup"><label for="rateNotes">Notes (optional)</label><input class="field" id="rateNotes" maxlength="200" placeholder="e.g. CBI official rate"></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="rateSubmit">Save rate</button></div>
+    </form>
+    <div class="auth-message error hidden" id="rateError" role="alert"></div>
+  </article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Rate history</h3></div><div class="rec-list" id="rateList"></div><p class="muted small" style="margin-top:10px">Each transaction you create preserves the rate you enter at that moment. Rates recorded here are saved for reference.</p></article>
 </section>
 
+<!-- ===== Budgets page ===== -->
 <section class="page" id="page-budgets">
-  <div class="section-head"><div><h2 class="section-title">Budgets</h2><p class="section-desc">Plan spending by month and category.</p></div><button class="btn primary">＋ Create budget</button></div>
-  <div class="grid2"><article class="card"><div class="statlabel">Monthly spending limit</div><div class="statvalue">— <small>IQD</small></div><div class="barline"><span></span></div><p class="muted small">No budget configured</p></article><article class="card"><div class="statlabel">Category budgets</div><div class="statvalue">—</div><p class="muted small">Set category limits, remaining amounts, and alerts.</p></article></div>
-  <article class="card" style="margin-top:14px"><h3>Budget tools</h3><p class="muted small">Overall monthly limit, category budgets, progress, remaining amount, warnings near limits, exceeded-budget alerts, and month-to-month comparisons.</p></article>
+  <div class="section-head"><div><h2 class="section-title">Budgets</h2><p class="section-desc">Plan spending by month and category.</p></div><button class="btn primary" id="addBudgetBtn">＋ Create budget</button></div>
+  <div class="grid2">
+    <article class="card"><div class="statlabel">Monthly spending limit</div><div class="statvalue" id="budgetOverallValue">— <small>IQD</small></div><div class="progress" id="budgetOverallBar"><span></span></div><p class="muted small" id="budgetOverallNote">No overall budget configured</p></article>
+    <article class="card"><div class="statlabel">Category budgets</div><div class="statvalue" id="budgetCategoryCount">—</div><p class="muted small">Category limits with remaining amounts and warnings.</p></article>
+  </div>
+  <article class="card form-card hidden" id="budgetFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="budgetFormTitle">New budget</h3><button class="btn" type="button" id="budgetCancel">Close</button></div>
+    <form id="budgetForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="budScope">Budget type</label><select class="field" id="budScope"><option value="overall">Overall monthly limit</option><option value="category">Category limit</option></select></div>
+      <div class="formgroup"><label for="budSpace">Financial space</label><select class="field" id="budSpace"><option value="all">All spaces</option><option value="personal">Personal</option><option value="family">Family</option><option value="business">Business</option></select></div>
+      <div class="formgroup" id="budCategoryGroup"><label for="budCategory">Category</label><input class="field" id="budCategory" list="categoryList" maxlength="60" placeholder="e.g. Food"></div>
+      <div class="formgroup"><label for="budLimit">Monthly limit (IQD)</label><input class="field" id="budLimit" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="budgetSubmit">Save budget</button></div>
+    </form>
+    <div class="auth-message error hidden" id="budgetError" role="alert"></div>
+  </article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Budgets this month</h3><span class="muted small">Counts expenses and card purchases only. Transfers and repayments are excluded.</span></div><div class="rec-list" id="budgetList"></div></article>
+  <p class="muted small">Planned: month-to-month comparisons.</p>
 </section>
 
+<!-- ===== Credit cards page ===== -->
 <section class="page" id="page-cards">
-  <div class="section-head"><div><h2 class="section-title">Credit cards</h2><p class="section-desc">Track balances, statements, and repayments.</p></div><button class="btn primary">＋ Add credit card</button></div>
-  <div class="notice">Credit purchases and repayments need dedicated accounting logic to avoid counting the same expense twice.</div>
-  <div class="empty card"><div class="symbol">▭</div><h4>No credit cards added</h4><p class="small">Track limits, available credit, outstanding balances, billing cycles, statement and due dates, minimum payments, fees, interest, and payment history.</p></div>
+  <div class="section-head"><div><h2 class="section-title">Credit cards</h2><p class="section-desc">Track balances, statements, and repayments.</p></div><button class="btn primary" id="addCardBtn">＋ Add credit card</button></div>
+  <div class="notice">Card purchases count as expenses once. Repayments are transfers from an account to the card and are not counted as expenses.</div>
+  <div class="grid3">
+    <article class="card"><div class="statlabel">Outstanding (IQD cards)</div><div class="statvalue" id="cardOutstanding">— <small>IQD</small></div><p class="muted small">Owed on IQD cards</p></article>
+    <article class="card"><div class="statlabel">Available credit (IQD cards)</div><div class="statvalue" id="cardAvailable">— <small>IQD</small></div><p class="muted small">Limit less outstanding</p></article>
+    <article class="card"><div class="statlabel">Cards</div><div class="statvalue" id="cardCount">—</div><p class="muted small">Cards added</p></article>
+  </div>
+  <article class="card form-card hidden" id="cardFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="cardFormTitle">New credit card</h3><button class="btn" type="button" id="cardCancel">Close</button></div>
+    <form id="cardForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="cardName">Card name</label><input class="field" id="cardName" maxlength="80" placeholder="e.g. Visa gold" required></div>
+      <div class="formgroup"><label for="cardCurrency">Currency</label><select class="field" id="cardCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="cardLimit">Credit limit</label><input class="field" id="cardLimit" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup"><label for="cardOpening">Outstanding balance now</label><input class="field" id="cardOpening" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup"><label for="cardStatement">Statement day (1–31)</label><input class="field" id="cardStatement" type="number" min="1" max="31" step="1" required></div>
+      <div class="formgroup"><label for="cardDue">Due day (1–31)</label><input class="field" id="cardDue" type="number" min="1" max="31" step="1" required></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="cardSubmit">Save card</button></div>
+    </form>
+    <div class="auth-message error hidden" id="cardError" role="alert"></div>
+  </article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Your cards</h3></div><div class="rec-list" id="cardList"></div><p class="muted small" style="margin-top:12px">Fees, interest, and minimum payments are planned.</p></article>
 </section>
 
+<!-- ===== Debts page ===== -->
 <section class="page" id="page-debts">
-  <div class="section-head"><div><h2 class="section-title">Debts & loans</h2><p class="section-desc">Money owed to you and money you owe.</p></div><button class="btn primary">＋ Add debt</button></div>
-  <div class="grid2"><article class="card"><div class="statlabel">You owe</div><div class="statvalue negative">— <small>IQD</small></div></article><article class="card"><div class="statlabel">Owed to you</div><div class="statvalue positive">— <small>IQD</small></div></article></div>
-  <article class="card" style="margin-top:14px"><div class="empty"><div class="symbol">⇅</div><h4>No debts or loans recorded</h4><p class="small">Track people, original amounts and currencies, due dates, partial repayments, remaining balances, statuses, reminders, and repayment history.</p></div></article>
+  <div class="section-head"><div><h2 class="section-title">Debts &amp; loans</h2><p class="section-desc">Money owed to you and money you owe.</p></div><button class="btn primary" id="addDebtBtn">＋ Add debt</button></div>
+  <div class="grid2">
+    <article class="card"><div class="statlabel">You owe (IQD)</div><div class="statvalue negative" id="debtOwe">— <small>IQD</small></div><p class="muted small" id="debtOweNote">Remaining balance</p></article>
+    <article class="card"><div class="statlabel">Owed to you (IQD)</div><div class="statvalue positive" id="debtOwed">— <small>IQD</small></div><p class="muted small" id="debtOwedNote">Remaining balance</p></article>
+  </div>
+  <article class="card form-card hidden" id="debtFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="debtFormTitle">New debt or loan</h3><button class="btn" type="button" id="debtCancel">Close</button></div>
+    <form id="debtForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="debtName">Person or lender</label><input class="field" id="debtName" maxlength="80" placeholder="e.g. Ali" required></div>
+      <div class="formgroup"><label for="debtDirection">Direction</label><select class="field" id="debtDirection"><option value="owe">I owe this</option><option value="owed">Owed to me</option></select></div>
+      <div class="formgroup"><label for="debtCurrency">Currency</label><select class="field" id="debtCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="debtAmount">Original amount</label><input class="field" id="debtAmount" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup"><label for="debtDue">Due date (optional)</label><input class="field" id="debtDue" type="date"></div>
+      <div class="formgroup"><label for="debtNotes">Notes</label><input class="field" id="debtNotes" maxlength="500" placeholder="Optional"></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="debtSubmit">Save debt</button></div>
+    </form>
+    <div class="auth-message error hidden" id="debtError" role="alert"></div>
+  </article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Debts and loans</h3></div><div class="rec-list" id="debtList"></div><p class="muted small" style="margin-top:12px">Record repayments as transfers from an account to a debt you owe, or from a debt owed to you into an account.</p></article>
 </section>
 
+<!-- ===== Savings page ===== -->
 <section class="page" id="page-savings">
-  <div class="section-head"><div><h2 class="section-title">Savings goals</h2><p class="section-desc">Give every goal a clear target.</p></div><button class="btn primary">＋ Create goal</button></div>
-  <div class="empty card"><div class="symbol">◈</div><h4>No savings goals yet</h4><p class="small">Create unlimited goals with target currency, target date, contributions, withdrawals, monthly targets, progress, and milestones.</p></div>
-  <p class="muted small">Savings allocations are tracked separately and are not double-counted as expenses.</p>
+  <div class="section-head"><div><h2 class="section-title">Savings goals</h2><p class="section-desc">Give every goal a clear target.</p></div><button class="btn primary" id="addGoalBtn">＋ Create goal</button></div>
+  <div class="grid2">
+    <article class="card"><div class="statlabel">Saved (IQD goals)</div><div class="statvalue" id="goalSaved">— <small>IQD</small></div><p class="muted small">Opening amount plus contributions less withdrawals</p></article>
+    <article class="card"><div class="statlabel">Goals</div><div class="statvalue" id="goalCount">—</div><p class="muted small">Goals created</p></article>
+  </div>
+  <article class="card form-card hidden" id="goalFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="goalFormTitle">New savings goal</h3><button class="btn" type="button" id="goalCancel">Close</button></div>
+    <form id="goalForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="goalName">Goal name</label><input class="field" id="goalName" maxlength="80" placeholder="e.g. Car" required></div>
+      <div class="formgroup"><label for="goalCurrency">Currency</label><select class="field" id="goalCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="goalTarget">Target amount</label><input class="field" id="goalTarget" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup"><label for="goalSavedStart">Already saved</label><input class="field" id="goalSavedStart" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup"><label for="goalDate">Target date (optional)</label><input class="field" id="goalDate" type="date"></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="goalSubmit">Save goal</button></div>
+    </form>
+    <div class="auth-message error hidden" id="goalError" role="alert"></div>
+  </article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Your goals</h3></div><div class="rec-list" id="goalList"></div></article>
+  <p class="muted small">Add money to a goal with a transfer from an account to the goal. Withdraw with a transfer from the goal to an account. Savings are never counted as expenses.</p>
 </section>
 
+<!-- ===== Reports page ===== -->
 <section class="page" id="page-reports">
-  <div class="section-head"><div><h2 class="section-title">Reports & analytics</h2><p class="section-desc">Understand income, expenses, and trends.</p></div><span class="tag">IQD reporting</span></div>
-  <div class="toolbar"><select class="field"><option>This month</option><option>This year</option><option>Custom date range</option></select><select class="field"><option>All financial spaces</option><option>Personal</option><option>Family</option><option>Business</option></select><button class="btn">Export PDF</button><button class="btn">Export Excel</button><button class="btn">Export CSV</button></div>
-  <div class="grid2"><article class="card"><h3>Income & expenses</h3><div class="empty"><div class="symbol">▥</div><p class="small">Reports will populate from saved transactions.</p></div></article><article class="card"><h3>Spending breakdown</h3><div class="empty"><div class="symbol">◉</div><p class="small">Category and financial-space analysis.</p></div></article></div>
-  <p class="muted small">Monthly, yearly, and custom reports; currency, date, category, account, and Personal/Family/Business breakdowns.</p>
+  <div class="section-head"><div><h2 class="section-title">Reports &amp; analytics</h2><p class="section-desc">Understand income, expenses, and trends.</p></div><span class="tag">IQD reporting</span></div>
+  <div class="toolbar">
+    <select class="field" id="reportPeriod"><option value="month">This month</option><option value="year">This year</option></select>
+    <select class="field" id="reportSpace"><option value="all">All spaces</option><option value="personal">Personal</option><option value="family">Family</option><option value="business">Business</option></select>
+  </div>
+  <div class="stats">
+    <article class="card"><div class="statlabel">Income</div><div class="statvalue positive" id="repIncome">— <small>IQD</small></div></article>
+    <article class="card"><div class="statlabel">Expenses</div><div class="statvalue negative" id="repExpense">— <small>IQD</small></div></article>
+    <article class="card"><div class="statlabel">Net</div><div class="statvalue" id="repNet">— <small>IQD</small></div></article>
+    <article class="card"><div class="statlabel">Transactions</div><div class="statvalue" id="repCount">—</div></article>
+  </div>
+  <div class="grid2">
+    <article class="card"><div class="cardhead"><h3>Spending by category</h3></div><div class="rec-list" id="repCategories"></div></article>
+    <article class="card"><div class="cardhead"><h3>By financial space</h3></div><div class="rec-list" id="repSpaces"></div></article>
+  </div>
+  <p class="muted small">Planned: date-range filters, month-to-month comparisons, CSV/XLSX/PDF exports, charts.</p>
 </section>
 
+<!-- ===== Settings page ===== -->
 <section class="page" id="page-settings">
   <div class="section-head"><div><h2 class="section-title">Settings</h2><p class="section-desc">Security, preferences, and data management.</p></div></div>
   <div class="grid2">
-    <article class="card"><div class="cardhead"><h3>Account protection</h3><span class="tag amber" id="protectionStatus">Not configured</span></div><p class="muted small">Firebase Authentication and owner-only database/storage permissions. One authorized owner account.</p><p class="muted small" id="accountEmail"></p><label class="small"><input type="checkbox" disabled> Enable optional PIN lock (available after secure local implementation)</label></article>
-    <article class="card"><h3>Language & appearance</h3><div class="formgrid" style="margin-top:12px"><div class="formgroup"><label>Language</label><select class="field" id="language"><option value="en">English</option><option value="ar">العربية</option><option value="ku">کوردی سۆرانی</option></select></div><div class="formgroup"><label>Primary currency</label><select class="field"><option>IQD</option></select></div></div><p class="muted small">Full Arabic and Sorani translation, RTL layouts, localized dates and numbers. Theme and dashboard layout will be configurable independently.</p></article>
-    <article class="card"><h3>Notifications</h3><p class="muted small">Individual controls for bills, recurring payments, budget warnings, overdue debts, savings milestones, daily/weekly summaries, and exchange-rate alerts.</p></article>
-    <article class="card"><h3>Backup & recovery</h3><p class="muted small">Cloud sync, scheduled backups, backup history, restore, and recovery of deleted records where available.</p></article>
-    <article class="card"><h3>Offline & sync</h3><p class="muted small">Planned local database, offline transaction queue, receipt upload queue, conflict handling, and visible sync status.</p></article>
-    <article class="card"><h3>Attachments & categories</h3><p class="muted small">Receipt and invoice photos/PDFs, multiple attachments, custom categories and subcategories, and safe deletion.</p></article>
+    <article class="card">
+      <div class="cardhead"><h3>Account protection</h3><span class="tag amber" id="protectionStatus">Not configured</span></div>
+      <p class="muted small" id="accountEmail"></p>
+      <p class="muted small">Firebase Authentication with owner-only Firestore permissions. Only the signed-in owner can read or write their financial records.</p>
+      <div style="margin-top:12px">
+        <span id="syncStatus" class="tag">Connecting…</span>
+      </div>
+    </article>
+    <article class="card"><h3>Language &amp; appearance</h3>
+      <div class="formgrid" style="margin-top:12px">
+        <div class="formgroup"><label>Language</label><select class="field" id="language"><option value="en">English</option><option value="ar">العربية</option><option value="ku">کوردی سۆرانی</option></select></div>
+        <div class="formgroup"><label>Primary currency</label><select class="field"><option>IQD</option></select></div>
+      </div>
+      <p class="muted small">Full Arabic and Sorani translation and RTL layouts are planned.</p>
+    </article>
+    <article class="card"><h3>Backup &amp; recovery</h3><p class="muted small">All records sync automatically to your Firebase account. Firestore offline persistence keeps a local copy for when you are without internet. Full export (CSV/JSON) is planned.</p></article>
+    <article class="card"><h3>Offline &amp; sync</h3><p class="muted small">The app uses Firestore's offline persistence. Changes made without internet are queued and synced automatically when you reconnect. No data is lost.</p></article>
   </div>
 </section>
-<footer class="footer">Finance · Prototype interface · No financial data is connected or stored by this file.</footer>
+
+<footer class="footer">Finance · Personal financial records · All data is private and stored in your own Firebase account.</footer>
 </main>
-<nav class="mobile" id="mobileNav"><button class="active" data-page="overview"><span>⌂</span>Home</button><button data-page="transactions"><span>↔</span>Activity</button><button data-page="budgets"><span>▤</span>Budgets</button><button data-page="reports"><span>▥</span>Reports</button><button data-page="settings"><span>⚙</span>Settings</button></nav>
-</div>
+
+<!-- ===== Mobile bottom navigation ===== -->
+<nav class="mobile" id="mobileNav">
+  <button class="active" data-page="overview"><span>⌂</span>Home</button>
+  <button data-page="transactions"><span>↔</span>Activity</button>
+  <button data-page="budgets"><span>▤</span>Budgets</button>
+  <button data-page="debts"><span>⇅</span>Debts</button>
+  <button data-page="settings"><span>⚙</span>Settings</button>
+</nav>
+</div><!-- end appShell -->
+
+<!-- ===== Navigation script (non-module, runs immediately) ===== -->
 <script>
-const titles={overview:"Overview",transactions:"Transactions",accounts:"Accounts",rates:"Exchange rates",budgets:"Budgets",cards:"Credit cards",debts:"Debts & loans",savings:"Savings",reports:"Reports",settings:"Settings"};
-function go(page){if(!titles[page])return;document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById("page-"+page)?.classList.add("active");document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===page));document.getElementById("pageTitle").textContent=titles[page];history.replaceState(null,"","#"+page);window.scrollTo({top:0,behavior:"smooth"});}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-page]");if(b)go(b.dataset.page)});
-function route(){const p=location.hash.slice(1);if(titles[p])go(p)}window.addEventListener("hashchange",route);route();
-const form=document.getElementById("txForm");document.getElementById("showTxForm").onclick=()=>form.classList.remove("hidden");document.getElementById("hideTxForm").onclick=()=>form.classList.add("hidden");document.getElementById("transactionForm").addEventListener("submit",e=>{e.preventDefault();alert("This is a visual prototype. Transactions will be saved after Firebase authentication, database rules, and the financial data engine are implemented.");});
-document.getElementById("language").addEventListener("change",e=>{if(e.target.value!=="en")alert("Arabic and Kurdish Sorani translations and RTL support are planned for the localization phase.");});
+const PAGE_TITLES = {
+  overview:"Overview", transactions:"Transactions", accounts:"Accounts",
+  rates:"Exchange rates", budgets:"Budgets", cards:"Credit cards",
+  debts:"Debts & loans", savings:"Savings", reports:"Reports", settings:"Settings"
+};
+
+function go(page) {
+  if (!PAGE_TITLES[page]) return;
+  document.querySelectorAll(".page").forEach(x => x.classList.remove("active"));
+  document.getElementById("page-" + page)?.classList.add("active");
+  document.querySelectorAll("[data-page]").forEach(x => x.classList.toggle("active", x.dataset.page === page));
+  const titleEl = document.getElementById("pageTitle");
+  if (titleEl) titleEl.textContent = PAGE_TITLES[page];
+  history.replaceState(null, "", "#" + page);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.addEventListener("click", e => {
+  const btn = e.target.closest("[data-page]");
+  if (btn) go(btn.dataset.page);
+});
+
+function route() {
+  const p = location.hash.slice(1);
+  if (PAGE_TITLES[p]) go(p);
+}
+window.addEventListener("hashchange", route);
+route();
+
+// Safety net: if Firebase modules cannot load, tell the user.
+setTimeout(() => {
+  if (document.body.dataset.authReady !== "1") {
+    document.getElementById("authLoadingMsg").textContent =
+      "Secure sign-in could not load. Check your internet connection and reload the page.";
+  }
+}, 15000);
 </script>
-<script>
-// Safety net: if the Firebase modules cannot load (e.g. no internet), tell the user instead of spinning forever.
-setTimeout(()=>{if(document.body.dataset.authReady!=="1"){document.getElementById("authLoadingMsg").textContent="Secure sign-in could not load. Check your internet connection and reload the page.";}},15000);
-</script>
+
+<!-- ===== Firebase application (type=module) ===== -->
 <script type="module">
+// ============================================================
+// Firebase SDK
+// ============================================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import {
   getAuth,
@@ -200,7 +549,27 @@ import {
   setPersistence,
   browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  serverTimestamp,
+  terminate,
+  clearIndexedDbPersistence
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
+// ============================================================
+// Firebase init
+// ============================================================
 const firebaseConfig = {
   apiKey: "AIzaSyC7ga-g3XzF1Tmwm2_9FGK7T-jkwEbP6-0",
   authDomain: "fathers-finance.firebaseapp.com",
@@ -211,12 +580,19 @@ const firebaseConfig = {
   measurementId: "G-F8ZYNMDYYS"
 };
 
-// Initialize Firebase exactly once per page load.
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
+// Persistent offline cache shared across browser tabs.
+const db = initializeFirestore(firebaseApp, {
+  localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
+});
 
+// ============================================================
+// Auth UI helpers
+// ============================================================
 const MIN_PASSWORD_LENGTH = 10;
 const $ = id => document.getElementById(id);
+
 const ui = {
   loading: $("authLoading"),
   screen: $("authScreen"),
@@ -238,8 +614,6 @@ const ui = {
   protectionStatus: $("protectionStatus")
 };
 
-// Human-friendly messages for Firebase Auth error codes.
-// Wrong email and wrong password share one message so the form does not reveal which accounts exist.
 const AUTH_ERRORS = {
   "auth/invalid-email": "That email address is not valid.",
   "auth/missing-email": "Please enter your email address.",
@@ -261,19 +635,15 @@ let authBusy = false;
 
 function friendlyAuthError(err) {
   const code = err && err.code;
-  // Log only the error code, never the email or password.
   console.warn("Firebase Auth error:", code || "unknown");
   return AUTH_ERRORS[code] || "Sign-in could not be completed. Please try again.";
 }
 
-function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
+function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
-// Returns an error message, or an empty string when the password is acceptable.
-function passwordProblem(password) {
-  if (password.length < MIN_PASSWORD_LENGTH) return `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`;
-  if (!/[A-Za-z]/.test(password) || !/\d/.test(password)) return "Password must include at least one letter and one number.";
+function passwordProblem(p) {
+  if (p.length < MIN_PASSWORD_LENGTH) return `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`;
+  if (!/[A-Za-z]/.test(p) || !/\d/.test(p)) return "Password must include at least one letter and one number.";
   return "";
 }
 
@@ -281,11 +651,7 @@ function showAuthMessage(text, type = "error") {
   ui.message.textContent = text;
   ui.message.className = `auth-message ${type}`;
 }
-
-function clearAuthMessage() {
-  ui.message.textContent = "";
-  ui.message.className = "auth-message hidden";
-}
+function clearAuthMessage() { ui.message.textContent = ""; ui.message.className = "auth-message hidden"; }
 
 function clearPasswordFields() {
   ui.signInPassword.value = "";
@@ -294,31 +660,28 @@ function clearPasswordFields() {
 }
 
 function setAuthMode(mode) {
-  const signIn = mode === "signin";
-  ui.tabSignIn.classList.toggle("active", signIn);
-  ui.tabRegister.classList.toggle("active", !signIn);
-  ui.tabSignIn.setAttribute("aria-selected", String(signIn));
-  ui.tabRegister.setAttribute("aria-selected", String(!signIn));
-  ui.signInForm.classList.toggle("hidden", !signIn);
-  ui.registerForm.classList.toggle("hidden", signIn);
+  const s = mode === "signin";
+  ui.tabSignIn.classList.toggle("active", s);
+  ui.tabRegister.classList.toggle("active", !s);
+  ui.tabSignIn.setAttribute("aria-selected", String(s));
+  ui.tabRegister.setAttribute("aria-selected", String(!s));
+  ui.signInForm.classList.toggle("hidden", !s);
+  ui.registerForm.classList.toggle("hidden", s);
   clearAuthMessage();
 }
 
-// Disables the submit button while Firebase works, then restores it.
 async function runAuthAction(button, busyText, action) {
   if (authBusy) return;
   authBusy = true;
-  const idleText = button.dataset.label;
+  const idle = button.dataset.label;
   button.disabled = true;
   button.textContent = busyText;
-  try {
-    await action(); // onAuthStateChanged switches the screen on success.
-  } catch (err) {
-    showAuthMessage(friendlyAuthError(err));
-  } finally {
+  try { await action(); }
+  catch (err) { showAuthMessage(friendlyAuthError(err)); }
+  finally {
     authBusy = false;
     button.disabled = false;
-    button.textContent = idleText;
+    button.textContent = idle;
   }
 }
 
@@ -343,18 +706,31 @@ function showAuthScreen() {
   clearPasswordFields();
 }
 
-// Keep the session across browser restarts (this is also the web default; set explicitly for clarity).
 setPersistence(auth, browserLocalPersistence).catch(err => {
   console.error("Could not set session persistence:", err && err.code);
 });
 
-// Runs on page load and whenever the sign-in state changes. The dashboard stays hidden until this has run.
-onAuthStateChanged(auth, user => {
+async function wipeLocalData() {
+  try { await terminate(db); await clearIndexedDbPersistence(db); }
+  catch (err) { console.warn("Local data cleanup incomplete:", err && err.code); }
+}
+
+let currentUid = null;
+let signedInOnce = false;
+
+onAuthStateChanged(auth, async user => {
   document.body.dataset.authReady = "1";
   if (user) {
+    if (currentUid && currentUid !== user.uid) { location.reload(); return; }
+    const first = !currentUid;
+    currentUid = user.uid;
+    signedInOnce = true;
     showApp(user);
+    if (first) startDataForUser(user.uid);
   } else {
     showAuthScreen();
+    stopListeners();
+    if (signedInOnce) { await wipeLocalData(); location.reload(); }
   }
 });
 
@@ -365,37 +741,1212 @@ ui.signInForm.addEventListener("submit", e => {
   e.preventDefault();
   clearAuthMessage();
   const email = ui.signInEmail.value.trim();
-  const password = ui.signInPassword.value;
+  const pw = ui.signInPassword.value;
   if (!isValidEmail(email)) return showAuthMessage("Please enter a valid email address.");
-  if (!password) return showAuthMessage("Please enter your password.");
-  runAuthAction(ui.signInSubmit, "Signing in…", () => signInWithEmailAndPassword(auth, email, password));
+  if (!pw) return showAuthMessage("Please enter your password.");
+  runAuthAction(ui.signInSubmit, "Signing in…", () => signInWithEmailAndPassword(auth, email, pw));
 });
 
 ui.registerForm.addEventListener("submit", e => {
   e.preventDefault();
   clearAuthMessage();
   const email = ui.registerEmail.value.trim();
-  const password = ui.registerPassword.value;
+  const pw = ui.registerPassword.value;
   const confirm = ui.registerConfirm.value;
   if (!isValidEmail(email)) return showAuthMessage("Please enter a valid email address.");
-  const problem = passwordProblem(password);
-  if (problem) return showAuthMessage(problem);
-  if (password !== confirm) return showAuthMessage("The passwords do not match.");
-  runAuthAction(ui.registerSubmit, "Creating account…", () => createUserWithEmailAndPassword(auth, email, password));
+  const prob = passwordProblem(pw);
+  if (prob) return showAuthMessage(prob);
+  if (pw !== confirm) return showAuthMessage("The passwords do not match.");
+  runAuthAction(ui.registerSubmit, "Creating account…", () => createUserWithEmailAndPassword(auth, email, pw));
 });
 
 ui.signOutBtn.addEventListener("click", async () => {
+  if (hasUnsyncedChanges() && !confirm("Some changes have not reached the server yet. Sign out anyway?")) return;
   ui.signOutBtn.disabled = true;
-  try {
-    await signOut(auth); // onAuthStateChanged returns the user to the sign-in screen.
-  } catch (err) {
+  try { await signOut(auth); }
+  catch (err) {
     console.error("Sign-out failed:", err && err.code);
-    alert("Could not sign out. Check your internet connection and try again.");
-  } finally {
+    toast("Could not sign out. Check your internet connection and try again.");
     ui.signOutBtn.disabled = false;
   }
 });
+
+// ============================================================
+// Data layer (module_b) — state, listeners, balance calc, renders
+// ============================================================
+const CURRENCIES = ["IQD", "USD", "EUR", "TRY", "GBP"];
+const RECORD_COLLECTIONS = ["accounts", "transactions", "budgets", "debts", "cards", "savings", "rates"];
+const state = { accounts: [], transactions: [], budgets: [], debts: [], cards: [], savings: [], rates: [] };
+const loaded = {};
+const syncFlags = {};
+const unsubscribers = [];
+let uid = null;
+
+const userCol = name => collection(db, "users", uid, name);
+const userDoc = (name, id) => doc(db, "users", uid, name, id);
+
+const numberFormat = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+const cents = n => Math.round((Number(n) || 0) * 100);
+const fmt = n => numberFormat.format(Math.round(Number(n) * 100) / 100);
+const fmtC = c => fmt(c / 100);
+const pad2 = n => String(n).padStart(2, "0");
+const todayStr = () => { const d = new Date(); return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`; };
+const todayYM = () => todayStr().slice(0, 7);
+const norm = s => String(s || "").trim().toLowerCase();
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+const SPACE_LABEL = { personal: "Personal", family: "Family", business: "Business", all: "All spaces" };
+const TYPE_LABEL = { income: "Income", expense: "Expense", transfer: "Transfer" };
+const ACCOUNT_TYPE_LABEL = { cash: "Cash", bank: "Bank", other: "Other" };
+const DIRECTION_LABEL = { owe: "I owe", owed: "Owed to me" };
+const KIND_COLLECTION = { account: "accounts", card: "cards", savings: "savings", debt: "debts" };
+const SOURCE_LABEL = { official: "Official", market: "Iraqi market", manual: "Manual" };
+
+// DOM builder: text is always text, never HTML.
+function h(tag, props, ...children) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v === null || v === undefined || v === false) continue;
+    if (k === "class") node.className = v;
+    else if (k === "text") node.textContent = v;
+    else if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
+    else node.setAttribute(k, v === true ? "" : String(v));
+  }
+  for (const child of children.flat()) {
+    if (child === null || child === undefined || child === false) continue;
+    node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+  }
+  return node;
+}
+
+function emptyBlock(title, text) {
+  return h("div", { class: "empty" }, h("h4", { text: title }), h("p", { class: "small", text }));
+}
+
+function parseRef(value) {
+  const [kind, id] = String(value || "").split(":");
+  return { kind: kind || "", id: id || "" };
+}
+
+function entity(kind, id) {
+  return (state[KIND_COLLECTION[kind]] || []).find(x => x.id === id) || null;
+}
+
+function entityName(kind, id) {
+  if (kind === "external") return "External";
+  const e = entity(kind, id);
+  if (!e) return "(deleted)";
+  return kind === "debt" ? `${e.name} (${DIRECTION_LABEL[e.direction] || "debt"})` : e.name;
+}
+
+function entityCurrency(kind, id) {
+  const e = entity(kind, id);
+  return e ? e.currency : "IQD";
+}
+
+function curOfRef(r) {
+  return r.kind && r.id ? entityCurrency(r.kind, r.id) : "IQD";
+}
+
+function isReferenced(kind, id) {
+  return state.transactions.some(t =>
+    (t.fromKind === kind && t.fromId === id) || (t.toKind === kind && t.toId === id));
+}
+
+// Calculate balances in cents from opening balances + transactions.
+function computeBalances() {
+  const bal = {};
+  const key = (kind, id) => `${kind}:${id}`;
+  for (const a of state.accounts) bal[key("account", a.id)] = cents(a.openingBalance);
+  for (const c of state.cards)    bal[key("card",    c.id)] = cents(c.openingBalance);
+  for (const s of state.savings)  bal[key("savings", s.id)] = cents(s.openingBalance);
+  for (const d of state.debts)    bal[key("debt",    d.id)] = cents(d.originalAmount);
+  for (const t of state.transactions) {
+    const amount   = cents(t.amount);
+    const received = cents(t.toAmount);
+    if (t.fromKind !== "external") {
+      const k = key(t.fromKind, t.fromId);
+      bal[k] = (bal[k] || 0) + (t.fromKind === "card" ? amount : -amount);
+    }
+    if (t.toKind !== "external") {
+      const k = key(t.toKind, t.toId);
+      bal[k] = (bal[k] || 0) + (t.toKind === "card" || t.toKind === "debt" ? -received : received);
+    }
+  }
+  return bal;
+}
+
+function balanceOf(bal, kind, id) { return bal[`${kind}:${id}`] || 0; }
+
+// Month totals in IQD cents using each transaction's preserved rate.
+function monthTotals(ym = todayYM(), spaceFilter = "all") {
+  const bySpace = { personal: { income: 0, expense: 0 }, family: { income: 0, expense: 0 }, business: { income: 0, expense: 0 } };
+  let income = 0, expense = 0;
+  for (const t of state.transactions) {
+    if (!t.date || t.date.slice(0, 7) !== ym) continue;
+    if (!bySpace[t.space]) continue;
+    if (spaceFilter !== "all" && t.space !== spaceFilter) continue;
+    const iqd = cents(t.amountIQD);
+    if (t.type === "income")        { income += iqd; bySpace[t.space].income += iqd; }
+    else if (t.type === "expense")  { expense += iqd; bySpace[t.space].expense += iqd; }
+  }
+  return { income, expense, net: income - expense, bySpace };
+}
+
+function yearTotals(year, spaceFilter = "all") {
+  let income = 0, expense = 0, count = 0;
+  for (const t of state.transactions) {
+    if (!t.date || !t.date.startsWith(String(year))) continue;
+    if (spaceFilter !== "all" && t.space !== spaceFilter) continue;
+    const iqd = cents(t.amountIQD);
+    count++;
+    if (t.type === "income")       income += iqd;
+    else if (t.type === "expense") expense += iqd;
+  }
+  return { income, expense, net: income - expense, count };
+}
+
+function budgetSpent(budget, ym = todayYM()) {
+  let spent = 0;
+  for (const t of state.transactions) {
+    if (t.type !== "expense" || t.date.slice(0, 7) !== ym) continue;
+    if (budget.space !== "all" && t.space !== budget.space) continue;
+    if (budget.scope === "category" && norm(t.category) !== norm(budget.category)) continue;
+    spent += cents(t.amountIQD);
+  }
+  return spent;
+}
+
+function budgetName(b) {
+  const scope = b.scope === "overall" ? "Overall limit" : b.category;
+  return `${scope} · ${SPACE_LABEL[b.space]}`;
+}
+
+// ---- Live listeners ----
+function startDataForUser(userId) {
+  uid = userId;
+  ensureUserDocuments();
+  for (const name of RECORD_COLLECTIONS) {
+    const q = name === "transactions"
+      ? query(userCol(name), orderBy("date", "desc"))
+      : name === "rates"
+        ? query(userCol(name), orderBy("date", "desc"))
+        : userCol(name);
+    unsubscribers.push(onSnapshot(q, { includeMetadataChanges: true }, snap => {
+      state[name] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      syncFlags[name] = { pending: snap.metadata.hasPendingWrites, fromCache: snap.metadata.fromCache };
+      loaded[name] = true;
+      refreshAll();
+    }, err => handleListenError(name, err)));
+  }
+}
+
+async function ensureUserDocuments() {
+  try {
+    const root = doc(db, "users", uid);
+    if (!(await getDoc(root)).exists()) {
+      await setDoc(root, { uid, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    }
+    const prefs = userDoc("settings", "prefs");
+    if (!(await getDoc(prefs)).exists()) {
+      await setDoc(prefs, { uid, language: "en", primaryCurrency: "IQD", createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    }
+  } catch (err) {
+    console.warn("Account setup not complete yet:", err && err.code);
+  }
+}
+
+function handleListenError(name, err) {
+  console.warn("Data listener error:", name, err && err.code);
+  if (err && err.code === "permission-denied") {
+    setOverviewNotice("Access denied. This account is not authorized to view these records.", true);
+    toast("Access denied. This account is not authorized for these records.");
+  } else {
+    setOverviewNotice("Connection problem. Showing the last saved records on this device.", true);
+  }
+}
+
+function stopListeners() {
+  while (unsubscribers.length) {
+    try { unsubscribers.pop()(); } catch (_) {}
+  }
+}
+
+function hasUnsyncedChanges() {
+  return Object.values(syncFlags).some(f => f && f.pending);
+}
+
+function updateSyncStatus() {
+  const el = $("syncStatus");
+  if (!el) return;
+  if (!navigator.onLine) {
+    el.textContent = "Offline. Changes are saved on this device and will sync when you reconnect.";
+    el.className = "tag amber";
+  } else if (hasUnsyncedChanges()) {
+    el.textContent = "Syncing changes to your account…";
+    el.className = "tag amber";
+  } else if (RECORD_COLLECTIONS.every(n => loaded[n])) {
+    el.textContent = "All changes saved to your account.";
+    el.className = "tag green";
+  } else {
+    el.textContent = "Connecting…";
+    el.className = "tag";
+  }
+}
+
+// ---- Writes ----
+function writeRecord(collectionName, id, data, errorId, onDone) {
+  if (!uid) { showFormError(errorId, "You are not signed in."); return; }
+  const ref = id ? userDoc(collectionName, id) : doc(userCol(collectionName));
+  const body = id
+    ? { ...data, updatedAt: serverTimestamp() }
+    : { ...data, uid, createdAt: serverTimestamp(), updatedAt: serverTimestamp() };
+  (id ? updateDoc(ref, body) : setDoc(ref, body)).catch(err => {
+    console.warn("Write rejected:", collectionName, err && err.code);
+    toast(writeErrorMessage(err));
+  });
+  if (onDone) onDone(ref.id);
+}
+
+function removeRecord(collectionName, id, label) {
+  if (!confirm(`Delete ${label}? This cannot be undone.`)) return;
+  deleteDoc(userDoc(collectionName, id)).catch(err => {
+    console.warn("Delete rejected:", collectionName, err && err.code);
+    toast(writeErrorMessage(err));
+  });
+}
+
+function writeErrorMessage(err) {
+  if (err && err.code === "permission-denied") return "The server did not accept this change. Check the entry and try again.";
+  return "The change could not be saved. Please try again.";
+}
+
+let toastTimer = null;
+function toast(message, ok = false) {
+  let el = $("toast");
+  if (!el) { el = h("div", { id: "toast", role: "status" }); document.body.append(el); }
+  el.textContent = message;
+  el.className = ok ? "ok" : "";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.remove(), 5000);
+}
+
+function showFormError(id, text) {
+  const el = $(id);
+  if (!el) return;
+  el.textContent = text;
+  el.classList.remove("hidden");
+}
+
+function clearFormError(id) {
+  const el = $(id);
+  if (!el) return;
+  el.textContent = "";
+  el.classList.add("hidden");
+}
+
+function setOverviewNotice(text, warn = false) {
+  const el = $("overviewNotice");
+  if (!el) return;
+  el.textContent = text;
+  el.className = warn ? "auth-message error" : "notice";
+}
+
+function openCard(id) {
+  const el = $(id);
+  if (!el) return;
+  el.classList.remove("hidden");
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function closeCard(id) { $(id)?.classList.add("hidden"); }
+
+// ---- Rendering ----
+function refreshAll() {
+  if (!uid) return;
+  renderSelectors();
+  renderOverview();
+  renderTransactions();
+  renderAccounts();
+  renderBudgets();
+  renderCards();
+  renderDebts();
+  renderSavings();
+  renderRates();
+  renderReports();
+  updateSyncStatus();
+}
+
+function renderSelectors() {
+  const categories = [...new Set(
+    [...state.transactions.map(t => t.category), ...state.budgets.map(b => b.category)].filter(Boolean)
+  )].sort();
+  $("categoryList").replaceChildren(...categories.map(c => h("option", { value: c })));
+  buildTxOptions();
+}
+
+function setStat(id, valueCents, currency = "IQD") {
+  $(id).replaceChildren(fmtC(valueCents), " ", h("small", { text: currency }));
+}
+
+function renderOverview() {
+  const bal = computeBalances();
+  const iqdAccounts = state.accounts.filter(a => a.currency === "IQD");
+  setStat("ovTotal", iqdAccounts.reduce((s, a) => s + balanceOf(bal, "account", a.id), 0));
+  $("ovTotalNote").textContent = `Across ${iqdAccounts.length} IQD account(s). Other currencies on Accounts page.`;
+
+  const m = monthTotals();
+  setStat("ovIncome", m.income);
+  setStat("ovExpense", m.expense);
+  setStat("ovNet", m.net);
+  for (const sp of ["personal", "family", "business"]) {
+    const net = m.bySpace[sp].income - m.bySpace[sp].expense;
+    $("space" + cap(sp)).replaceChildren(fmtC(net), " IQD");
+  }
+
+  // Latest USD rate for overview card
+  const usdRate = state.rates.find(r => r.currency === "USD");
+  if (usdRate) {
+    $("ovRateDisplay").replaceChildren(fmt(usdRate.buyRate), h("small", { text: " IQD / USD" }));
+    $("ovRateNote").textContent = `${SOURCE_LABEL[usdRate.source] || usdRate.source} · ${usdRate.date}`;
+  } else {
+    $("ovRateDisplay").replaceChildren("— ", h("small", { text: "IQD / USD" }));
+    $("ovRateNote").textContent = "No rate entered yet";
+  }
+
+  const max = Math.max(m.income, m.expense, 1);
+  $("ovBars").replaceChildren(barRow("Income", m.income, max, ""), barRow("Expenses", m.expense, max, "warn"));
+
+  const recent = state.transactions.slice(0, 5);
+  $("ovRecent").replaceChildren(...(recent.length
+    ? recent.map(compactTxRow)
+    : [emptyBlock("No transactions yet", "Income, expenses, and transfers will appear here.")]));
+
+  const obligations = [
+    ...state.debts.filter(d => d.direction === "owe" && balanceOf(bal, "debt", d.id) > 0 && d.dueDate)
+      .map(d => ({ date: d.dueDate, text: `${d.name}: ${fmtC(balanceOf(bal, "debt", d.id))} ${d.currency}` })),
+    ...state.cards.filter(c => balanceOf(bal, "card", c.id) > 0)
+      .map(c => ({ date: `day ${c.dueDay}`, text: `${c.name} card payment: ${fmtC(balanceOf(bal, "card", c.id))} ${c.currency}` }))
+  ].sort((a, b) => String(a.date).localeCompare(String(b.date)));
+
+  $("ovObligations").replaceChildren(...(obligations.length
+    ? obligations.slice(0, 6).map(o => h("div", { class: "rec-row" },
+        h("div", { class: "rec-main", text: o.text }),
+        h("div", { class: "rec-amount muted small", text: o.date })))
+    : [h("p", { class: "muted small", text: "No upcoming card payments or debt due dates." })]));
+
+  $("ovBudgetTag").textContent = `${state.budgets.length} active`;
+  const overall = state.budgets.find(b => b.scope === "overall" && b.space === "all");
+  $("ovBudgetNote").textContent = overall
+    ? `Overall limit: ${fmtC(budgetSpent(overall))} of ${fmt(overall.limit)} IQD used this month.`
+    : "Monthly limits and category spending.";
+
+  const saved = state.savings.filter(s => s.currency === "IQD").reduce((s, g) => s + balanceOf(bal, "savings", g.id), 0);
+  $("ovGoals").textContent = state.savings.length
+    ? `${state.savings.length} goal(s). ${fmtC(saved)} IQD saved in IQD goals.`
+    : "Track targets and contributions.";
+
+  const allLoaded = RECORD_COLLECTIONS.every(n => loaded[n]);
+  if (allLoaded) {
+    const empty = !state.accounts.length && !state.transactions.length;
+    setOverviewNotice(empty
+      ? "No records yet. Start by adding your accounts and their opening balances on the Accounts page."
+      : "Showing your saved records. Balances are calculated from your transactions.");
+  }
+}
+
+function barRow(label, value, max, cls) {
+  const pct = Math.min(100, Math.round((value / max) * 100));
+  const bar = h("div", { class: `progress ${cls}` }, h("span"));
+  bar.firstChild.style.width = `${pct}%`;
+  return h("div", { class: "rec-row", style: "margin-bottom:8px" },
+    h("div", { class: "rec-main", text: label }),
+    h("div", { class: "rec-amount" }, `${fmtC(value)} IQD`, bar));
+}
+
+function compactTxRow(t) {
+  const sign = t.type === "income" ? "+" : t.type === "expense" ? "−" : "";
+  const cls  = t.type === "income" ? "positive" : t.type === "expense" ? "negative" : "muted";
+  return h("div", { class: "rec-row" },
+    h("div", { class: "rec-main" },
+      h("strong", { text: t.description || TYPE_LABEL[t.type] }),
+      h("div",    { class: "sub", text: `${t.date} · ${TYPE_LABEL[t.type]}` })),
+    h("div", { class: `rec-amount ${cls}`, text: `${sign}${fmt(t.amount)} ${t.currency}` }));
+}
+
+function txAccountLabel(t) {
+  if (t.type === "transfer") return `${entityName(t.fromKind, t.fromId)} → ${entityName(t.toKind, t.toId)}`;
+  if (t.type === "income")   return entityName(t.toKind,   t.toId);
+  return entityName(t.fromKind, t.fromId);
+}
+
+function renderTransactions() {
+  const q  = norm($("txSearch").value);
+  const ft = $("txFilterType").value;
+  const fs = $("txFilterSpace").value;
+  const fc = $("txFilterCurrency").value;
+  const rows = state.transactions.filter(t => {
+    if (ft !== "all" && t.type !== ft) return false;
+    if (fs !== "all" && t.space !== fs) return false;
+    if (fc !== "all" && t.currency !== fc) return false;
+    if (q) {
+      const text = norm([t.description, t.category, t.date, txAccountLabel(t)].join(" "));
+      if (!text.includes(q)) return false;
+    }
+    return true;
+  });
+  const tbody = $("txTableBody");
+  if (!rows.length) {
+    tbody.replaceChildren(h("tr", null, h("td", {
+      colspan: "7", class: "muted", style: "text-align:center;padding:35px",
+      text: state.transactions.length ? "No transactions match these filters." : "No transactions recorded yet. Add your first one."
+    })));
+    return;
+  }
+  tbody.replaceChildren(...rows.map(txTableRow));
+}
+
+function txTableRow(t) {
+  const sign = t.type === "income" ? "+" : t.type === "expense" ? "−" : "";
+  const cls  = t.type === "income" ? "positive" : t.type === "expense" ? "negative" : "muted";
+  const amountText = t.type === "transfer" && t.toCurrency !== t.currency
+    ? `${fmt(t.amount)} ${t.currency} → ${fmt(t.toAmount)} ${t.toCurrency}`
+    : `${sign}${fmt(t.amount)} ${t.currency}`;
+  const iqdNote = t.currency !== "IQD" ? `≈ ${fmt(t.amountIQD)} IQD at saved rate ${fmt(t.fxRateToIQD)}` : "";
+  return h("tr", null,
+    h("td", { text: t.date }),
+    h("td", { text: t.description || TYPE_LABEL[t.type] }),
+    h("td", { text: t.category || "—" }),
+    h("td", { text: SPACE_LABEL[t.space] }),
+    h("td", { text: txAccountLabel(t) }),
+    h("td", { class: `amount ${cls}` }, amountText,
+      iqdNote ? h("div", { class: "muted small", text: iqdNote }) : null),
+    h("td", { class: "table-actions" },
+      h("button", { class: "btn small", type: "button", onclick: () => editTransaction(t.id) }, "Edit"), " ",
+      h("button", { class: "btn small", type: "button", onclick: () => deleteTransaction(t.id) }, "Delete")));
+}
+
+function renderAccounts() {
+  const bal = computeBalances();
+  const cashIqd = state.accounts.filter(a => a.type === "cash" && a.currency === "IQD");
+  const iqdAll  = state.accounts.filter(a => a.currency === "IQD");
+  setStat("cashTotal", cashIqd.reduce((s, a) => s + balanceOf(bal, "account", a.id), 0));
+  $("cashNote").textContent = cashIqd.length ? `${cashIqd.length} IQD cash account(s)` : "No IQD cash accounts yet";
+  $("bankCount").textContent = String(state.accounts.filter(a => a.type === "bank").length);
+  setStat("combinedTotal", iqdAll.reduce((s, a) => s + balanceOf(bal, "account", a.id), 0));
+  $("combinedNote").textContent = "IQD accounts only until exchange rates are connected";
+
+  $("accountList").replaceChildren(...(state.accounts.length
+    ? state.accounts.map(a => h("div", { class: "rec-row" },
+        h("div", { class: "rec-main" },
+          h("strong", { text: a.name }),
+          h("div",    { class: "sub", text: `${ACCOUNT_TYPE_LABEL[a.type] || a.type} · ${a.currency}` })),
+        h("div", { class: "rec-amount", text: `${fmtC(balanceOf(bal, "account", a.id))} ${a.currency}` }),
+        h("div", { class: "rec-actions" },
+          h("button", { class: "btn small", type: "button", onclick: () => editAccount(a.id) }, "Edit"),
+          h("button", { class: "btn small", type: "button", onclick: () => deleteAccount(a.id) }, "Delete"))))
+    : [emptyBlock("No accounts yet", "Add cash, bank, or other accounts.")]));
+}
+
+function renderBudgets() {
+  const overall = state.budgets.find(b => b.scope === "overall" && b.space === "all");
+  if (overall) {
+    const spent = budgetSpent(overall);
+    $("budgetOverallValue").replaceChildren(fmtC(spent), " / ", fmt(overall.limit), " ", h("small", { text: "IQD" }));
+    setProgress("budgetOverallBar", spent, cents(overall.limit));
+    $("budgetOverallNote").textContent = spent > cents(overall.limit)
+      ? "Over the monthly limit."
+      : "Spent this month, counting expenses and card purchases.";
+  } else {
+    $("budgetOverallValue").replaceChildren("— ", h("small", { text: "IQD" }));
+    setProgress("budgetOverallBar", 0, 1);
+    $("budgetOverallNote").textContent = "No overall budget configured";
+  }
+  $("budgetCategoryCount").textContent = String(state.budgets.filter(b => b.scope === "category").length);
+
+  $("budgetList").replaceChildren(...(state.budgets.length
+    ? state.budgets.map(b => {
+        const spent = budgetSpent(b);
+        const limit = cents(b.limit);
+        const remaining = limit - spent;
+        const pct = limit ? spent / limit : 0;
+        const tone   = pct > 1 ? "bad" : pct >= 0.8 ? "warn" : "ok";
+        const status = pct > 1 ? "Exceeded" : pct >= 0.8 ? "Near limit" : "On track";
+        return h("div", { class: "rec-row", style: "display:block" },
+          h("div", { style: "display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap" },
+            h("strong", { text: budgetName(b) }),
+            h("span", { class: `pill ${tone}`, text: status })),
+          h("div", { class: "sub", text: `${fmtC(spent)} of ${fmt(b.limit)} IQD · remaining ${fmtC(remaining)} IQD` }),
+          h("div", { class: `progress ${pct > 1 ? "over" : pct >= 0.8 ? "warn" : ""}` },
+            h("span", { style: `width:${Math.min(100, pct * 100).toFixed(1)}%` })),
+          h("div", { class: "rec-actions", style: "margin-top:8px" },
+            h("button", { class: "btn small", type: "button", onclick: () => editBudget(b.id) }, "Edit"),
+            h("button", { class: "btn small", type: "button", onclick: () => deleteBudget(b.id) }, "Delete")));
+      })
+    : [emptyBlock("No budgets yet", "Set an overall monthly limit or a category limit.")]));
+}
+
+function setProgress(id, value, max) {
+  const bar = $(id);
+  if (!bar) return;
+  const pct = max > 0 ? Math.min(100, (value / max) * 100) : 0;
+  bar.className = `progress ${value > max ? "over" : pct >= 80 ? "warn" : ""}`;
+  bar.firstElementChild.style.width = `${pct}%`;
+}
+
+function renderCards() {
+  const bal = computeBalances();
+  const iqdCards = state.cards.filter(c => c.currency === "IQD");
+  const owed  = iqdCards.reduce((s, c) => s + balanceOf(bal, "card", c.id), 0);
+  const limit = iqdCards.reduce((s, c) => s + cents(c.creditLimit), 0);
+  setStat("cardOutstanding", owed);
+  setStat("cardAvailable", limit - owed);
+  $("cardCount").textContent = String(state.cards.length);
+
+  $("cardList").replaceChildren(...(state.cards.length
+    ? state.cards.map(c => {
+        const owedNow = balanceOf(bal, "card", c.id);
+        return h("div", { class: "rec-row" },
+          h("div", { class: "rec-main" },
+            h("strong", { text: c.name }),
+            h("div", { class: "sub", text: `Limit ${fmt(c.creditLimit)} ${c.currency} · available ${fmtC(cents(c.creditLimit) - owedNow)} ${c.currency}` }),
+            h("div", { class: "sub", text: `Statement day ${c.statementDay} · due day ${c.dueDay}` })),
+          h("div", { class: `rec-amount ${owedNow > 0 ? "negative" : ""}`, text: `${fmtC(owedNow)} ${c.currency} owed` }),
+          h("div", { class: "rec-actions" },
+            h("button", { class: "btn small", type: "button", onclick: () => editCard(c.id) }, "Edit"),
+            h("button", { class: "btn small", type: "button", onclick: () => deleteCard(c.id) }, "Delete")));
+      })
+    : [emptyBlock("No credit cards added", "Add a card to track its limit, balance owed, and due dates.")]));
+}
+
+function renderDebts() {
+  const bal = computeBalances();
+  const owe  = state.debts.filter(d => d.direction === "owe"  && d.currency === "IQD").reduce((s, d) => s + balanceOf(bal, "debt", d.id), 0);
+  const owed = state.debts.filter(d => d.direction === "owed" && d.currency === "IQD").reduce((s, d) => s + balanceOf(bal, "debt", d.id), 0);
+  setStat("debtOwe",  owe);
+  setStat("debtOwed", owed);
+
+  $("debtList").replaceChildren(...(state.debts.length
+    ? state.debts.map(d => {
+        const remaining = balanceOf(bal, "debt", d.id);
+        return h("div", { class: "rec-row" },
+          h("div", { class: "rec-main" },
+            h("strong", { text: d.name }),
+            h("div", { class: "sub", text: `${DIRECTION_LABEL[d.direction]} · original ${fmt(d.originalAmount)} ${d.currency}${d.dueDate ? " · due " + d.dueDate : ""}` }),
+            d.notes ? h("div", { class: "sub", text: d.notes }) : null),
+          h("div", { class: `rec-amount ${d.direction === "owe" ? "negative" : "positive"}` },
+            `${fmtC(remaining)} ${d.currency}`, h("div", { class: "sub", text: "remaining" })),
+          h("div", { class: "rec-actions" },
+            h("button", { class: "btn small", type: "button", onclick: () => editDebt(d.id) }, "Edit"),
+            h("button", { class: "btn small", type: "button", onclick: () => deleteDebt(d.id) }, "Delete")));
+      })
+    : [emptyBlock("No debts or loans recorded", "Track people, original amounts, due dates, repayments, and remaining balances.")]));
+}
+
+function renderSavings() {
+  const bal = computeBalances();
+  const iqdGoals = state.savings.filter(s => s.currency === "IQD");
+  setStat("goalSaved", iqdGoals.reduce((s, g) => s + balanceOf(bal, "savings", g.id), 0));
+  $("goalCount").textContent = String(state.savings.length);
+
+  $("goalList").replaceChildren(...(state.savings.length
+    ? state.savings.map(g => {
+        const saved  = balanceOf(bal, "savings", g.id);
+        const target = cents(g.targetAmount);
+        const pct    = target ? Math.min(100, (saved / target) * 100) : 0;
+        return h("div", { class: "rec-row", style: "display:block" },
+          h("div", { style: "display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap" },
+            h("strong", { text: g.name }),
+            h("span", { class: "muted small", text: `${Math.round(pct)}%` })),
+          h("div", { class: "sub", text: `${fmtC(saved)} of ${fmt(g.targetAmount)} ${g.currency}${g.targetDate ? " · target " + g.targetDate : ""}` }),
+          h("div", { class: "progress" }, h("span", { style: `width:${pct}%` })),
+          h("div", { class: "rec-actions", style: "margin-top:8px" },
+            h("button", { class: "btn small", type: "button", onclick: () => editGoal(g.id) }, "Edit"),
+            h("button", { class: "btn small", type: "button", onclick: () => deleteGoal(g.id) }, "Delete")));
+      })
+    : [emptyBlock("No savings goals yet", "Create a goal with a target amount and an optional target date.")]));
+}
+
+function renderRates() {
+  // Summary cards for USD, EUR, TRY
+  for (const cur of ["USD", "EUR", "TRY"]) {
+    const r = state.rates.find(x => x.currency === cur);
+    const statEl = $(`rate${cur}`);
+    const noteEl = $(`rate${cur}Note`);
+    if (r && statEl) {
+      statEl.replaceChildren(fmt(r.buyRate), h("small", { text: ` IQD` }));
+      if (noteEl) noteEl.textContent = `${SOURCE_LABEL[r.source] || r.source} · ${r.date}`;
+    } else {
+      if (statEl) statEl.replaceChildren("— ", h("small", { text: "IQD" }));
+      if (noteEl) noteEl.textContent = "Not entered";
+    }
+  }
+
+  // Rate history list
+  $("rateList").replaceChildren(...(state.rates.length
+    ? state.rates.map(r => h("div", { class: "rec-row" },
+        h("div", { class: "rec-main" },
+          h("strong", { text: `${r.currency} · ${SOURCE_LABEL[r.source] || r.source}` }),
+          h("div", { class: "sub", text: r.date + (r.notes ? ` · ${r.notes}` : "") })),
+        h("div", { class: "rec-amount" },
+          h("div", { text: `Buy ${fmt(r.buyRate)} IQD` }),
+          h("div", { class: "sub", text: `Sell ${fmt(r.sellRate)} IQD` })),
+        h("div", { class: "rec-actions" },
+          h("button", { class: "btn small", type: "button", onclick: () => deleteRate(r.id) }, "Delete"))))
+    : [emptyBlock("No rates recorded", "Enter rates for reference and to use when adding foreign-currency transactions.")]));
+}
+
+function renderReports() {
+  const period = $("reportPeriod")?.value || "month";
+  const space  = $("reportSpace")?.value  || "all";
+
+  let income, expense, net, count;
+  if (period === "month") {
+    const m = monthTotals(todayYM(), space);
+    income = m.income; expense = m.expense; net = m.net;
+    count  = state.transactions.filter(t => t.date && t.date.slice(0, 7) === todayYM() && (space === "all" || t.space === space)).length;
+  } else {
+    const y = yearTotals(new Date().getFullYear(), space);
+    income = y.income; expense = y.expense; net = y.net; count = y.count;
+  }
+
+  setStat("repIncome",  income);
+  setStat("repExpense", expense);
+  setStat("repNet",     net);
+  $("repCount").textContent = String(count);
+
+  // Spending by category
+  const catMap = {};
+  for (const t of state.transactions) {
+    if (t.type !== "expense") continue;
+    if (space !== "all" && t.space !== space) continue;
+    if (period === "month" && t.date?.slice(0, 7) !== todayYM()) continue;
+    if (period === "year"  && !t.date?.startsWith(String(new Date().getFullYear()))) continue;
+    const cat = t.category || "Uncategorised";
+    catMap[cat] = (catMap[cat] || 0) + cents(t.amountIQD);
+  }
+  const cats = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+  $("repCategories").replaceChildren(...(cats.length
+    ? cats.map(([cat, val]) => h("div", { class: "rec-row" },
+        h("div", { class: "rec-main", text: cat }),
+        h("div", { class: "rec-amount negative", text: `${fmtC(val)} IQD` })))
+    : [h("p", { class: "muted small", text: "No expense data for this period." })]));
+
+  // By space
+  const spaceTotals = {};
+  for (const sp of ["personal", "family", "business"]) {
+    const m2 = monthTotals(todayYM(), sp);
+    spaceTotals[sp] = period === "month" ? m2 : yearTotals(new Date().getFullYear(), sp);
+  }
+  $("repSpaces").replaceChildren(...["personal", "family", "business"].map(sp => {
+    const d = spaceTotals[sp];
+    return h("div", { class: "rec-row" },
+      h("div", { class: "rec-main" },
+        h("strong", { text: SPACE_LABEL[sp] }),
+        h("div", { class: "sub", text: `Income ${fmtC(d.income)} · Expense ${fmtC(d.expense)}` })),
+      h("div", { class: `rec-amount ${d.net >= 0 ? "positive" : "negative"}`, text: `${fmtC(d.net)} IQD` }));
+  }));
+}
+
+// ============================================================
+// Forms and actions (module_c)
+// ============================================================
+const editing = { tx: null, account: null, card: null, debt: null, goal: null, budget: null, rate: null };
+const numOrNaN = v => (String(v).trim() === "" ? NaN : Number(v));
+const isDate = v => /^\d{4}-\d{2}-\d{2}$/.test(v);
+const isDay  = v => Number.isInteger(v) && v >= 1 && v <= 31;
+
+const txEls = {
+  type: $("txType"), amount: $("txAmount"), currency: $("txCurrency"), date: $("txDate"),
+  space: $("txSpace"), category: $("txCategory"), from: $("txFrom"), to: $("txTo"),
+  toAmount: $("txToAmount"), rate: $("txRate"), payment: $("txPayment"), desc: $("txDesc")
+};
+
+function entityLabel(kind, e, bal) {
+  const amount = fmtC(balanceOf(bal, kind, e.id));
+  if (kind === "account") return `${e.name} · ${e.currency} · balance ${amount}`;
+  if (kind === "card")    return `${e.name} card · ${e.currency} · owed ${amount}`;
+  if (kind === "savings") return `${e.name} goal · ${e.currency} · saved ${amount}`;
+  return `${e.name} · ${e.currency} · remaining ${amount}`;
+}
+
+function listEntities(kind, pred = () => true) {
+  const bal = computeBalances();
+  return state[KIND_COLLECTION[kind]].filter(pred).map(e => ({
+    value: `${kind}:${e.id}`, label: entityLabel(kind, e, bal), id: e.id
+  }));
+}
+
+function fillSelect(select, options, keepValue) {
+  const prev = keepValue ?? select.value;
+  select.replaceChildren(...options.map(o => h("option", { value: o.value }, o.label)));
+  if (prev && options.some(o => o.value === prev)) select.value = prev;
+}
+
+function buildTxOptions(keep = {}) {
+  const type = txEls.type.value;
+  const accounts   = listEntities("account");
+  const cards      = listEntities("card");
+  const savings    = listEntities("savings");
+  const owedDebts  = listEntities("debt", d => d.direction === "owed");
+  const owingDebts = listEntities("debt", d => d.direction === "owe");
+
+  let fromOpts;
+  if (type === "income")  fromOpts = [{ value: "external:", label: "Outside source" }];
+  else if (type === "expense") fromOpts = [...accounts, ...cards];
+  else fromOpts = [...accounts, ...savings, ...owedDebts];
+  fillSelect(txEls.from, fromOpts, keep.from);
+
+  const from = parseRef(txEls.from.value);
+  let toOpts;
+  if (type === "income")  toOpts = accounts;
+  else if (type === "expense") toOpts = [{ value: "external:", label: "Outside (expense)" }];
+  else if (from.kind === "account") toOpts = [...accounts.filter(a => a.value !== txEls.from.value), ...savings, ...cards, ...owingDebts];
+  else if (from.kind === "savings" || from.kind === "debt") toOpts = accounts;
+  else toOpts = [];
+  fillSelect(txEls.to, toOpts, keep.to);
+}
+
+function entityOf(ref) {
+  return ref && ref.kind && ref.id ? entity(ref.kind, ref.id) : null;
+}
+
+function updateTxFormUI() {
+  const type    = txEls.type.value;
+  const from    = parseRef(txEls.from.value);
+  const to      = parseRef(txEls.to.value);
+  const fromEnt = entityOf(from);
+  const toEnt   = entityOf(to);
+
+  $("txFromGroup").classList.toggle("hidden", type === "income");
+  $("txToGroup").classList.toggle("hidden", type === "expense");
+  $("txFromLabel").textContent = type === "expense" ? "Paid from" : "From";
+  $("txToLabel").textContent   = type === "income"  ? "Received into" : "To";
+
+  const currency = type === "income" ? toEnt?.currency : fromEnt?.currency;
+  if (currency) { txEls.currency.value = currency; txEls.currency.disabled = true; }
+  else           { txEls.currency.disabled = false; }
+
+  const cur        = txEls.currency.value;
+  const toCurrency = type === "transfer" ? toEnt?.currency : cur;
+  const crossCurrency = type === "transfer" && toCurrency && toCurrency !== cur;
+
+  $("txToAmountGroup").classList.toggle("hidden", !crossCurrency);
+  $("txToAmountLabel").textContent = crossCurrency ? `Amount received (${toCurrency})` : "Amount received";
+  $("txRateGroup").classList.toggle("hidden", cur === "IQD");
+  $("txRateLabel").textContent = `Exchange rate used (IQD per 1 ${cur})`;
+}
+
+function openNewTx() {
+  resetTxForm();
+  $("txFormTitle").textContent = "New transaction";
+  $("txSubmit").textContent = "Save transaction";
+  txEls.date.value = todayStr();
+  buildTxOptions();
+  updateTxFormUI();
+  openCard("txForm");
+}
+
+function resetTxForm() {
+  editing.tx = null;
+  $("transactionForm").reset();
+  txEls.currency.disabled = false;
+  clearFormError("txError");
+}
+
+function closeTxForm() { resetTxForm(); closeCard("txForm"); }
+
+function editTransaction(id) {
+  const t = state.transactions.find(x => x.id === id);
+  if (!t) return;
+  resetTxForm();
+  editing.tx = id;
+  $("txFormTitle").textContent = "Edit transaction";
+  $("txSubmit").textContent    = "Save changes";
+  txEls.type.value     = t.type;
+  txEls.amount.value   = t.amount;
+  txEls.date.value     = t.date;
+  txEls.space.value    = t.space;
+  txEls.category.value = t.category || "";
+  txEls.payment.value  = t.paymentMethod;
+  txEls.desc.value     = t.description || "";
+  txEls.rate.value     = t.currency === "IQD" ? "" : t.fxRateToIQD;
+  txEls.toAmount.value = t.toCurrency !== t.currency ? t.toAmount : "";
+  buildTxOptions({ from: `${t.fromKind}:${t.fromId}`, to: `${t.toKind}:${t.toId}` });
+  updateTxFormUI();
+  openCard("txForm");
+}
+
+function deleteTransaction(id) { removeRecord("transactions", id, "this transaction"); }
+
+function saveTransaction(e) {
+  e.preventDefault();
+  clearFormError("txError");
+  const fail = msg => showFormError("txError", msg);
+  const type    = txEls.type.value;
+  const from    = parseRef(txEls.from.value);
+  const to      = parseRef(txEls.to.value);
+  const fromEnt = entityOf(from);
+  const toEnt   = entityOf(to);
+  const amount  = numOrNaN(txEls.amount.value);
+  const date    = txEls.date.value;
+  const desc    = txEls.desc.value.trim();
+
+  if (type === "income"   && !toEnt) return fail("Choose the account that receives the income.");
+  if (type === "expense"  && !(fromEnt && (from.kind === "account" || from.kind === "card"))) return fail("Choose the account or card you paid from.");
+  if (type === "transfer" && !fromEnt) return fail("Choose where the money comes from.");
+  if (type === "transfer" && !toEnt)   return fail("Choose where the money goes.");
+  if (type === "transfer" && from.kind === to.kind && from.id === to.id) return fail("A transfer needs two different places.");
+  if (type === "transfer" && to.kind === "card" && from.kind !== "account") return fail("Card repayments must come from an account.");
+  if (type === "transfer" && from.kind === "debt" && fromEnt.direction !== "owed") return fail("Only money owed to you can be collected from a debt.");
+  if (type === "transfer" && to.kind === "debt" && toEnt.direction !== "owe")     return fail("Payments can only go to debts you owe.");
+  if (!isDate(date))    return fail("Choose a valid date.");
+  if (!(amount > 0))    return fail("Enter an amount greater than zero.");
+
+  const currency    = type === "income" ? toEnt.currency : fromEnt.currency;
+  const toCurrency  = type === "transfer" ? toEnt.currency : currency;
+  let toAmount = amount;
+  if (toCurrency !== currency) {
+    toAmount = numOrNaN(txEls.toAmount.value);
+    if (!(toAmount > 0)) return fail(`Enter the amount received in ${toCurrency}.`);
+  }
+  let rate = 1;
+  if (currency !== "IQD") {
+    rate = numOrNaN(txEls.rate.value);
+    if (!(rate > 0)) return fail(`Enter the exchange rate used for ${currency} (IQD per 1 ${currency}). It is saved with this entry and never changes later.`);
+  }
+  const amountIQD = Math.round(amount * rate * 100) / 100;
+
+  const data = {
+    type, date, amount, currency, toAmount, toCurrency,
+    fromKind: type === "income"  ? "external" : from.kind,
+    fromId:   type === "income"  ? "" : from.id,
+    toKind:   type === "expense" ? "external" : to.kind,
+    toId:     type === "expense" ? "" : to.id,
+    space:    txEls.space.value,
+    category: txEls.category.value.trim().slice(0, 60),
+    paymentMethod: txEls.payment.value,
+    description:   desc.slice(0, 500),
+    fxRateToIQD: rate,
+    amountIQD
+  };
+  writeRecord("transactions", editing.tx, data, "txError");
+  toast(navigator.onLine ? "Transaction saved." : "Saved on this device. It will sync when you reconnect.", true);
+  closeTxForm();
+}
+
+// ---- Accounts ----
+function openAccountForm(id) {
+  const a = id ? entity("account", id) : null;
+  $("accountForm").reset();
+  editing.account = a ? a.id : null;
+  $("accountFormTitle").textContent = a ? "Edit account" : "New account";
+  $("accountSubmit").textContent    = a ? "Save changes" : "Save account";
+  $("accName").value     = a ? a.name : "";
+  $("accType").value     = a ? a.type : "cash";
+  $("accCurrency").value = a ? a.currency : "IQD";
+  $("accCurrency").disabled = !!a && isReferenced("account", a.id);
+  $("accOpening").value  = a ? a.openingBalance : "";
+  clearFormError("accountError");
+  openCard("accountFormCard");
+}
+
+function saveAccount(e) {
+  e.preventDefault();
+  clearFormError("accountError");
+  const name    = $("accName").value.trim();
+  const opening = numOrNaN($("accOpening").value);
+  if (!name) return showFormError("accountError", "Enter an account name.");
+  if (Number.isNaN(opening)) return showFormError("accountError", "Enter the opening balance (use 0 if none).");
+  writeRecord("accounts", editing.account, {
+    name: name.slice(0, 80),
+    type: $("accType").value,
+    currency: $("accCurrency").value,
+    openingBalance: opening
+  }, "accountError");
+  editing.account = null;
+  closeCard("accountFormCard");
+}
+
+function deleteAccount(id) {
+  const a = entity("account", id);
+  if (!a) return;
+  if (isReferenced("account", id)) return toast("This account is used by transactions. Delete or edit those transactions first.");
+  removeRecord("accounts", id, `account "${a.name}"`);
+}
+
+// ---- Credit cards ----
+function openCardForm(id) {
+  const c = id ? entity("card", id) : null;
+  $("cardForm").reset();
+  editing.card = c ? c.id : null;
+  $("cardFormTitle").textContent = c ? "Edit credit card" : "New credit card";
+  $("cardSubmit").textContent    = c ? "Save changes" : "Save card";
+  $("cardName").value      = c ? c.name : "";
+  $("cardCurrency").value  = c ? c.currency : "IQD";
+  $("cardCurrency").disabled = !!c && isReferenced("card", c.id);
+  $("cardLimit").value     = c ? c.creditLimit : "";
+  $("cardOpening").value   = c ? c.openingBalance : "";
+  $("cardStatement").value = c ? c.statementDay : "";
+  $("cardDue").value       = c ? c.dueDay : "";
+  clearFormError("cardError");
+  openCard("cardFormCard");
+}
+
+function saveCard(e) {
+  e.preventDefault();
+  clearFormError("cardError");
+  const name         = $("cardName").value.trim();
+  const limit        = numOrNaN($("cardLimit").value);
+  const opening      = numOrNaN($("cardOpening").value);
+  const statementDay = numOrNaN($("cardStatement").value);
+  const dueDay       = numOrNaN($("cardDue").value);
+  if (!name)               return showFormError("cardError", "Enter a name for the card.");
+  if (!(limit >= 0))       return showFormError("cardError", "Enter the credit limit (0 or more).");
+  if (!(opening >= 0))     return showFormError("cardError", "Enter the amount currently owed (0 or more).");
+  if (!isDay(statementDay) || !isDay(dueDay)) return showFormError("cardError", "Statement and due days must be between 1 and 31.");
+  writeRecord("cards", editing.card, {
+    name: name.slice(0, 80),
+    currency: $("cardCurrency").value,
+    creditLimit: limit,
+    openingBalance: opening,
+    statementDay,
+    dueDay
+  }, "cardError");
+  editing.card = null;
+  closeCard("cardFormCard");
+}
+
+function deleteCard(id) {
+  const c = entity("card", id);
+  if (!c) return;
+  if (isReferenced("card", id)) return toast("This card has transactions. Delete or edit those transactions first.");
+  removeRecord("cards", id, `card "${c.name}"`);
+}
+
+// ---- Debts ----
+function openDebtForm(id) {
+  const d = id ? entity("debt", id) : null;
+  $("debtForm").reset();
+  editing.debt = d ? d.id : null;
+  const locked = !!d && isReferenced("debt", d.id);
+  $("debtFormTitle").textContent = d ? "Edit debt or loan" : "New debt or loan";
+  $("debtSubmit").textContent    = d ? "Save changes" : "Save debt";
+  $("debtName").value       = d ? d.name : "";
+  $("debtDirection").value  = d ? d.direction : "owe";
+  $("debtDirection").disabled = locked;
+  $("debtCurrency").value   = d ? d.currency : "IQD";
+  $("debtCurrency").disabled = locked;
+  $("debtAmount").value     = d ? d.originalAmount : "";
+  $("debtDue").value        = d ? d.dueDate : "";
+  $("debtNotes").value      = d ? d.notes : "";
+  clearFormError("debtError");
+  openCard("debtFormCard");
+}
+
+function saveDebt(e) {
+  e.preventDefault();
+  clearFormError("debtError");
+  const name   = $("debtName").value.trim();
+  const amount = numOrNaN($("debtAmount").value);
+  const due    = $("debtDue").value;
+  if (!name)         return showFormError("debtError", "Enter the person or lender.");
+  if (!(amount > 0)) return showFormError("debtError", "Enter an original amount greater than zero.");
+  if (due && !isDate(due)) return showFormError("debtError", "Choose a valid due date or leave it empty.");
+  writeRecord("debts", editing.debt, {
+    name: name.slice(0, 80),
+    direction: $("debtDirection").value,
+    currency:  $("debtCurrency").value,
+    originalAmount: amount,
+    dueDate: due,
+    notes: $("debtNotes").value.trim().slice(0, 500)
+  }, "debtError");
+  editing.debt = null;
+  closeCard("debtFormCard");
+}
+
+function deleteDebt(id) {
+  const d = entity("debt", id);
+  if (!d) return;
+  if (isReferenced("debt", id)) return toast("This debt has repayments recorded. Delete or edit those transactions first.");
+  removeRecord("debts", id, `debt "${d.name}"`);
+}
+
+// ---- Savings ----
+function openGoalForm(id) {
+  const g = id ? entity("savings", id) : null;
+  $("goalForm").reset();
+  editing.goal = g ? g.id : null;
+  $("goalFormTitle").textContent = g ? "Edit savings goal" : "New savings goal";
+  $("goalSubmit").textContent    = g ? "Save changes" : "Save goal";
+  $("goalName").value       = g ? g.name : "";
+  $("goalCurrency").value   = g ? g.currency : "IQD";
+  $("goalCurrency").disabled = !!g && isReferenced("savings", g.id);
+  $("goalTarget").value     = g ? g.targetAmount : "";
+  $("goalSavedStart").value = g ? g.openingBalance : "";
+  $("goalDate").value       = g ? g.targetDate : "";
+  clearFormError("goalError");
+  openCard("goalFormCard");
+}
+
+function saveGoal(e) {
+  e.preventDefault();
+  clearFormError("goalError");
+  const name   = $("goalName").value.trim();
+  const target = numOrNaN($("goalTarget").value);
+  const saved  = numOrNaN($("goalSavedStart").value);
+  const date   = $("goalDate").value;
+  if (!name)         return showFormError("goalError", "Enter a goal name.");
+  if (!(target > 0)) return showFormError("goalError", "Enter a target amount greater than zero.");
+  if (!(saved >= 0)) return showFormError("goalError", "Enter the amount already saved (0 or more).");
+  if (date && !isDate(date)) return showFormError("goalError", "Choose a valid target date or leave it empty.");
+  writeRecord("savings", editing.goal, {
+    name: name.slice(0, 80),
+    currency: $("goalCurrency").value,
+    targetAmount: target,
+    openingBalance: saved,
+    targetDate: date
+  }, "goalError");
+  editing.goal = null;
+  closeCard("goalFormCard");
+}
+
+function deleteGoal(id) {
+  const g = entity("savings", id);
+  if (!g) return;
+  if (isReferenced("savings", id)) return toast("This goal has contributions or withdrawals. Delete or edit those transactions first.");
+  removeRecord("savings", id, `goal "${g.name}"`);
+}
+
+// ---- Budgets ----
+function openBudgetForm(id) {
+  const b = id ? state.budgets.find(x => x.id === id) : null;
+  $("budgetForm").reset();
+  editing.budget = b ? b.id : null;
+  $("budgetFormTitle").textContent = b ? "Edit budget" : "New budget";
+  $("budgetSubmit").textContent    = b ? "Save changes" : "Save budget";
+  $("budScope").value    = b ? b.scope    : "overall";
+  $("budSpace").value    = b ? b.space    : "all";
+  $("budCategory").value = b ? b.category : "";
+  $("budLimit").value    = b ? b.limit    : "";
+  updateBudgetFormUI();
+  clearFormError("budgetError");
+  openCard("budgetFormCard");
+}
+
+function updateBudgetFormUI() {
+  $("budCategoryGroup").classList.toggle("hidden", $("budScope").value !== "category");
+}
+
+function saveBudget(e) {
+  e.preventDefault();
+  clearFormError("budgetError");
+  const scope    = $("budScope").value;
+  const space    = $("budSpace").value;
+  const category = scope === "category" ? $("budCategory").value.trim().slice(0, 60) : "";
+  const limit    = numOrNaN($("budLimit").value);
+  if (scope === "category" && !category) return showFormError("budgetError", "Enter the category name.");
+  if (!(limit > 0)) return showFormError("budgetError", "Enter a monthly limit greater than zero.");
+  const duplicate = state.budgets.some(b => b.id !== editing.budget && b.scope === scope && b.space === space && norm(b.category) === norm(category));
+  if (duplicate) return showFormError("budgetError", "A budget with this type, space, and category already exists. Edit that one instead.");
+  writeRecord("budgets", editing.budget, { scope, space, category, limit, currency: "IQD" }, "budgetError");
+  editing.budget = null;
+  closeCard("budgetFormCard");
+}
+
+function deleteBudget(id) {
+  const b = state.budgets.find(x => x.id === id);
+  if (!b) return;
+  removeRecord("budgets", id, `budget "${budgetName(b)}"`);
+}
+
+// ---- Exchange rates ----
+function openRateForm() {
+  $("rateForm").reset();
+  editing.rate = null;
+  $("rateFormTitle").textContent = "Enter rate";
+  $("rateDate").value = todayStr();
+  clearFormError("rateError");
+  openCard("rateFormCard");
+}
+
+function saveRate(e) {
+  e.preventDefault();
+  clearFormError("rateError");
+  const currency = $("rateCurrency").value;
+  const buyRate  = numOrNaN($("rateBuy").value);
+  const sellRate = numOrNaN($("rateSell").value);
+  const date     = $("rateDate").value;
+  const source   = $("rateSource").value;
+  const notes    = $("rateNotes").value.trim().slice(0, 200);
+  if (!(buyRate > 0))  return showFormError("rateError", "Enter a buy rate greater than zero.");
+  if (!(sellRate > 0)) return showFormError("rateError", "Enter a sell rate greater than zero.");
+  if (!isDate(date))   return showFormError("rateError", "Choose a valid effective date.");
+  writeRecord("rates", null, { currency, buyRate, sellRate, date, source, notes }, "rateError");
+  toast("Rate saved.", true);
+  closeCard("rateFormCard");
+}
+
+function deleteRate(id) { removeRecord("rates", id, "this rate entry"); }
+
+// ---- Edit aliases ----
+function editAccount(id) { openAccountForm(id); }
+function editCard(id)    { openCardForm(id); }
+function editDebt(id)    { openDebtForm(id); }
+function editGoal(id)    { openGoalForm(id); }
+function editBudget(id)  { openBudgetForm(id); }
+
+// ============================================================
+// Event wiring
+// ============================================================
+$("showTxForm").addEventListener("click", openNewTx);
+$("hideTxForm").addEventListener("click", closeTxForm);
+$("txCancel").addEventListener("click", closeTxForm);
+$("transactionForm").addEventListener("submit", saveTransaction);
+txEls.type.addEventListener("change", () => { buildTxOptions(); updateTxFormUI(); });
+txEls.from.addEventListener("change", () => { buildTxOptions(); updateTxFormUI(); });
+txEls.to.addEventListener("change", updateTxFormUI);
+
+$("txSearch").addEventListener("input", renderTransactions);
+["txFilterType", "txFilterSpace", "txFilterCurrency"].forEach(id => $(id).addEventListener("change", renderTransactions));
+
+$("addAccountBtn").addEventListener("click", () => openAccountForm(null));
+$("accountCancel").addEventListener("click", () => { editing.account = null; closeCard("accountFormCard"); });
+$("accountForm").addEventListener("submit", saveAccount);
+
+$("addCardBtn").addEventListener("click", () => openCardForm(null));
+$("cardCancel").addEventListener("click",  () => { editing.card = null; closeCard("cardFormCard"); });
+$("cardForm").addEventListener("submit", saveCard);
+
+$("addDebtBtn").addEventListener("click", () => openDebtForm(null));
+$("debtCancel").addEventListener("click", () => { editing.debt = null; closeCard("debtFormCard"); });
+$("debtForm").addEventListener("submit", saveDebt);
+
+$("addGoalBtn").addEventListener("click", () => openGoalForm(null));
+$("goalCancel").addEventListener("click", () => { editing.goal = null; closeCard("goalFormCard"); });
+$("goalForm").addEventListener("submit", saveGoal);
+
+$("addBudgetBtn").addEventListener("click", () => openBudgetForm(null));
+$("budgetCancel").addEventListener("click", () => { editing.budget = null; closeCard("budgetFormCard"); });
+$("budScope").addEventListener("change", updateBudgetFormUI);
+$("budgetForm").addEventListener("submit", saveBudget);
+
+$("addRateBtn").addEventListener("click", openRateForm);
+$("rateCancel").addEventListener("click", () => closeCard("rateFormCard"));
+$("rateForm").addEventListener("submit", saveRate);
+
+$("reportPeriod")?.addEventListener("change", renderReports);
+$("reportSpace")?.addEventListener("change",  renderReports);
+
+$("language").addEventListener("change", e => {
+  if (e.target.value !== "en") {
+    alert("Arabic and Kurdish Sorani translations and RTL support are planned for the localization phase.");
+    e.target.value = "en";
+  }
+});
+
+window.addEventListener("online",  updateSyncStatus);
+window.addEventListener("offline", updateSyncStatus);
 </script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
