@@ -1,1 +1,147 @@
 
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101411">
+  <meta name="description" content="A simple, powerful personal finance manager.">
+  <title>Finance</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">F</div>
+        <span>Finance</span>
+      </div>
+
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="navigation">
+        <button class="nav-item active" data-page="overview">Overview</button>
+        <button class="nav-item" data-page="transactions">Transactions</button>
+        <button class="nav-item" data-page="budgets">Budgets</button>
+        <button class="nav-item" data-page="debts">Debts</button>
+        <button class="nav-item" data-page="savings">Savings</button>
+        <button class="nav-item" data-page="reports">Reports</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="nav-item" data-page="settings">Settings</button>
+        <p class="muted">Personal finance, organized.</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR FINANCES</p>
+          <h1 id="page-title">Overview</h1>
+        </div>
+        <button class="profile-button" aria-label="Account">F</button>
+      </header>
+
+      <section id="overview-page" class="page active">
+        <div class="welcome-row">
+          <div>
+            <h2>Your financial overview</h2>
+            <p class="muted">Everything in one place.</p>
+          </div>
+          <span class="currency-tag">IQD · Primary currency</span>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <p>Total balance</p>
+            <h2>— <small>IQD</small></h2>
+            <span class="muted">Connect your accounts to begin</span>
+          </article>
+          <article class="stat-card">
+            <p>Income</p>
+            <h2>— <small>IQD</small></h2>
+            <span class="muted">No transactions yet</span>
+          </article>
+          <article class="stat-card">
+            <p>Expenses</p>
+            <h2>— <small>IQD</small></h2>
+            <span class="muted">No transactions yet</span>
+          </article>
+          <article class="stat-card">
+            <p>Net savings</p>
+            <h2>— <small>IQD</small></h2>
+            <span class="muted">Waiting for your data</span>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel">
+            <div class="panel-heading">
+              <h3>Financial spaces</h3>
+              <span class="muted">Combined overview</span>
+            </div>
+            <div class="space-list">
+              <div><span class="space-dot personal"></span>Personal <strong>—</strong></div>
+              <div><span class="space-dot family"></span>Family <strong>—</strong></div>
+              <div><span class="space-dot business"></span>Business <strong>—</strong></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <h3>Exchange rates</h3>
+              <span class="status">Setup required</span>
+            </div>
+            <p class="muted">Official, Iraqi market, and manual rates will be managed here.</p>
+            <p class="muted">No exchange rates have been loaded yet.</p>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <h3>Recent transactions</h3>
+              <button class="text-button" data-page="transactions">View all</button>
+            </div>
+            <div class="empty-state">
+              <span class="empty-icon">↗</span>
+              <h4>No transactions yet</h4>
+              <p class="muted">Your financial activity will appear here.</p>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <h3>Getting started</h3>
+            </div>
+            <p class="muted">Your financial information will appear once your secure account and accounts are configured.</p>
+            <span class="status">Setup incomplete</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="other-page" class="page">
+        <article class="panel empty-page">
+          <div class="empty-icon">✦</div>
+          <h2 id="empty-title">Coming soon</h2>
+          <p class="muted">This section is being prepared.</p>
+        </article>
+      </section>
+
+      <footer class="footer">
+        Finance · Your money, clearly organized.
+      </footer>
+    </main>
+  </div>
+
+  <nav class="mobile-nav">
+    <button class="nav-item active" data-page="overview">Home</button>
+    <button class="nav-item" data-page="transactions">Activity</button>
+    <button class="nav-item" data-page="budgets">Budgets</button>
+    <button class="nav-item" data-page="reports">Reports</button>
+    <button class="nav-item" data-page="settings">Settings</button>
+  </nav>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
+
