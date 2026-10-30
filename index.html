@@ -9,12 +9,52 @@
 :root{color-scheme:dark;--bg:#0d1410;--surface:#151f19;--surface2:#1b2921;--line:#293a30;--text:#eef5ef;--muted:#91a398;--green:#75e0a5;--red:#f08080;--amber:#e9c27c;--blue:#88b8ed;--r:18px}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% -20%,#1d3828 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
 button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:248px;padding:25px 17px;background:#111a14;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:5}.brand{display:flex;gap:11px;align-items:center;font-size:20px;font-weight:750;margin:2px 8px 38px}.logo{width:37px;height:37px;border-radius:12px;background:linear-gradient(145deg,#9af0bd,#45b87c);color:#0b2114;display:grid;place-items:center;font-weight:900}.nav-label{color:#718278;font-size:10px;letter-spacing:1.6px;font-weight:800;margin:0 10px 12px}.nav{display:grid;gap:5px}.nav button,.mobile button{border:0;background:transparent;color:var(--muted);padding:11px 13px;text-align:left;border-radius:11px;display:flex;align-items:center;gap:12px}.nav button.active,.nav button:hover{background:#20362a;color:var(--green)}.nav .ico{width:19px;text-align:center;font-size:16px}.sidebottom{margin-top:auto}.sidebottom p{font-size:11px;color:#718278;padding:0 10px}.main{margin-left:248px;padding:27px 34px 50px;max-width:1700px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px}.eyebrow{color:#82958a;font-size:10px;letter-spacing:1.7px;font-weight:800;margin:0 0 4px}.top h1{font-size:27px;margin:0}.topright{display:flex;gap:10px;align-items:center}.pill,.tag{border:1px solid var(--line);background:#17231b;border-radius:30px;padding:8px 12px;color:var(--muted);font-size:11px}.avatar{width:38px;height:38px;border-radius:50%;border:1px solid #3b5945;background:#213a2b;color:var(--green);font-weight:800}.page{display:none;animation:fade .2s ease}.page.active{display:block}@keyframes fade{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}.welcome{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:19px}.welcome h2{font-size:20px;margin:0 0 3px}.muted{color:var(--muted)}.small{font-size:12px}.btn{border:1px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--text);padding:10px 14px}.btn.primary{background:var(--green);border-color:var(--green);color:#0b2114;font-weight:750}.btn:hover{filter:brightness(1.1)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:15px}.card{background:linear-gradient(145deg,#19251d,#141d17);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0;box-shadow:0 10px 30px #00000012}.statlabel{font-size:12px;color:var(--muted)}.statvalue{font-size:25px;font-weight:750;margin:11px 0 3px;letter-spacing:-.6px;overflow-wrap:anywhere}.statvalue small{font-size:11px;color:var(--muted);font-weight:500}.positive{color:var(--green)}.negative{color:var(--red)}.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-bottom:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.cardhead h3{font-size:14px;margin:0}.space-list{display:grid;gap:13px}.space-row{display:flex;align-items:center;gap:10px;color:var(--muted)}.space-row strong{margin-left:auto;color:var(--text)}.dot{width:9px;height:9px;border-radius:50%;background:var(--green)}.dot.blue{background:var(--blue)}.dot.purple{background:#c39af1}.empty{text-align:center;padding:23px 10px;color:var(--muted)}.empty .symbol{font-size:25px;color:var(--green)}.empty h4{color:var(--text);margin:8px 0 3px}.barline{height:8px;border-radius:10px;background:#26362c;overflow:hidden;margin:10px 0}.barline span{display:block;height:100%;width:0;background:var(--green);border-radius:10px}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:14px 0}.field{background:#111a14;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:10px 12px;min-width:0}.field::placeholder{color:#738379}input.field,select.field{height:40px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:600px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #26352b;font-size:12px}th{color:#8fa195;font-weight:600}td{color:#dce7de}.section-title{margin:0 0 5px;font-size:20px}.section-desc{margin:0;color:var(--muted);font-size:12px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 17px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.formgroup{display:grid;gap:6px}.formgroup label{font-size:11px;color:var(--muted)}.formgroup.full{grid-column:1/-1}.notice{border:1px solid #66532d;background:#302819;color:#e9d2a4;padding:12px 14px;border-radius:12px;font-size:12px;margin-bottom:15px}.tag.green{color:var(--green);border-color:#315640}.tag.amber{color:var(--amber);border-color:#66532d}.mobile{display:none}.hidden{display:none!important}.footer{text-align:center;color:#65766b;font-size:10px;padding:30px 0 5px}
+button:disabled{opacity:.6;cursor:not-allowed}
+.auth-loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;color:var(--muted);padding:20px;background:radial-gradient(ellipse at 70% -20%,#1d3828 0,transparent 38%),var(--bg);z-index:20}
+.auth-screen{position:fixed;inset:0;overflow:auto;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 70% -20%,#1d3828 0,transparent 38%),var(--bg);z-index:20}
+.auth-card{width:min(420px,100%);padding:26px}
+.auth-brand{display:flex;gap:12px;align-items:center;margin-bottom:20px}
+.auth-brand h1{font-size:20px;margin:0}
+.auth-brand p{margin:2px 0 0}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border:1px solid var(--line);border-radius:14px;background:#111a14;margin-bottom:16px}
+.auth-tabs button{border:0;background:transparent;color:var(--muted);padding:10px;border-radius:10px}
+.auth-tabs button.active{background:#20362a;color:var(--green)}
+.auth-form{display:grid;gap:14px}
+.auth-form .field{width:100%}
+.auth-submit{width:100%;height:42px}
+.auth-hint{margin:0;font-size:11px;color:var(--muted)}
+.auth-message{border:1px solid #66532d;background:#302819;color:#e9d2a4;padding:11px 13px;border-radius:12px;font-size:12px;margin-bottom:14px}
+.auth-message.error{border-color:#6b3434;background:#2e1a1a;color:#f5b5b5}
 @media(max-width:1100px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}}
 @media(max-width:700px){.sidebar{display:none}.main{margin:0;padding:20px 14px 100px}.top h1{font-size:23px}.welcome{align-items:flex-start;flex-direction:column}.stats{gap:9px}.card{padding:15px;border-radius:15px}.statvalue{font-size:21px}.grid3{grid-template-columns:1fr}.mobile{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:10px;padding:7px 4px;background:#17231beF;border:1px solid #3a4a3d;border-radius:17px;backdrop-filter:blur(18px);z-index:10}.mobile button{display:block;text-align:center;padding:9px 1px;font-size:10px}.mobile button.active{color:var(--green);background:#20362a}.mobile button span{display:block;font-size:15px}.topright .pill{display:none}}
 </style>
 </head>
 <body>
-<div class="app">
+<div id="authLoading" class="auth-loading" role="status"><div class="logo">F</div><p id="authLoadingMsg">Checking secure session…</p></div>
+
+<section id="authScreen" class="auth-screen hidden" aria-labelledby="authTitle">
+  <div class="auth-card card">
+    <div class="auth-brand"><div class="logo">F</div><div><h1 id="authTitle">Finance</h1><p class="muted small">Sign in to your private financial records.</p></div></div>
+    <div class="auth-tabs" role="tablist">
+      <button type="button" role="tab" id="tabSignIn" class="active" aria-selected="true" aria-controls="signInForm" data-auth-mode="signin">Sign in</button>
+      <button type="button" role="tab" id="tabRegister" aria-selected="false" aria-controls="registerForm" data-auth-mode="register">Create account</button>
+    </div>
+    <div id="authMessage" class="auth-message hidden" role="alert"></div>
+    <form id="signInForm" class="auth-form" novalidate>
+      <div class="formgroup"><label for="signInEmail">Email</label><input id="signInEmail" class="field" type="email" autocomplete="username" required></div>
+      <div class="formgroup"><label for="signInPassword">Password</label><input id="signInPassword" class="field" type="password" autocomplete="current-password" required></div>
+      <button id="signInSubmit" class="btn primary auth-submit" type="submit" data-label="Sign in">Sign in</button>
+    </form>
+    <form id="registerForm" class="auth-form hidden" novalidate>
+      <div class="formgroup"><label for="registerEmail">Email</label><input id="registerEmail" class="field" type="email" autocomplete="email" required></div>
+      <div class="formgroup"><label for="registerPassword">Password</label><input id="registerPassword" class="field" type="password" autocomplete="new-password" required><p class="auth-hint">At least 10 characters, including letters and numbers.</p></div>
+      <div class="formgroup"><label for="registerConfirm">Confirm password</label><input id="registerConfirm" class="field" type="password" autocomplete="new-password" required></div>
+      <button id="registerSubmit" class="btn primary auth-submit" type="submit" data-label="Create account">Create account</button>
+    </form>
+  </div>
+</section>
+
+<div class="app hidden" id="appShell">
 <aside class="sidebar">
   <div class="brand"><div class="logo">F</div>Finance</div>
   <p class="nav-label">WORKSPACE</p>
@@ -32,7 +72,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:
   <div class="sidebottom"><nav class="nav"><button data-page="settings"><span class="ico">⚙</span>Settings</button></nav><p>One clear view of your finances.</p></div>
 </aside>
 <main class="main">
-<header class="top"><div><p class="eyebrow">YOUR FINANCES</p><h1 id="pageTitle">Overview</h1></div><div class="topright"><span class="pill">IQD · Primary currency</span><button class="avatar" title="Owner account">F</button></div></header>
+<header class="top"><div><p class="eyebrow">YOUR FINANCES</p><h1 id="pageTitle">Overview</h1></div><div class="topright"><span class="pill">IQD · Primary currency</span><button class="avatar" title="Owner account">F</button><button class="btn" id="signOutBtn" type="button">Sign out</button></div></header>
 
 <section class="page active" id="page-overview">
   <div class="welcome"><div><h2>Financial overview</h2><div class="muted small">Personal, Family, and Business — together.</div></div><button class="btn primary" data-page="transactions">＋ Add transaction</button></div>
@@ -125,7 +165,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:
 <section class="page" id="page-settings">
   <div class="section-head"><div><h2 class="section-title">Settings</h2><p class="section-desc">Security, preferences, and data management.</p></div></div>
   <div class="grid2">
-    <article class="card"><div class="cardhead"><h3>Account protection</h3><span class="tag amber">Not configured</span></div><p class="muted small">Firebase Authentication and owner-only database/storage permissions. One authorized owner account.</p><label class="small"><input type="checkbox" disabled> Enable optional PIN lock (available after secure local implementation)</label></article>
+    <article class="card"><div class="cardhead"><h3>Account protection</h3><span class="tag amber" id="protectionStatus">Not configured</span></div><p class="muted small">Firebase Authentication and owner-only database/storage permissions. One authorized owner account.</p><p class="muted small" id="accountEmail"></p><label class="small"><input type="checkbox" disabled> Enable optional PIN lock (available after secure local implementation)</label></article>
     <article class="card"><h3>Language & appearance</h3><div class="formgrid" style="margin-top:12px"><div class="formgroup"><label>Language</label><select class="field" id="language"><option value="en">English</option><option value="ar">العربية</option><option value="ku">کوردی سۆرانی</option></select></div><div class="formgroup"><label>Primary currency</label><select class="field"><option>IQD</option></select></div></div><p class="muted small">Full Arabic and Sorani translation, RTL layouts, localized dates and numbers. Theme and dashboard layout will be configurable independently.</p></article>
     <article class="card"><h3>Notifications</h3><p class="muted small">Individual controls for bills, recurring payments, budget warnings, overdue debts, savings milestones, daily/weekly summaries, and exchange-rate alerts.</p></article>
     <article class="card"><h3>Backup & recovery</h3><p class="muted small">Cloud sync, scheduled backups, backup history, restore, and recovery of deleted records where available.</p></article>
@@ -145,5 +185,217 @@ function route(){const p=location.hash.slice(1);if(titles[p])go(p)}window.addEve
 const form=document.getElementById("txForm");document.getElementById("showTxForm").onclick=()=>form.classList.remove("hidden");document.getElementById("hideTxForm").onclick=()=>form.classList.add("hidden");document.getElementById("transactionForm").addEventListener("submit",e=>{e.preventDefault();alert("This is a visual prototype. Transactions will be saved after Firebase authentication, database rules, and the financial data engine are implemented.");});
 document.getElementById("language").addEventListener("change",e=>{if(e.target.value!=="en")alert("Arabic and Kurdish Sorani translations and RTL support are planned for the localization phase.");});
 </script>
+<script>
+// Safety net: if the Firebase modules cannot load (e.g. no internet), tell the user instead of spinning forever.
+setTimeout(()=>{if(document.body.dataset.authReady!=="1"){document.getElementById("authLoadingMsg").textContent="Secure sign-in could not load. Check your internet connection and reload the page.";}},15000);
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC7ga-g3XzF1Tmwm2_9FGK7T-jkwEbP6-0",
+  authDomain: "fathers-finance.firebaseapp.com",
+  projectId: "fathers-finance",
+  storageBucket: "fathers-finance.firebasestorage.app",
+  messagingSenderId: "531387408583",
+  appId: "1:531387408583:web:f07f205a715379428b5ee2",
+  measurementId: "G-F8ZYNMDYYS"
+};
+
+// Initialize Firebase exactly once per page load.
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+
+const MIN_PASSWORD_LENGTH = 10;
+const $ = id => document.getElementById(id);
+const ui = {
+  loading: $("authLoading"),
+  screen: $("authScreen"),
+  app: $("appShell"),
+  message: $("authMessage"),
+  tabSignIn: $("tabSignIn"),
+  tabRegister: $("tabRegister"),
+  signInForm: $("signInForm"),
+  registerForm: $("registerForm"),
+  signInEmail: $("signInEmail"),
+  signInPassword: $("signInPassword"),
+  signInSubmit: $("signInSubmit"),
+  registerEmail: $("registerEmail"),
+  registerPassword: $("registerPassword"),
+  registerConfirm: $("registerConfirm"),
+  registerSubmit: $("registerSubmit"),
+  signOutBtn: $("signOutBtn"),
+  accountEmail: $("accountEmail"),
+  protectionStatus: $("protectionStatus")
+};
+
+// Human-friendly messages for Firebase Auth error codes.
+// Wrong email and wrong password share one message so the form does not reveal which accounts exist.
+const AUTH_ERRORS = {
+  "auth/invalid-email": "That email address is not valid.",
+  "auth/missing-email": "Please enter your email address.",
+  "auth/missing-password": "Please enter your password.",
+  "auth/invalid-credential": "Incorrect email or password.",
+  "auth/invalid-login-credentials": "Incorrect email or password.",
+  "auth/wrong-password": "Incorrect email or password.",
+  "auth/user-not-found": "Incorrect email or password.",
+  "auth/user-disabled": "This account has been disabled.",
+  "auth/email-already-in-use": "An account already exists for this email. Try signing in instead.",
+  "auth/weak-password": "This password is too weak. Use at least 10 characters with letters and numbers.",
+  "auth/operation-not-allowed": "Sign-in is temporarily unavailable. Please try again later.",
+  "auth/too-many-requests": "Too many attempts. Please wait a few minutes and try again.",
+  "auth/network-request-failed": "Network error. Check your internet connection and try again.",
+  "auth/internal-error": "Something went wrong. Please try again."
+};
+
+let authBusy = false;
+
+function friendlyAuthError(err) {
+  const code = err && err.code;
+  // Log only the error code, never the email or password.
+  console.warn("Firebase Auth error:", code || "unknown");
+  return AUTH_ERRORS[code] || "Sign-in could not be completed. Please try again.";
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+// Returns an error message, or an empty string when the password is acceptable.
+function passwordProblem(password) {
+  if (password.length < MIN_PASSWORD_LENGTH) return `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`;
+  if (!/[A-Za-z]/.test(password) || !/\d/.test(password)) return "Password must include at least one letter and one number.";
+  return "";
+}
+
+function showAuthMessage(text, type = "error") {
+  ui.message.textContent = text;
+  ui.message.className = `auth-message ${type}`;
+}
+
+function clearAuthMessage() {
+  ui.message.textContent = "";
+  ui.message.className = "auth-message hidden";
+}
+
+function clearPasswordFields() {
+  ui.signInPassword.value = "";
+  ui.registerPassword.value = "";
+  ui.registerConfirm.value = "";
+}
+
+function setAuthMode(mode) {
+  const signIn = mode === "signin";
+  ui.tabSignIn.classList.toggle("active", signIn);
+  ui.tabRegister.classList.toggle("active", !signIn);
+  ui.tabSignIn.setAttribute("aria-selected", String(signIn));
+  ui.tabRegister.setAttribute("aria-selected", String(!signIn));
+  ui.signInForm.classList.toggle("hidden", !signIn);
+  ui.registerForm.classList.toggle("hidden", signIn);
+  clearAuthMessage();
+}
+
+// Disables the submit button while Firebase works, then restores it.
+async function runAuthAction(button, busyText, action) {
+  if (authBusy) return;
+  authBusy = true;
+  const idleText = button.dataset.label;
+  button.disabled = true;
+  button.textContent = busyText;
+  try {
+    await action(); // onAuthStateChanged switches the screen on success.
+  } catch (err) {
+    showAuthMessage(friendlyAuthError(err));
+  } finally {
+    authBusy = false;
+    button.disabled = false;
+    button.textContent = idleText;
+  }
+}
+
+function showApp(user) {
+  ui.loading.classList.add("hidden");
+  ui.screen.classList.add("hidden");
+  ui.app.classList.remove("hidden");
+  ui.accountEmail.textContent = `Signed in as ${user.email || "owner account"}`;
+  ui.protectionStatus.textContent = "Signed in";
+  ui.protectionStatus.className = "tag green";
+  clearPasswordFields();
+  clearAuthMessage();
+}
+
+function showAuthScreen() {
+  ui.loading.classList.add("hidden");
+  ui.app.classList.add("hidden");
+  ui.screen.classList.remove("hidden");
+  ui.accountEmail.textContent = "";
+  ui.protectionStatus.textContent = "Not signed in";
+  ui.protectionStatus.className = "tag amber";
+  clearPasswordFields();
+}
+
+// Keep the session across browser restarts (this is also the web default; set explicitly for clarity).
+setPersistence(auth, browserLocalPersistence).catch(err => {
+  console.error("Could not set session persistence:", err && err.code);
+});
+
+// Runs on page load and whenever the sign-in state changes. The dashboard stays hidden until this has run.
+onAuthStateChanged(auth, user => {
+  document.body.dataset.authReady = "1";
+  if (user) {
+    showApp(user);
+  } else {
+    showAuthScreen();
+  }
+});
+
+ui.tabSignIn.addEventListener("click", () => setAuthMode("signin"));
+ui.tabRegister.addEventListener("click", () => setAuthMode("register"));
+
+ui.signInForm.addEventListener("submit", e => {
+  e.preventDefault();
+  clearAuthMessage();
+  const email = ui.signInEmail.value.trim();
+  const password = ui.signInPassword.value;
+  if (!isValidEmail(email)) return showAuthMessage("Please enter a valid email address.");
+  if (!password) return showAuthMessage("Please enter your password.");
+  runAuthAction(ui.signInSubmit, "Signing in…", () => signInWithEmailAndPassword(auth, email, password));
+});
+
+ui.registerForm.addEventListener("submit", e => {
+  e.preventDefault();
+  clearAuthMessage();
+  const email = ui.registerEmail.value.trim();
+  const password = ui.registerPassword.value;
+  const confirm = ui.registerConfirm.value;
+  if (!isValidEmail(email)) return showAuthMessage("Please enter a valid email address.");
+  const problem = passwordProblem(password);
+  if (problem) return showAuthMessage(problem);
+  if (password !== confirm) return showAuthMessage("The passwords do not match.");
+  runAuthAction(ui.registerSubmit, "Creating account…", () => createUserWithEmailAndPassword(auth, email, password));
+});
+
+ui.signOutBtn.addEventListener("click", async () => {
+  ui.signOutBtn.disabled = true;
+  try {
+    await signOut(auth); // onAuthStateChanged returns the user to the sign-in screen.
+  } catch (err) {
+    console.error("Sign-out failed:", err && err.code);
+    alert("Could not sign out. Check your internet connection and try again.");
+  } finally {
+    ui.signOutBtn.disabled = false;
+  }
+});
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
