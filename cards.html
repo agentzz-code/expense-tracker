@@ -1,0 +1,19 @@
+<section class="page" id="page-cards">
+  <div class="section-head"><div><h2 class="section-title">Credit cards</h2><p class="section-desc">Track balances, statements, and repayments.</p></div><button class="btn primary" id="addCardBtn">＋ Add credit card</button></div>
+  <div class="notice">Card purchases count as expenses once. Repayments are transfers from an account to the card and are not counted as expenses.</div>
+  <div class="grid3"><article class="card"><div class="statlabel">Outstanding (IQD cards)</div><div class="statvalue" id="cardOutstanding">— <small>IQD</small></div><p class="muted small">Owed on IQD cards</p></article><article class="card"><div class="statlabel">Available credit (IQD cards)</div><div class="statvalue" id="cardAvailable">— <small>IQD</small></div><p class="muted small">Limit less outstanding</p></article><article class="card"><div class="statlabel">Cards</div><div class="statvalue" id="cardCount">—</div><p class="muted small">Cards added</p></article></div>
+  <article class="card form-card hidden" id="cardFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="cardFormTitle">New credit card</h3><button class="btn" type="button" id="cardCancel">Close</button></div>
+    <form id="cardForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="cardName">Card name</label><input class="field" id="cardName" maxlength="80" placeholder="e.g. Visa gold" required></div>
+      <div class="formgroup"><label for="cardCurrency">Currency</label><select class="field" id="cardCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="cardLimit">Credit limit</label><input class="field" id="cardLimit" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup"><label for="cardOpening">Outstanding balance now</label><input class="field" id="cardOpening" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup"><label for="cardStatement">Statement day (1–31)</label><input class="field" id="cardStatement" type="number" min="1" max="31" step="1" required></div>
+      <div class="formgroup"><label for="cardDue">Due day (1–31)</label><input class="field" id="cardDue" type="number" min="1" max="31" step="1" required></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="cardSubmit">Save card</button></div>
+    </form>
+    <div class="auth-message error hidden" id="cardError" role="alert"></div>
+  </article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Your cards</h3></div><div class="rec-list" id="cardList"></div><p class="muted small" style="margin-top:12px">Fees, interest, and minimum payments are planned.</p></article>
+</section>

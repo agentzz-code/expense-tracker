@@ -1,0 +1,17 @@
+<section class="page" id="page-budgets">
+  <div class="section-head"><div><h2 class="section-title">Budgets</h2><p class="section-desc">Plan spending by month and category.</p></div><button class="btn primary" id="addBudgetBtn">＋ Create budget</button></div>
+  <div class="grid2"><article class="card"><div class="statlabel">Monthly spending limit</div><div class="statvalue" id="budgetOverallValue">— <small>IQD</small></div><div class="progress" id="budgetOverallBar"><span></span></div><p class="muted small" id="budgetOverallNote">No overall budget configured</p></article><article class="card"><div class="statlabel">Category budgets</div><div class="statvalue" id="budgetCategoryCount">—</div><p class="muted small">Category limits with remaining amounts and warnings.</p></article></div>
+  <article class="card form-card hidden" id="budgetFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="budgetFormTitle">New budget</h3><button class="btn" type="button" id="budgetCancel">Close</button></div>
+    <form id="budgetForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="budScope">Budget type</label><select class="field" id="budScope"><option value="overall">Overall monthly limit</option><option value="category">Category limit</option></select></div>
+      <div class="formgroup"><label for="budSpace">Financial space</label><select class="field" id="budSpace"><option value="all">All spaces</option><option value="personal">Personal</option><option value="family">Family</option><option value="business">Business</option></select></div>
+      <div class="formgroup" id="budCategoryGroup"><label for="budCategory">Category</label><input class="field" id="budCategory" list="categoryList" maxlength="60" placeholder="e.g. Food"></div>
+      <div class="formgroup"><label for="budLimit">Monthly limit (IQD)</label><input class="field" id="budLimit" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="budgetSubmit">Save budget</button></div>
+    </form>
+    <div class="auth-message error hidden" id="budgetError" role="alert"></div>
+  </article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Budgets this month</h3><span class="muted small">Counts expenses and card purchases only. Transfers and repayments are excluded.</span></div><div class="rec-list" id="budgetList"></div></article>
+  <p class="muted small">Planned: month-to-month comparisons.</p>
+</section>

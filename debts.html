@@ -1,0 +1,18 @@
+<section class="page" id="page-debts">
+  <div class="section-head"><div><h2 class="section-title">Debts & loans</h2><p class="section-desc">Money owed to you and money you owe.</p></div><button class="btn primary" id="addDebtBtn">＋ Add debt</button></div>
+  <div class="grid2"><article class="card"><div class="statlabel">You owe (IQD)</div><div class="statvalue negative" id="debtOwe">— <small>IQD</small></div><p class="muted small" id="debtOweNote">Remaining balance</p></article><article class="card"><div class="statlabel">Owed to you (IQD)</div><div class="statvalue positive" id="debtOwed">— <small>IQD</small></div><p class="muted small" id="debtOwedNote">Remaining balance</p></article></div>
+  <article class="card form-card hidden" id="debtFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="debtFormTitle">New debt or loan</h3><button class="btn" type="button" id="debtCancel">Close</button></div>
+    <form id="debtForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="debtName">Person or lender</label><input class="field" id="debtName" maxlength="80" placeholder="e.g. Ali" required></div>
+      <div class="formgroup"><label for="debtDirection">Direction</label><select class="field" id="debtDirection"><option value="owe">I owe this</option><option value="owed">Owed to me</option></select></div>
+      <div class="formgroup"><label for="debtCurrency">Currency</label><select class="field" id="debtCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="debtAmount">Original amount</label><input class="field" id="debtAmount" type="number" min="0" step="any" placeholder="0" required></div>
+      <div class="formgroup"><label for="debtDue">Due date (optional)</label><input class="field" id="debtDue" type="date"></div>
+      <div class="formgroup"><label for="debtNotes">Notes</label><input class="field" id="debtNotes" maxlength="500" placeholder="Optional"></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="debtSubmit">Save debt</button></div>
+    </form>
+    <div class="auth-message error hidden" id="debtError" role="alert"></div>
+  </article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Debts and loans</h3></div><div class="rec-list" id="debtList"></div><p class="muted small" style="margin-top:12px">Record repayments as transfers from an account to a debt you owe, or from a debt owed to you into an account.</p></article>
+</section>

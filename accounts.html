@@ -1,0 +1,16 @@
+<section class="page" id="page-accounts">
+  <div class="section-head"><div><h2 class="section-title">Accounts</h2><p class="section-desc">Cash and multiple bank accounts, shown separately and combined.</p></div><button class="btn primary" id="addAccountBtn">＋ Add account</button></div>
+  <div class="grid3"><article class="card"><div class="statlabel">Cash on hand</div><div class="statvalue" id="cashTotal">— <small>IQD</small></div><p class="muted small" id="cashNote">No cash accounts yet</p></article><article class="card"><div class="statlabel">Bank accounts</div><div class="statvalue" id="bankCount">—</div><p class="muted small">Bank accounts added</p></article><article class="card"><div class="statlabel">Combined balance</div><div class="statvalue" id="combinedTotal">— <small>IQD</small></div><p class="muted small" id="combinedNote">IQD accounts only until exchange rates are connected</p></article></div>
+  <article class="card form-card hidden" id="accountFormCard" style="margin-top:14px">
+    <div class="cardhead"><h3 id="accountFormTitle">New account</h3><button class="btn" type="button" id="accountCancel">Close</button></div>
+    <form id="accountForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="accName">Account name</label><input class="field" id="accName" maxlength="80" placeholder="e.g. Main bank account" required></div>
+      <div class="formgroup"><label for="accType">Type</label><select class="field" id="accType"><option value="cash">Cash</option><option value="bank">Bank</option><option value="other">Other</option></select></div>
+      <div class="formgroup"><label for="accCurrency">Currency</label><select class="field" id="accCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="accOpening">Opening balance</label><input class="field" id="accOpening" type="number" step="any" placeholder="0" required></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="accountSubmit">Save account</button></div>
+    </form>
+    <div class="auth-message error hidden" id="accountError" role="alert"></div>
+  </article>
+  <div class="grid2" style="margin-top:14px"><article class="card"><div class="cardhead"><h3>Account list</h3><span class="tag">Multiple currencies</span></div><div class="rec-list" id="accountList"></div></article><article class="card"><div class="cardhead"><h3>Transfers & reconciliation</h3></div><p class="muted small">Transfers between owned accounts are recorded on the Transactions page and never count as income or expenses.</p><p class="muted small">Reconciliation and cross-currency fee tracking are planned.</p></article></div>
+</section>
