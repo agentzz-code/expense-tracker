@@ -328,6 +328,10 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
     <label class="field" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span data-t="fromDate">From</span><input class="field" id="txFromDate" type="date" style="height:34px;padding:0 8px"></label>
     <label class="field" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span data-t="toDate">To</span><input class="field" id="txToDate" type="date" style="height:34px;padding:0 8px"></label>
     <button class="btn" id="txClearDates" data-t="clearFilters">Clear filters</button>
+    <select class="field" id="txExportFormat" aria-label="Export format">
+      <option value="csv">CSV</option><option value="xlsx">XLSX</option><option value="pdf">PDF</option>
+    </select>
+    <button class="btn" id="txExportBtn" type="button">Export transactions</button>
   </div>
   <div class="card tablewrap"><table><thead><tr><th data-t="tableDate">Date</th><th data-t="tableDescription">Description</th><th data-t="tableCategory">Category</th><th data-t="tableSpace">Space</th><th data-t="tableAccount">Account</th><th class="amount" data-t="tableAmount">Amount</th><th></th></tr></thead><tbody id="txTableBody"><tr><td colspan="7" class="muted" style="text-align:center;padding:35px" data-t="loadingTransactions">Loading transactions…</td></tr></tbody></table></div>
   <p class="muted small" data-t="txPlanned">Attachments, recurring transactions, date-range filters, and CSV/XLSX/PDF exports are available from the toolbar and transaction rows.</p>
@@ -515,8 +519,17 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
       </div>
       <p class="muted small">Full Arabic and Sorani translation and RTL layouts are planned.</p>
     </article>
-    <article class="card"><h3>Backup &amp; recovery</h3><p class="muted small">All records sync automatically to your Firebase account. Firestore offline persistence keeps a local copy for when you are without internet. Full export (CSV/JSON) is planned.</p></article>
-    <article class="card"><h3>Offline &amp; sync</h3><p class="muted small">The app uses Firestore's offline persistence. Changes made without internet are queued and synced automatically when you reconnect. No data is lost.</p></article>
+    <article class="card">
+      <h3>Backup &amp; recovery</h3>
+      <p class="muted small">Create a JSON backup of all finance collections or restore a backup previously exported by this application. Restore merges records by ID and does not delete records already in your account.</p>
+      <div class="form-actions" style="margin-top:12px">
+        <button class="btn" id="backupExportBtn" type="button">Download full backup</button>
+        <button class="btn" id="backupImportBtn" type="button">Restore backup</button>
+        <input id="backupFileInput" type="file" accept="application/json,.json" class="hidden">
+      </div>
+      <p class="hint" id="backupStatus" role="status" style="margin-top:10px">Keep a copy somewhere secure. A backup contains private financial information.</p>
+    </article>
+    <article class="card"><h3>Offline &amp; sync</h3><p class="muted small">Firestore persistent local cache is enabled. Pending writes are shown in the sync indicator when Firebase reports them. Offline behavior depends on browser storage availability; keep regular backups.</p></article>
   </div>
 </section>
 
@@ -575,7 +588,7 @@ setTimeout(() => {
 
 <!-- ===== Optional feature libraries (loaded globally) ===== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.20.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
@@ -604,6 +617,7 @@ import {
   setDoc,
   updateDoc,
   deleteDoc,
+  writeBatch,
   onSnapshot,
   query,
   orderBy,
@@ -1714,6 +1728,30 @@ function t(key, params = {}) {
   return str.replace(/\{(\w+)\}/g, (m, p) => params[p] !== undefined ? params[p] : m);
 }
 
+function applyTranslations() {
+  document.querySelectorAll("[data-t]").forEach(el => {
+    const key = el.getAttribute("data-t");
+    const value = t(key);
+    if (value !== key) el.textContent = value;
+  });
+  document.querySelectorAll("[data-t-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-t-placeholder");
+    const value = t(key);
+    if (value !== key) el.setAttribute("placeholder", value);
+  });
+  document.querySelectorAll("[data-t-title]").forEach(el => {
+    const key = el.getAttribute("data-t-title");
+    const value = t(key);
+    if (value !== key) el.setAttribute("title", value);
+  });
+  const title = $("pageTitle");
+  const activePage = document.querySelector(".page.active");
+  if (title && activePage) {
+    const key = activePage.id.replace("page-", "");
+    title.textContent = t(key);
+  }
+}
+
 function applyDirection() {
   const dir = LANGUAGES[currentLanguage]?.dir || "ltr";
   document.documentElement.dir = dir;
@@ -1721,6 +1759,7 @@ function applyDirection() {
   document.documentElement.lang = currentLanguage;
   const sel = $("language");
   if (sel) sel.value = currentLanguage;
+  applyTranslations();
 }
 
 async function setLanguage(lang) {
@@ -1730,6 +1769,7 @@ async function setLanguage(lang) {
   if (uid) {
     writeRecord("settings", "prefs", { language: lang, primaryCurrency: "IQD" }, null);
   }
+  applyTranslations();
   refreshAll();
 }
 
@@ -2009,6 +2049,7 @@ function closeCard(id) { $(id)?.classList.add("hidden"); }
 
 // ---- Rendering ----
 function refreshAll() {
+  applyTranslations();
   if (!uid) return;
   renderSelectors();
   renderOverview();
@@ -2131,10 +2172,14 @@ function renderTransactions() {
   const ft = $("txFilterType").value;
   const fs = $("txFilterSpace").value;
   const fc = $("txFilterCurrency").value;
+  const fromDate = $("txFromDate").value;
+  const toDate = $("txToDate").value;
   const rows = state.transactions.filter(t => {
     if (ft !== "all" && t.type !== ft) return false;
     if (fs !== "all" && t.space !== fs) return false;
     if (fc !== "all" && t.currency !== fc) return false;
+    if (fromDate && t.date < fromDate) return false;
+    if (toDate && t.date > toDate) return false;
     if (q) {
       const text = norm([t.description, t.category, t.date, txAccountLabel(t)].join(" "));
       if (!text.includes(q)) return false;
@@ -2843,6 +2888,117 @@ function editGoal(id)    { openGoalForm(id); }
 function editBudget(id)  { openBudgetForm(id); }
 
 // ============================================================
+// Export and backup utilities
+// ============================================================
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function csvCell(value) {
+  const text = String(value ?? "");
+  return '"' + text.replace(/"/g, '""') + '"';
+}
+
+function exportTransactions() {
+  const fromDate = $("txFromDate").value;
+  const toDate = $("txToDate").value;
+  const format = $("txExportFormat").value;
+  const rows = state.transactions.filter(tx =>
+    (!fromDate || tx.date >= fromDate) && (!toDate || tx.date <= toDate)
+  );
+  if (!rows.length) return toast("There are no transactions in the selected date range.");
+  const columns = ["date","type","amount","currency","amountIQD","fxRateToIQD","toAmount","toCurrency","fromKind","fromId","toKind","toId","space","category","paymentMethod","description"];
+  const data = [columns, ...rows.map(tx => columns.map(k => tx[k] ?? ""))];
+  const stamp = todayStr();
+  if (format === "xlsx") {
+    if (!window.XLSX) return toast("Excel export library did not load. Choose CSV instead.");
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(data), "Transactions");
+    XLSX.writeFile(wb, `finance-transactions-${stamp}.xlsx`);
+  } else if (format === "pdf") {
+    if (!window.jspdf?.jsPDF) return toast("PDF export library did not load. Choose CSV instead.");
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: "landscape" });
+    pdf.text("Finance transactions", 14, 14);
+    pdf.autoTable({ head: [columns], body: data.slice(1), startY: 20, styles: { fontSize: 7 } });
+    pdf.save(`finance-transactions-${stamp}.pdf`);
+  } else {
+    const csv = "\uFEFF" + data.map(row => row.map(csvCell).join(",")).join("\r\n");
+    downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8" }), `finance-transactions-${stamp}.csv`);
+  }
+}
+
+const BACKUP_COLLECTIONS = ["accounts", "transactions", "budgets", "debts", "cards", "savings", "rates"];
+async function exportFullBackup() {
+  if (!uid) return toast("You are not signed in.");
+  const payload = {
+    format: "fathers-finance-backup",
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    uid,
+    collections: Object.fromEntries(BACKUP_COLLECTIONS.map(name => [
+      name, state[name].map(({ id, ...record }) => ({ id, ...record }))
+    ]))
+  };
+  downloadBlob(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }),
+    `fathers-finance-backup-${todayStr()}.json`);
+  $("backupStatus").textContent = "Backup downloaded. Store it securely; it contains private financial records.";
+}
+
+async function importFullBackup(file) {
+  if (!uid) throw new Error("You are not signed in.");
+  if (file.size > 20 * 1024 * 1024) throw new Error("Backup file is larger than 20 MB.");
+  const payload = JSON.parse(await file.text());
+  if (payload?.format !== "fathers-finance-backup" || payload?.version !== 1 || !payload.collections) {
+    throw new Error("This is not a supported Finance backup file.");
+  }
+  if (payload.uid !== uid) throw new Error("This backup belongs to a different Finance account.");
+  if (!confirm("Restore this backup by merging its records into your account? Existing records with matching IDs will be overwritten. This cannot be undone.")) {
+    $("backupStatus").textContent = "Restore cancelled.";
+    return false;
+  }
+  for (const name of BACKUP_COLLECTIONS) {
+    const records = payload.collections[name];
+    if (records === undefined) continue;
+    if (!Array.isArray(records)) throw new Error(`Invalid ${name} backup data.`);
+    for (let offset = 0; offset < records.length; offset += 400) {
+      const batch = writeBatch(db);
+      for (const record of records.slice(offset, offset + 400)) {
+        if (!record || typeof record.id !== "string" || !record.id || record.id.length > 1500) {
+          throw new Error(`Invalid record ID in ${name}.`);
+        }
+        const { id, ...data } = record;
+        batch.set(userDoc(name, id), { ...data, uid, restoredAt: serverTimestamp(), updatedAt: serverTimestamp() }, { merge: true });
+      }
+      await batch.commit();
+    }
+  }
+  $("backupStatus").textContent = "Restore completed. Records are syncing with Firebase.";
+  toast("Backup restored.", true);
+}
+
+$("backupExportBtn").addEventListener("click", exportFullBackup);
+$("backupImportBtn").addEventListener("click", () => $("backupFileInput").click());
+$("backupFileInput").addEventListener("change", async event => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  $("backupStatus").textContent = "Validating and restoring backup…";
+  try { await importFullBackup(file); }
+  catch (err) {
+    console.error("Backup restore failed:", err);
+    $("backupStatus").textContent = err.message || "Backup restore failed.";
+    toast(err.message || "Backup restore failed.");
+  } finally { event.target.value = ""; }
+});
+
+// ============================================================
 // Event wiring
 // ============================================================
 $("showTxForm").addEventListener("click", openNewTx);
@@ -2854,7 +3010,17 @@ txEls.from.addEventListener("change", () => { buildTxOptions(); updateTxFormUI()
 txEls.to.addEventListener("change", updateTxFormUI);
 
 $("txSearch").addEventListener("input", renderTransactions);
-["txFilterType", "txFilterSpace", "txFilterCurrency"].forEach(id => $(id).addEventListener("change", renderTransactions));
+["txFilterType", "txFilterSpace", "txFilterCurrency", "txFromDate", "txToDate"].forEach(id => $(id).addEventListener("change", renderTransactions));
+$("txClearDates").addEventListener("click", () => {
+  $("txFromDate").value = "";
+  $("txToDate").value = "";
+  $("txSearch").value = "";
+  $("txFilterType").value = "all";
+  $("txFilterSpace").value = "all";
+  $("txFilterCurrency").value = "all";
+  renderTransactions();
+});
+$("txExportBtn").addEventListener("click", exportTransactions);
 
 $("addAccountBtn").addEventListener("click", () => openAccountForm(null));
 $("accountCancel").addEventListener("click", () => { editing.account = null; closeCard("accountFormCard"); });
