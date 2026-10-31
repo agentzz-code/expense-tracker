@@ -21,7 +21,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .nav{display:grid;gap:5px}
 .nav button,.mobile button{border:0;background:transparent;color:var(--muted);padding:11px 13px;text-align:left;border-radius:11px;display:flex;align-items:center;gap:12px}
 .nav button.active,.nav button:hover{background:#20362a;color:var(--green)}
-.nav .ico{width:19px;text-align:center;font-size:16px}
+.nav .ico{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border-radius:9px;background:var(--surface2);text-align:center;font-size:16px}
 .sidebottom{margin-top:auto}.sidebottom p{font-size:11px;color:#718278;padding:0 10px}
 
 /* ===== Main area ===== */
@@ -195,6 +195,52 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
 [dir="rtl"] .welcome{flex-direction:row-reverse}
 [dir="rtl"] .toolbar{flex-direction:row-reverse}
 [dir="rtl"] .form-actions{flex-direction:row-reverse}
+
+/* ===== iOS safe-area, keyboard and touch refinements ===== */
+:root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px);--accent:#75e0a5;--accent-soft:#20362a;--nav-bg:rgba(23,35,27,.94)}
+html{min-height:100%;background:var(--bg);-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:calc(16px + var(--safe-top))}
+body{min-height:100dvh;overscroll-behavior-y:contain;-webkit-tap-highlight-color:transparent}
+.app{min-height:100dvh}
+button,.btn,select,input,textarea{-webkit-appearance:none;appearance:none;touch-action:manipulation}
+button,.btn{min-height:42px}
+input,select,textarea{font-size:16px!important;scroll-margin-bottom:180px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mobile{padding-bottom:calc(7px + var(--safe-bottom));bottom:0;left:0;right:0;border-radius:18px 18px 0 0;padding-left:calc(8px + var(--safe-left));padding-right:calc(8px + var(--safe-right));background:var(--nav-bg);box-shadow:0 -8px 28px #0003}
+.main{padding-bottom:calc(44px + var(--safe-bottom))}
+.auth-screen{padding:calc(18px + var(--safe-top)) calc(18px + var(--safe-right)) calc(18px + var(--safe-bottom)) calc(18px + var(--safe-left));min-height:100dvh}
+/* Themes: selected with the Appearance control */
+:root[data-theme="midnight"]{color-scheme:dark;--bg:#0b1020;--surface:#151d32;--surface2:#1d2942;--line:#303d59;--text:#edf2ff;--muted:#9aa8c2;--green:#91b7ff;--red:#ff929e;--amber:#f0c879;--blue:#83d3e8;--accent:#91b7ff;--accent-soft:#253858;--nav-bg:rgba(21,29,50,.95)}
+:root[data-theme="light"]{color-scheme:light;--bg:#f3f6f8;--surface:#fff;--surface2:#edf2f5;--line:#d7e0e5;--text:#17252d;--muted:#647680;--green:#168653;--red:#c64b58;--amber:#966414;--blue:#2776ad;--accent:#168653;--accent-soft:#e1f2e9;--nav-bg:rgba(255,255,255,.96)}
+:root[data-theme="light"] body{background:var(--bg)}
+:root[data-theme="light"] .sidebar,:root[data-theme="light"] .field,:root[data-theme="light"] .auth-tabs{background:#fff}
+:root[data-theme="light"] .card{background:var(--surface);box-shadow:0 8px 24px #1c34400b}
+:root[data-theme="light"] .mobile{border-color:var(--line)}
+:root[data-theme="light"] .nav button.active,:root[data-theme="light"] .mobile button.active{background:var(--accent-soft);color:var(--accent)}
+:root[data-theme="light"] th,:root[data-theme="light"] td{border-color:var(--line);color:var(--text)}
+:root[data-theme="light"] .rec-row,:root[data-theme="light"] .rate-row{background:#f8fafb}
+:root[data-theme="light"] .nav button.active .ico,:root[data-theme="light"] .mobile button.active{background:var(--accent-soft)}
+:root[data-theme="light"] .notice,:root[data-theme="light"] .auth-message{background:#fff8e8;color:#76530c;border-color:#e8d7a8}
+:root[data-theme="light"] .btn{background:#fff;color:var(--text);border-color:var(--line)}
+:root[data-theme="light"] .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.overview-section{margin:18px 0 9px;display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.overview-section:after{content:"";height:1px;background:var(--line);flex:1}
+.stat-icon{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--accent-soft);color:var(--accent);margin-right:7px;font-size:15px;vertical-align:middle}
+.ov-quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+.ov-quick button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.rent-summary{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.rent-chip{padding:8px 11px;border-radius:12px;background:var(--surface2);border:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media(max-width:700px){
+ .main{padding:calc(14px + var(--safe-top)) calc(13px + var(--safe-right)) calc(112px + var(--safe-bottom)) calc(13px + var(--safe-left))}
+ .top{margin-bottom:17px}.top h1{font-size:21px}.welcome{gap:10px}.welcome h2{font-size:18px}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stats .card{padding:13px;min-height:124px}.statlabel{font-size:11px}.statvalue{font-size:clamp(18px,5vw,22px);margin:8px 0 4px}
+ .grid2,.grid3{grid-template-columns:1fr;gap:10px}.card{padding:14px}
+ .mobile{grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}.mobile button{min-width:0;min-height:52px;padding:6px 1px;font-size:10px}.mobile button span{font-size:19px;line-height:1.2;margin-bottom:3px}
+ .ov-quick{grid-template-columns:repeat(2,minmax(0,1fr))}.ov-quick button:last-child{grid-column:1/-1}
+ .section-head{align-items:flex-start}.section-head .btn{white-space:nowrap}
+}
+@media(max-width:380px){.topright .avatar{display:none}.stats .card{padding:11px}.statvalue{font-size:18px}}
+@media(hover:none){.btn:hover{filter:none}}
+
 </style>
 </head>
 <body>
@@ -241,6 +287,7 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
     <button data-page="budgets"><span class="ico">▤</span><span data-t="budgets">Budgets</span></button>
     <button data-page="cards"><span class="ico">▭</span><span data-t="cards">Credit cards</span></button>
     <button data-page="debts"><span class="ico">⇅</span><span data-t="debts">Debts &amp; loans</span></button>
+    <button data-page="rent"><span class="ico">⌂</span><span>Rent</span></button>
     <button data-page="savings"><span class="ico">◈</span><span data-t="savings">Savings</span></button>
     <button data-page="reports"><span class="ico">▥</span><span data-t="reports">Reports</span></button>
   </nav>
@@ -264,12 +311,15 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
 <section class="page active" id="page-overview">
   <div class="welcome"><div><h2 data-t="financialOverview">Financial overview</h2><div class="muted small" data-t="overviewSubtitle">Personal, Family, and Business — together.</div></div><button class="btn primary" data-page="transactions" data-t="addTransaction">＋ Add transaction</button></div>
   <div class="notice" id="overviewNotice">Loading your records…</div>
+  <div class="overview-section">At a glance</div>
   <div class="stats">
-    <article class="card"><div class="statlabel" data-t="totalBalance">Total balance</div><div class="statvalue" id="ovTotal">— <small id="ovTotalCurrency" data-t="iqd">IQD</small></div><div class="muted small" id="ovTotalNote">Across IQD accounts</div></article>
-    <article class="card"><div class="statlabel" data-t="incomeThisMonth">Income this month</div><div class="statvalue positive" id="ovIncome">— <small>IQD</small></div><div class="muted small" data-t="recordedIncomeAtSavedRates">Recorded income at saved rates</div></article>
-    <article class="card"><div class="statlabel" data-t="expensesThisMonth">Expenses this month</div><div class="statvalue negative" id="ovExpense">— <small>IQD</small></div><div class="muted small" data-t="cardPurchasesIncluded">Card purchases included; transfers excluded</div></article>
-    <article class="card"><div class="statlabel" data-t="netSavings">Net savings</div><div class="statvalue" id="ovNet">— <small>IQD</small></div><div class="muted small" data-t="incomeThisMonth">Income less expenses this month</div></article>
+    <article class="card"><div class="statlabel"><span class="stat-icon">◉</span><span data-t="totalBalance">Total balance</span></div><div class="statvalue" id="ovTotal">— <small id="ovTotalCurrency" data-t="iqd">IQD</small></div><div class="muted small" id="ovTotalNote">Across IQD accounts</div></article>
+    <article class="card"><div class="statlabel"><span class="stat-icon">↗</span><span data-t="incomeThisMonth">Income this month</span></div><div class="statvalue positive" id="ovIncome">— <small>IQD</small></div><div class="muted small" data-t="recordedIncomeAtSavedRates">Recorded income at saved rates</div></article>
+    <article class="card"><div class="statlabel"><span class="stat-icon">↘</span><span data-t="expensesThisMonth">Expenses this month</span></div><div class="statvalue negative" id="ovExpense">— <small>IQD</small></div><div class="muted small" data-t="cardPurchasesIncluded">Card purchases included; transfers excluded</div></article>
+    <article class="card"><div class="statlabel"><span class="stat-icon">◇</span><span data-t="netSavings">Net savings</span></div><div class="statvalue" id="ovNet">— <small>IQD</small></div><div class="muted small" data-t="incomeThisMonth">Income less expenses this month</div></article>
   </div>
+  <div class="ov-quick"><button class="btn" data-page="transactions">＋ Add transaction</button><button class="btn" data-page="accounts">▣ Accounts</button><button class="btn" data-page="rent">⌂ Rent &amp; housing</button></div>
+  <div class="overview-section">Your money by space</div>
   <div class="grid2">
     <article class="card"><div class="cardhead"><h3 data-t="financialSpaces">Financial spaces</h3><span class="tag" data-t="unifiedLedger">Unified ledger</span></div>
       <div class="space-list">
@@ -286,14 +336,17 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
       <button class="btn" data-page="rates" data-t="configureRates">Configure rates</button>
     </article>
   </div>
+  <div class="overview-section">Monthly activity</div>
   <div class="grid2">
     <article class="card"><div class="cardhead"><h3 data-t="incomeVsExpenses">Income vs expenses</h3><span class="muted small" data-t="thisMonthIQD">This month, IQD</span></div><div id="ovBars"></div></article>
     <article class="card"><div class="cardhead"><h3 data-t="recentActivity">Recent activity</h3><button class="btn" data-page="transactions" data-t="viewAll">View all</button></div><div class="rec-list" id="ovRecent"></div></article>
   </div>
+  <div class="overview-section">Plans &amp; commitments</div>
   <div class="grid3">
     <article class="card"><div class="cardhead"><h3 data-t="budgetsLabel">Budgets</h3><span class="tag" id="ovBudgetTag">0 active</span></div><p class="muted small" id="ovBudgetNote">Monthly limits and category spending.</p></article>
     <article class="card"><div class="cardhead"><h3 data-t="upcomingObligations">Upcoming obligations</h3></div><div class="rec-list" id="ovObligations"></div></article>
     <article class="card"><div class="cardhead"><h3 data-t="savingsGoals">Savings goals</h3></div><p class="muted small" id="ovGoals">Track targets and contributions.</p></article>
+    <article class="card"><div class="cardhead"><h3>Rent &amp; housing</h3><button class="btn small" data-page="rent">Manage</button></div><div class="statvalue" id="ovRentCount">0</div><p class="muted small">Active rent agreements</p></article>
   </div>
 </section>
 
@@ -457,6 +510,25 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
   <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Debts and loans</h3></div><div class="rec-list" id="debtList"></div><p class="muted small" style="margin-top:12px">Record repayments as transfers from an account to a debt you owe, or from a debt owed to you into an account.</p></article>
 </section>
 
+
+<!-- ===== Rent tracker ===== -->
+<section class="page" id="page-rent">
+  <div class="section-head"><div><h2 class="section-title">Rent &amp; housing</h2><p class="section-desc">Track rent agreements, due dates, and payment status. This tracker does not create an expense automatically.</p></div><button class="btn primary" id="addRentBtn">＋ Add rent</button></div>
+  <div class="grid2"><article class="card"><div class="statlabel">Monthly rent commitments</div><div class="statvalue" id="rentMonthlyTotal">—</div><p class="muted small">Active agreements, shown in their original currencies</p></article><article class="card"><div class="statlabel">Due soon / overdue</div><div class="statvalue" id="rentDueCount">—</div><p class="muted small">Due within 7 days or past due</p></article></div>
+  <article class="card form-card hidden" id="rentFormCard" style="margin-top:14px"><div class="cardhead"><h3 id="rentFormTitle">New rent agreement</h3><button class="btn" type="button" id="rentCancel">Close</button></div>
+    <form id="rentForm" class="formgrid" novalidate>
+      <div class="formgroup"><label for="rentName">Property / landlord</label><input class="field" id="rentName" maxlength="100" placeholder="Apartment or landlord" required></div>
+      <div class="formgroup"><label for="rentAmount">Rent amount</label><input class="field" id="rentAmount" type="number" min="0.01" step="any" required placeholder="0"></div>
+      <div class="formgroup"><label for="rentCurrency">Currency</label><select class="field" id="rentCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
+      <div class="formgroup"><label for="rentDue">Next due date</label><input class="field" id="rentDue" type="date" required></div>
+      <div class="formgroup"><label for="rentFrequency">Payment frequency</label><select class="field" id="rentFrequency"><option value="monthly">Monthly</option><option value="weekly">Weekly</option><option value="quarterly">Quarterly</option><option value="yearly">Yearly</option></select></div>
+      <div class="formgroup"><label for="rentNotes">Notes (optional)</label><input class="field" id="rentNotes" maxlength="500" placeholder="Deposit, contract details…"></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="rentSubmit">Save rent agreement</button></div>
+    </form><div class="auth-message error hidden" id="rentError" role="alert"></div></article>
+  <div class="rent-summary"><span class="rent-chip">🟢 Upcoming · next 7 days</span><span class="rent-chip">🔴 Overdue · past due date</span><span class="rent-chip">✓ Paid · marked paid for this cycle</span></div>
+  <article class="card"><div class="cardhead"><h3>Rent agreements</h3><span class="muted small">Mark paid advances the next due date</span></div><div class="rec-list" id="rentList"></div></article>
+</section>
+
 <!-- ===== Savings page ===== -->
 <section class="page" id="page-savings">
   <div class="section-head"><div><h2 class="section-title">Savings goals</h2><p class="section-desc">Give every goal a clear target.</p></div><button class="btn primary" id="addGoalBtn">＋ Create goal</button></div>
@@ -516,8 +588,9 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
       <div class="formgrid" style="margin-top:12px">
         <div class="formgroup"><label>Language</label><select class="field" id="language"><option value="en">English</option><option value="ar">العربية</option><option value="ku">کوردی سۆرانی</option></select></div>
         <div class="formgroup"><label>Primary currency</label><select class="field"><option>IQD</option></select></div>
+        <div class="formgroup full"><label for="themeSelect">App theme</label><select class="field" id="themeSelect"><option value="forest">Forest green</option><option value="midnight">Midnight blue</option><option value="light">Light</option></select></div>
       </div>
-      <p class="muted small">Full Arabic and Sorani translation and RTL layouts are planned.</p>
+      <p class="muted small">Choose a comfortable color theme. Your choice is saved on this device.</p>
     </article>
     <article class="card">
       <h3>Backup &amp; recovery</h3>
@@ -541,7 +614,7 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
   <button class="active" data-page="overview"><span>⌂</span>Home</button>
   <button data-page="transactions"><span>↔</span>Activity</button>
   <button data-page="budgets"><span>▤</span>Budgets</button>
-  <button data-page="debts"><span>⇅</span>Debts</button>
+  <button data-page="rent"><span>⌂</span>Rent</button>
   <button data-page="settings"><span>⚙</span>Settings</button>
 </nav>
 </div><!-- end appShell -->
@@ -551,7 +624,7 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
 const PAGE_TITLES = {
   overview:"Overview", transactions:"Transactions", accounts:"Accounts",
   rates:"Exchange rates", budgets:"Budgets", cards:"Credit cards",
-  debts:"Debts & loans", savings:"Savings", reports:"Reports", settings:"Settings"
+  debts:"Debts & loans", rent:"Rent", savings:"Savings", reports:"Reports", settings:"Settings"
 };
 
 function go(page) {
@@ -569,6 +642,28 @@ document.addEventListener("click", e => {
   const btn = e.target.closest("[data-page]");
   if (btn) go(btn.dataset.page);
 });
+
+// Appearance preference is local to this device.
+function setTheme(theme) {
+  const allowed = ["forest", "midnight", "light"]; if (!allowed.includes(theme)) theme = "forest";
+  document.documentElement.dataset.theme = theme;
+  try { localStorage.setItem("finance-theme", theme); } catch (_) {}
+  const selector = document.getElementById("themeSelect"); if (selector) selector.value = theme;
+}
+try { setTheme(localStorage.getItem("finance-theme") || "forest"); } catch (_) { setTheme("forest"); }
+document.addEventListener("change", e => { if (e.target && e.target.id === "themeSelect") setTheme(e.target.value); });
+
+// iOS keyboard: keep the focused field visible and avoid covering it with bottom tabs.
+function syncKeyboardViewport() {
+  const vv = window.visualViewport; if (!vv) return;
+  const keyboardOpen = window.innerHeight - vv.height > 140;
+  document.documentElement.classList.toggle("keyboard-open", keyboardOpen);
+  const nav = document.getElementById("mobileNav"); if (nav) nav.style.transform = keyboardOpen ? "translateY(120%)" : "";
+}
+if (window.visualViewport) { window.visualViewport.addEventListener("resize", syncKeyboardViewport); window.visualViewport.addEventListener("scroll", syncKeyboardViewport); }
+document.addEventListener("focusin", e => { if (e.target.matches("input,select,textarea")) setTimeout(() => e.target.scrollIntoView({block:"nearest",behavior:"smooth"}), 220); });
+document.addEventListener("focusout", () => setTimeout(syncKeyboardViewport, 100));
+window.addEventListener("orientationchange", () => setTimeout(syncKeyboardViewport, 300));
 
 function route() {
   const p = location.hash.slice(1);
@@ -843,8 +938,8 @@ ui.signOutBtn.addEventListener("click", async () => {
 // Data layer (module_b) — state, listeners, balance calc, renders
 // ============================================================
 const CURRENCIES = ["IQD", "USD", "EUR", "TRY", "GBP"];
-const RECORD_COLLECTIONS = ["accounts", "transactions", "budgets", "debts", "cards", "savings", "rates"];
-const state = { accounts: [], transactions: [], budgets: [], debts: [], cards: [], savings: [], rates: [] };
+const RECORD_COLLECTIONS = ["accounts", "transactions", "budgets", "debts", "cards", "savings", "rates", "rents"];
+const state = { accounts: [], transactions: [], budgets: [], debts: [], cards: [], savings: [], rates: [], rents: [] };
 const loaded = {};
 const syncFlags = {};
 const unsubscribers = [];
@@ -2058,6 +2153,7 @@ function refreshAll() {
   renderBudgets();
   renderCards();
   renderDebts();
+  renderRents();
   renderSavings();
   renderRates();
   renderReports();
@@ -2442,7 +2538,7 @@ function renderReports() {
 // ============================================================
 // Forms and actions (module_c)
 // ============================================================
-const editing = { tx: null, account: null, card: null, debt: null, goal: null, budget: null, rate: null };
+const editing = { tx: null, account: null, card: null, debt: null, rent: null, goal: null, budget: null, rate: null };
 const numOrNaN = v => (String(v).trim() === "" ? NaN : Number(v));
 const isDate = v => /^\d{4}-\d{2}-\d{2}$/.test(v);
 const isDay  = v => Number.isInteger(v) && v >= 1 && v <= 31;
@@ -2763,6 +2859,66 @@ function deleteDebt(id) {
   removeRecord("debts", id, `debt "${d.name}"`);
 }
 
+
+// ---- Rent agreements ----
+function addRentInterval(date, frequency) {
+  const [year, month, day] = date.split("-").map(Number);
+  const d = new Date(year, month - 1, day, 12);
+  if (frequency === "weekly") d.setDate(d.getDate() + 7);
+  else {
+    const months = frequency === "quarterly" ? 3 : frequency === "yearly" ? 12 : 1;
+    const targetMonth = d.getMonth() + months;
+    const lastDay = new Date(d.getFullYear(), targetMonth + 1, 0).getDate();
+    d.setDate(Math.min(d.getDate(), lastDay));
+    d.setMonth(targetMonth);
+  }
+  return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+}
+function renderRents() {
+  const active = state.rents.filter(r => r.active !== false);
+  const totals = {}; active.forEach(r => {
+    const divisor = r.frequency === "weekly" ? 4.345 : r.frequency === "quarterly" ? 3 : r.frequency === "yearly" ? 12 : 1;
+    totals[r.currency] = (totals[r.currency] || 0) + Number(r.amount || 0) / divisor;
+  });
+  $("rentMonthlyTotal").textContent = Object.entries(totals).map(([c,v]) => `${fmt(v)} ${c}`).join(" · ") || "0";
+  const today = todayStr();
+  const soon = active.filter(r => r.nextDue && r.nextDue <= addDays(today, 7)).length;
+  $("rentDueCount").textContent = String(soon);
+  const ovRent = $("ovRentCount"); if (ovRent) ovRent.textContent = String(active.length);
+  $("rentList").replaceChildren(...(state.rents.length ? state.rents.slice().sort((a,b) => String(a.nextDue).localeCompare(String(b.nextDue))).map(r => {
+    const overdue = r.active !== false && r.nextDue < today && r.paidForDue !== r.nextDue;
+    const paid = r.paidForDue === r.nextDue;
+    const dueSoon = r.active !== false && !paid && r.nextDue >= today && r.nextDue <= addDays(today,7);
+    const status = paid ? "✓ Paid this cycle" : overdue ? "Overdue" : dueSoon ? "Due soon" : "Upcoming";
+    return h("div", {class:"rec-row"},
+      h("div", {class:"rec-main"}, h("strong", {text:r.name}), h("div", {class:"sub", text:`${r.frequency || "monthly"} · due ${r.nextDue}${r.notes ? " · " + r.notes : ""}` })),
+      h("div", {class:`rec-amount ${overdue ? "negative" : paid ? "positive" : ""}`}, `${fmt(r.amount)} ${r.currency}`, h("div", {class:"sub", text:status})),
+      h("div", {class:"rec-actions"}, ...(r.active !== false ? [h("button", {class:"btn small", type:"button", onclick:()=>markRentPaid(r.id)}, "Mark paid")] : []), h("button", {class:"btn small", type:"button", onclick:()=>openRentForm(r.id)}, "Edit"), h("button", {class:"btn small", type:"button", onclick:()=>deleteRent(r.id)}, "Delete"))
+    );
+  }) : [emptyBlock("No rent agreements yet", "Add your rent amount and next due date to keep housing commitments visible.")]));
+}
+function addDays(date, days) { const d = new Date(date + "T12:00:00"); d.setDate(d.getDate()+days); return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`; }
+function openRentForm(id) {
+  const r = id ? state.rents.find(x=>x.id===id) : null; $("rentForm").reset(); editing.rent = r ? r.id : null;
+  $("rentFormTitle").textContent = r ? "Edit rent agreement" : "New rent agreement"; $("rentSubmit").textContent = r ? "Save changes" : "Save rent agreement";
+  $("rentName").value = r?.name || ""; $("rentAmount").value = r?.amount ?? ""; $("rentCurrency").value = r?.currency || "IQD"; $("rentDue").value = r?.nextDue || todayStr(); $("rentFrequency").value = r?.frequency || "monthly"; $("rentNotes").value = r?.notes || ""; clearFormError("rentError"); openCard("rentFormCard");
+}
+function saveRent(e) {
+  e.preventDefault(); clearFormError("rentError"); const name=$("rentName").value.trim(), amount=numOrNaN($("rentAmount").value), due=$("rentDue").value;
+  if (!name) return showFormError("rentError", "Enter a property or landlord name.");
+  if (!(amount>0)) return showFormError("rentError", "Enter a rent amount greater than zero.");
+  if (!isDate(due)) return showFormError("rentError", "Choose a valid next due date.");
+  const old = editing.rent ? state.rents.find(x=>x.id===editing.rent) : null;
+  writeRecord("rents", editing.rent, {name:name.slice(0,100), amount, currency:$("rentCurrency").value, nextDue:due, frequency:$("rentFrequency").value, notes:$("rentNotes").value.trim().slice(0,500), active:true, paidForDue:old?.paidForDue || ""}, "rentError");
+  editing.rent=null; closeCard("rentFormCard");
+}
+function markRentPaid(id) {
+  const r=state.rents.find(x=>x.id===id); if(!r || r.paidForDue===r.nextDue) return;
+  if(!confirm(`Mark ${r.name} rent for ${r.nextDue} as paid? This updates the rent tracker only; add a separate expense transaction to update account balances.`)) return;
+  writeRecord("rents", id, {...r, paidForDue:r.nextDue, nextDue:addRentInterval(r.nextDue,r.frequency || "monthly")}, "rentError");
+}
+function deleteRent(id) { const r=state.rents.find(x=>x.id===id); if(!r) return; if(confirm(`Delete rent agreement for ${r.name}?`)) removeRecord("rents",id,`rent agreement "${r.name}"`); }
+
 // ---- Savings ----
 function openGoalForm(id) {
   const g = id ? entity("savings", id) : null;
@@ -2930,12 +3086,13 @@ function exportTransactions() {
     pdf.autoTable({ head: [columns], body: data.slice(1), startY: 20, styles: { fontSize: 7 } });
     pdf.save(`finance-transactions-${stamp}.pdf`);
   } else {
-    const csv = "\uFEFF" + data.map(row => row.map(csvCell).join(",")).join("\r\n");
+    const csv = "\uFEFF" + data.map(row => row.map(csvCell).join(",")).join("\r
+");
     downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8" }), `finance-transactions-${stamp}.csv`);
   }
 }
 
-const BACKUP_COLLECTIONS = ["accounts", "transactions", "budgets", "debts", "cards", "savings", "rates"];
+const BACKUP_COLLECTIONS = ["accounts", "transactions", "budgets", "debts", "cards", "savings", "rates", "rents"];
 async function exportFullBackup() {
   if (!uid) return toast("You are not signed in.");
   const payload = {
@@ -3033,6 +3190,10 @@ $("cardForm").addEventListener("submit", saveCard);
 $("addDebtBtn").addEventListener("click", () => openDebtForm(null));
 $("debtCancel").addEventListener("click", () => { editing.debt = null; closeCard("debtFormCard"); });
 $("debtForm").addEventListener("submit", saveDebt);
+
+$("addRentBtn").addEventListener("click", () => openRentForm(null));
+$("rentCancel").addEventListener("click", () => { editing.rent=null; closeCard("rentFormCard"); });
+$("rentForm").addEventListener("submit", saveRent);
 
 $("addGoalBtn").addEventListener("click", () => openGoalForm(null));
 $("goalCancel").addEventListener("click", () => { editing.goal = null; closeCard("goalFormCard"); });
