@@ -672,11 +672,27 @@ function route() {
 window.addEventListener("hashchange", route);
 route();
 
-// Safety net: if Firebase modules cannot load, tell the user.
+// Safety net: surface module-load errors instead of leaving an unexplained spinner.
+function showFirebaseStartupError(detail) {
+  if (document.body.dataset.authReady === "1") return;
+  const message = document.getElementById("authLoadingMsg");
+  if (message) message.textContent = detail ||
+    "Secure sign-in could not start. Check your connection, then reload the page.";
+}
+window.addEventListener("error", event => {
+  if (event.target && event.target.tagName === "SCRIPT" && event.target.type === "module") {
+    showFirebaseStartupError("Firebase could not download its sign-in module. Check that gstatic.com is accessible, then reload.");
+  }
+});
+window.addEventListener("unhandledrejection", event => {
+  if (document.body.dataset.authReady !== "1") {
+    console.error("Firebase startup rejected:", event.reason);
+    showFirebaseStartupError("Firebase could not initialize. Check your connection or browser privacy settings, then reload.");
+  }
+});
 setTimeout(() => {
   if (document.body.dataset.authReady !== "1") {
-    document.getElementById("authLoadingMsg").textContent =
-      "Secure sign-in could not load. Check your internet connection and reload the page.";
+    showFirebaseStartupError("Secure sign-in could not load. Check your internet connection or browser privacy settings, then reload the page.");
   }
 }, 15000);
 </script>
@@ -704,6 +720,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import {
   initializeFirestore,
+  getFirestore,
   persistentLocalCache,
   persistentMultipleTabManager,
   collection,
@@ -745,9 +762,18 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 // Persistent offline cache shared across browser tabs.
-const db = initializeFirestore(firebaseApp, {
-  localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
-});
+// Prefer persistent offline storage, but never let unsupported/blocked
+// IndexedDB (common in iOS private browsing or restrictive browser settings)
+// prevent Firebase Authentication from starting.
+let db;
+try {
+  db = initializeFirestore(firebaseApp, {
+    localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
+  });
+} catch (cacheError) {
+  console.warn("Persistent Firestore cache unavailable; using the browser's default cache.", cacheError);
+  db = getFirestore(firebaseApp);
+}
 const storage = getStorage(firebaseApp);
 
 // ============================================================
@@ -3086,8 +3112,7 @@ function exportTransactions() {
     pdf.autoTable({ head: [columns], body: data.slice(1), startY: 20, styles: { fontSize: 7 } });
     pdf.save(`finance-transactions-${stamp}.pdf`);
   } else {
-    const csv = "\uFEFF" + data.map(row => row.map(csvCell).join(",")).join("\r
-");
+    const csv = "\uFEFF" + data.map(row => row.map(csvCell).join(",")).join("\r\n");
     downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8" }), `finance-transactions-${stamp}.csv`);
   }
 }
