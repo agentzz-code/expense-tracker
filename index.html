@@ -453,9 +453,9 @@ body[data-current-page="overview"] .main > .top{display:none}
 
   <section class="card rate-widget" id="overviewRatesWidget" role="button" tabindex="0" aria-label="Exchange Rates">
     <div class="cardhead"><h3>Exchange rates</h3><button class="ov-text-link" id="overviewRatesButton" type="button">View all ↗</button></div>
-    <div class="rate-pair"><span>USD / IQD official</span><strong id="ovOfficialRate">—</strong></div>
+    <div class="rate-pair"><span>USD / IQD official</span><strong id="ovOfficialRate">Updating…</strong></div>
     <div class="rate-pair"><span>USD / IQD market</span><strong id="ovMarketRate">—</strong></div>
-    <div class="rate-meta" id="ovRatesMeta">Updating automatically…</div>
+    <div class="rate-meta" id="ovRatesMeta">Retrieving the latest CBI-published rate…</div>
   </section>
 
   <section class="ov-rent-card">
@@ -558,12 +558,12 @@ body[data-current-page="overview"] .main > .top{display:none}
   <div class="section-head"><div><h2 class="section-title">Exchange rates</h2><p class="section-desc">Verified rates are refreshed automatically and historical transaction snapshots never change.</p></div><button class="btn" id="refreshRatesBtn" type="button">↻ Refresh now</button></div>
   <div class="notice" id="ratesStatus">Automatic rates use public data where available. CBI-published values are clearly identified; market values remain separate.</div>
   <div class="grid3" id="rateStatGrid">
-    <article class="card rate-highlight"><div class="statlabel">CBI Official Rate · USD / IQD</div><div class="statvalue" id="rateUSD">— <small>IQD</small></div><p class="muted small" id="rateUSDNote">Waiting for verified data</p></article>
+    <article class="card rate-highlight"><div class="statlabel">CBI Official Rate · USD / IQD</div><div class="statvalue" id="rateUSD">— <small>IQD</small></div><p class="muted small" id="rateUSDNote">Retrieving the latest CBI-published rate…</p></article>
     <article class="card rate-highlight"><div class="statlabel">Market Rate · USD / IQD</div><div class="statvalue" id="rateUSDMarket">— <small>IQD</small></div><p class="muted small" id="rateUSDMarketNote">Not available</p></article>
     <article class="card"><div class="statlabel">EUR / IQD</div><div class="statvalue" id="rateEUR">— <small>IQD</small></div><p class="muted small" id="rateEURNote">Not entered</p></article>
     <article class="card"><div class="statlabel">TRY / IQD</div><div class="statvalue" id="rateTRY">— <small>IQD</small></div><p class="muted small" id="rateTRYNote">Not entered</p></article>
   </div>
-  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Currency converter</h3><span class="muted small" id="converterRateLabel">Uses the latest saved rate</span></div><div class="formgrid"><div class="formgroup"><label for="convAmount">Amount</label><input class="field" id="convAmount" type="number" min="0" step="any" value="1"></div><div class="formgroup"><label for="convFrom">From</label><select class="field" id="convFrom"><option>USD</option><option>EUR</option><option>GBP</option><option>TRY</option><option>IQD</option></select></div><div class="formgroup"><label for="convTo">To</label><select class="field" id="convTo"><option>IQD</option><option>USD</option><option>EUR</option><option>GBP</option><option>TRY</option></select></div><div class="formgroup"><label for="convMode">Rate type</label><select class="field" id="convMode"><option value="official">Official</option><option value="market">Market</option></select></div><div class="formgroup full"><div class="statvalue" id="convResult">—</div></div></div></article>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Currency converter</h3><span class="muted small" id="converterRateLabel">Uses the latest verified CBI rate</span></div><div class="formgrid"><div class="formgroup"><label for="convAmount">Amount</label><input class="field" id="convAmount" type="number" min="0" step="any" value="1"></div><div class="formgroup"><label for="convFrom">From</label><select class="field" id="convFrom"><option>USD</option><option>EUR</option><option>GBP</option><option>TRY</option><option>IQD</option></select></div><div class="formgroup"><label for="convTo">To</label><select class="field" id="convTo"><option>IQD</option><option>USD</option><option>EUR</option><option>GBP</option><option>TRY</option></select></div><div class="formgroup"><label for="convMode">Rate type</label><select class="field" id="convMode"><option value="official">Official</option><option value="market">Market</option></select></div><div class="formgroup full"><div class="statvalue" id="convResult">—</div></div></div></article>
   <article class="card form-card hidden" id="rateFormCard" style="margin-top:14px">
     <div class="cardhead"><h3 id="rateFormTitle">Enter rate</h3><button class="btn" type="button" id="rateCancel">Close</button></div>
     <form id="rateForm" class="formgrid" novalidate>
@@ -1130,45 +1130,33 @@ const DIRECTION_LABEL = { owe: "I owe", owed: "Owed to me" };
 const KIND_COLLECTION = { account: "accounts", card: "cards", savings: "savings", debt: "debts" };
 const SOURCE_LABEL = { official: "Official", market: "Iraqi market", manual: "Manual" };
 
-// Automatic market feed. The provider is recorded separately from the rate source;
-// saved values are never overwritten by a failed or malformed response.
+// The app reads official rates through a Firebase Function, not directly from CBI.
+// This avoids browser CORS failures and lets the server validate/cache the CBI response.
+const OFFICIAL_RATES_ENDPOINT = "https://us-central1-fathers-finance.cloudfunctions.net/officialRates";
 let ratesRefreshInFlight = null;
 async function refreshAutomaticRates(force = false) {
   if (!uid || ratesRefreshInFlight) return ratesRefreshInFlight;
-  const cachedAt = Number(localStorage.getItem("finance-rates-refresh-at") || 0);
+  const cachedAt = Number(localStorage.getItem("finance-official-rates-updated") || 0);
   if (!force && Date.now() - cachedAt < 12 * 60 * 60 * 1000) return;
+  const status = $("ratesStatus");
+  if (status) status.textContent = "Retrieving the latest official rate from the Central Bank of Iraq…";
   ratesRefreshInFlight = (async () => {
     try {
-      const [marketResult, cbiResult] = await Promise.allSettled([
-        fetch("https://open.er-api.com/v6/latest/USD", { cache: "no-store" }).then(r => r.ok ? r.json() : Promise.reject(new Error("market provider unavailable"))),
-        fetch("https://cbi.iq/?lang=en&pid=Home", { cache: "no-store" }).then(r => r.ok ? r.text() : Promise.reject(new Error("CBI unavailable")))
-      ]);
-      const payload = marketResult.status === "fulfilled" ? marketResult.value : null;
-      const iqd = Number(payload?.rates?.IQD);
-      if (!(iqd > 0) || !Number.isFinite(iqd)) throw new Error("invalid rate response");
-      const date = payload.time_last_update_utc ? new Date(payload.time_last_update_utc).toISOString().slice(0, 10) : todayStr();
-      const id = `auto-market-USD-${date}`;
-      const current = state.rates.find(r => r.id === id);
-      if (!current || Number(current.buyRate) !== iqd) {
-        writeRecord("rates", id, { currency: "USD", source: "market", provider: "Open Exchange Rates public feed", buyRate: iqd, sellRate: iqd, date, confirmedDate: date, retrievedAt: new Date().toISOString(), status: "verified-provider", notes: "Market reference feed; not a CBI official rate." }, null);
-      }
-      const cbiHtml = cbiResult.status === "fulfilled" ? cbiResult.value : "";
-      const cbiMatch = cbiHtml.match(/U\.S\.\s*dollar[\s\S]{0,500}?USD[\s\S]{0,500}?(\d{3,4}(?:\.\d+)?)/i);
-      const cbiUsd = Number(cbiMatch?.[1]);
-      const officialRate = cbiUsd > 0 && Number.isFinite(cbiUsd) ? cbiUsd : 1510;
-      const officialId = `cbi-official-USD-${todayStr()}`;
-      const savedOfficial = state.rates.find(r => r.id === officialId);
-      if (!savedOfficial) writeRecord("rates", officialId, {
-        currency: "USD", source: "official", provider: cbiMatch ? "Central Bank of Iraq website" : "Central Bank of Iraq published rate (verified fallback)",
-        buyRate: officialRate, sellRate: officialRate, date: todayStr(), confirmedDate: todayStr(), retrievedAt: new Date().toISOString(), status: cbiMatch ? "verified-cbi" : "fallback-cbi", notes: "Official CBI USD/IQD reference rate."
-      }, null);
-      localStorage.setItem("finance-rates-refresh-at", String(Date.now()));
-      toast("Exchange rates updated.", true);
+      const response = await fetch(OFFICIAL_RATES_ENDPOINT, { headers: { Accept: "application/json" }, cache: "no-store" });
+      if (!response.ok) throw new Error(`official rate service returned ${response.status}`);
+      const payload = await response.json();
+      const usd = payload?.rates?.USD;
+      const buyRate = Number(usd?.buyRate), sellRate = Number(usd?.sellRate);
+      if (!(buyRate > 0) || !(sellRate > 0) || !payload?.publishedDate) throw new Error("invalid official-rate response");
+      const id = `official-USD-${payload.publishedDate}`;
+      writeRecord("rates", id, { currency: "USD", source: "official", provider: "Central Bank of Iraq", buyRate, sellRate, date: payload.publishedDate, confirmedDate: payload.publishedDate, retrievedAt: payload.retrievedAt || new Date().toISOString(), status: "verified-cbi", notes: "Retrieved and validated by the official-rates Firebase service." }, null);
+      localStorage.setItem("finance-official-rates-updated", String(Date.now()));
+      if (status) status.textContent = `CBI Official Rate updated: ${payload.publishedDate}.`;
     } catch (err) {
-      console.warn("Automatic rate refresh failed; keeping saved rates.", err);
-      const fallbackId = `cbi-official-USD-${todayStr()}`;
-      if (!state.rates.some(r => r.id === fallbackId)) writeRecord("rates", fallbackId, { currency: "USD", source: "official", provider: "Central Bank of Iraq published rate (verified fallback)", buyRate: 1510, sellRate: 1510, date: todayStr(), confirmedDate: todayStr(), retrievedAt: new Date().toISOString(), status: "fallback-cbi", notes: "Official CBI USD/IQD reference rate." }, null);
-      const status = $("ratesStatus"); if (status) status.textContent = "Could not refresh automatically. Your last saved rates are still being used.";
+      console.warn("Official rate refresh failed; retaining the last valid saved rate.", err);
+      if (status) status.textContent = state.rates.some(r => r.currency === "USD" && r.source === "official")
+        ? "Could not reach the rate service. Showing the last verified CBI rate."
+        : "Official-rate service is not configured yet. Deploy functions/official-rates.js to enable automatic updates.";
     } finally { ratesRefreshInFlight = null; renderRates(); renderOverviewRates(); }
   })();
   return ratesRefreshInFlight;
@@ -2097,16 +2085,23 @@ function applyDirection() {
 
 async function setLanguage(lang) {
   if (!LANGUAGES[lang]) return;
-  currentLanguage = lang;
-  applyDirection();
-  if (uid) {
-    writeRecord("settings", "prefs", { language: lang, primaryCurrency: "IQD" }, null);
+  try {
+    currentLanguage = lang;
+    localStorage.setItem("finance-language", lang);
+    applyDirection();
+    if (uid) writeRecord("settings", "prefs", { language: lang, primaryCurrency: "IQD" }, null);
+    refreshAll();
+    // Reapply after renderers replace dynamic page labels.
+    requestAnimationFrame(() => { applyDirection(); applyLegacyTranslations(); });
+  } catch (err) {
+    console.error("Language update failed:", err);
+    toast("The language could not be changed. Please try again.");
   }
-  applyTranslations();
-  refreshAll();
 }
 
 async function loadSavedLanguage() {
+  const deviceLanguage = localStorage.getItem("finance-language");
+  if (deviceLanguage && LANGUAGES[deviceLanguage]) { currentLanguage = deviceLanguage; applyDirection(); }
   if (!uid) return;
   try {
     const prefsDoc = userDoc("settings", "prefs");
@@ -3566,7 +3561,7 @@ $("budgetCancel").addEventListener("click", () => { editing.budget = null; close
 $("budScope").addEventListener("change", updateBudgetFormUI);
 $("budgetForm").addEventListener("submit", saveBudget);
 
-$("addRateBtn").addEventListener("click", openRateForm);
+$("addRateBtn")?.addEventListener("click", openRateForm);
 $("rateCancel").addEventListener("click", () => closeCard("rateFormCard"));
 $("rateForm").addEventListener("submit", saveRate);
 
@@ -3587,7 +3582,7 @@ $("refreshRatesBtn")?.addEventListener("click", () => refreshAutomaticRates(true
 
 window.addEventListener("online",  updateSyncStatus);
 window.addEventListener("offline", updateSyncStatus);
-window.addEventListener("online", () => refreshAutomaticRates(true));
+window.addEventListener("online", () => refreshAutomaticRates());
 </script>
 </body>
 </html>
