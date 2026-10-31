@@ -24,6 +24,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .nav .ico{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border-radius:9px;background:var(--surface2);text-align:center;font-size:16px}
 .sidebottom{margin-top:auto}.sidebottom p{font-size:11px;color:#718278;padding:0 10px}
 
+.nav .ico svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.nav button.active .ico{color:var(--green)}
 /* ===== Main area ===== */
 .main{margin-left:248px;padding:27px 34px 50px;max-width:1700px}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px}
@@ -241,18 +242,139 @@ input,select,textarea{font-size:16px!important;scroll-margin-bottom:180px}
 @media(max-width:380px){.topright .avatar{display:none}.stats .card{padding:11px}.statvalue{font-size:18px}}
 @media(hover:none){.btn:hover{filter:none}}
 
+
+/* ===== Premium mobile-first Overview ===== */
+body[data-current-page="overview"] .main > .top{display:none}
+.main{max-width:1420px}
+.ov-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 20px}
+.ov-greeting{display:flex;align-items:center;gap:12px;min-width:0}
+.ov-avatar-mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#b9f3ce,#4cb87d);color:#10271a;font-weight:900;font-size:17px;box-shadow:0 5px 18px #58d78b20}
+.ov-greeting-line{font-size:19px;font-weight:760;letter-spacing:-.45px;line-height:1.25}
+.ov-date{font-size:12px;color:var(--muted);margin-top:3px}
+.ov-header-actions{display:flex;align-items:center;gap:10px}
+.ov-icon-button,.ov-profile{width:42px;height:42px;position:relative;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--text);display:grid;place-items:center}
+.ov-icon-button svg,.ov-profile svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ov-notification-dot{position:absolute;right:8px;top:8px;width:7px;height:7px;border-radius:50%;background:#ef7373;border:1.5px solid var(--surface)}
+.ov-profile{background:#233b2c;border-color:#3a6147;color:#a6efc0;font-weight:800}
+.ov-balance-card{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;min-height:180px;padding:23px 25px;margin:0 0 13px;border:1px solid #355341;border-radius:23px;background:radial-gradient(ellipse at 90% 5%,#2c6545 0,transparent 42%),linear-gradient(115deg,#17251c,#1b3224 58%,#14251b);box-shadow:0 16px 38px #0003}
+.ov-balance-copy{position:relative;z-index:1;min-width:0}
+.ov-kicker{display:flex;align-items:center;gap:9px;color:#a5b9aa;font-size:10px;font-weight:850;letter-spacing:1.4px}
+.ov-eye{width:28px;height:26px;padding:3px;border:0;border-radius:7px;background:#ffffff0d;color:#c5dfcd;display:grid;place-items:center}
+.ov-eye svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ov-balance-number{font-size:clamp(29px,5vw,43px);font-weight:820;letter-spacing:-1.6px;line-height:1.18;margin:12px 0 8px;overflow-wrap:anywhere;color:#f1fff5}
+.ov-balance-number small{font-size:13px;letter-spacing:0;color:#a6c3b0;font-weight:650}
+.ov-balance-foot{display:flex;align-items:center;gap:9px;color:#9eb5a5;font-size:11px}
+.ov-currency-pill{padding:3px 8px;border:1px solid #52725d;border-radius:20px;color:#d2f6dd;font-weight:800;font-size:10px}
+.ov-performance{display:flex;align-items:center;gap:6px;margin-top:13px;color:#a9e8bd;font-size:11px}
+.ov-performance-arrow{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:#65d99420;color:#8ceab0}
+.ov-performance strong{font-size:11px;color:#91e7ac}
+.ov-wallet-art{width:125px;flex:0 0 125px;opacity:.92;filter:drop-shadow(0 12px 16px #0003)}
+.ov-wallet-art svg{width:100%;height:auto}
+.ov-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 13px}
+.ov-summary-card{min-width:0;padding:14px 14px 13px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(150deg,#1b2720,#141d18);box-shadow:0 8px 24px #0002}
+.ov-summary-top{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:9px;font-weight:850;letter-spacing:.7px;white-space:nowrap}
+.ov-mini-icon{width:25px;height:25px;display:grid;place-items:center;border-radius:8px;flex:0 0 25px}
+.ov-mini-icon svg,.qa-icon svg,.ov-info-icon svg,.ov-rent-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ov-mini-icon.income,.qa-icon.income{background:#1d4933;color:#7ee6a6}.ov-mini-icon.expense,.qa-icon.expense{background:#4a292a;color:#f28d8d}.ov-mini-icon.savings{background:#273d39;color:#9bdac5}
+.ov-summary-card>strong{display:block;margin:10px 0 3px;font-size:clamp(15px,2vw,21px);font-weight:790;letter-spacing:-.45px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-summary-card>strong.positive,.ov-performance strong.positive{color:#75e0a5}.ov-summary-card>strong.negative,.ov-performance strong.negative{color:#f08080}
+.ov-summary-card>small{display:block;color:#84958b;font-size:10px;white-space:nowrap}
+.ov-rent-card{margin:0 0 13px;padding:17px 18px 16px;border:1px solid #5b492b;border-radius:19px;background:radial-gradient(ellipse at 100% 0,#4a371c44,transparent 48%),linear-gradient(140deg,#292318,#211e17);box-shadow:0 9px 25px #0002}
+.ov-rent-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
+.ov-rent-title{display:flex;align-items:center;gap:10px;min-width:0}
+.ov-rent-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:#e8b95b1c;color:#eac16f}
+.ov-rent-title h3{font-size:14px;margin:0;color:#f5e8cb}
+.ov-rent-title p{font-size:10px;margin:2px 0 0;color:#b9a57e}
+.ov-text-link{border:0;background:transparent;padding:4px 0;color:var(--green);font-size:11px;font-weight:750;white-space:nowrap}
+.ov-rent-card .ov-text-link{color:#eac16f}
+.ov-rent-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ov-rent-metrics>div{min-width:0;padding:10px 10px 9px;border:1px solid #67532e55;border-radius:12px;background:#100e0a33}
+.ov-rent-metrics span{display:block;color:#b9a57e;font-size:10px;white-space:nowrap}
+.ov-rent-metrics strong{display:block;margin:5px 0 2px;color:#f3d38d;font-size:clamp(13px,1.8vw,17px);font-weight:780;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-rent-metrics small{display:block;color:#a99775;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-two-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:17px}
+.ov-info-card{display:flex;align-items:center;gap:10px;min-width:0;padding:14px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(150deg,#1b2720,#141d18);color:var(--text);text-align:left;box-shadow:0 8px 24px #0002}
+.ov-info-icon{width:35px;height:35px;display:grid;place-items:center;flex:0 0 35px;border-radius:11px;background:#203a2a;color:#8be4aa}
+.ov-info-icon.debt{background:#3a2c2b;color:#eaa0a0}
+.ov-info-copy{display:block;min-width:0;flex:1}
+.ov-info-copy small,.ov-info-copy em{display:block;color:var(--muted);font-size:10px;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-info-copy strong{display:block;margin:3px 0;font-size:17px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-info-copy em{font-size:9px}
+.ov-chevron{color:#71847a;font-size:25px;line-height:1}
+.ov-block{margin:0 0 17px}
+.ov-section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}
+.ov-section-heading h3{margin:0;font-size:14px;font-weight:780;letter-spacing:-.2px}
+.ov-section-heading>span{color:#75877b;font-size:9px;font-weight:800;letter-spacing:1px}
+.ov-quick-actions{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+.ov-quick-actions button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:86px;padding:10px 4px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(150deg,#1b2720,#141d18);color:var(--text);transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.ov-quick-actions button:active{transform:scale(.97)}
+.ov-quick-actions b{font-size:10px;font-weight:700;white-space:nowrap}
+.qa-icon{width:35px;height:35px;border-radius:12px;display:grid;place-items:center;background:#1e3828;color:#88e6a9}
+.qa-icon.expense{background:#47292a;color:#f28c8c}.qa-icon.transfer{background:#243749;color:#90c6ed}.qa-icon.rent{background:#47371f;color:#edc776}.qa-icon.debt{background:#3c2c40;color:#c9a0df}.qa-icon.more{background:#29352f;color:#b5c6bb}
+.ov-budget-card{padding:16px 17px;margin:0 0 17px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#1b2720,#141d18)}
+.ov-budget-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.ov-budget-head .ov-section-heading{justify-content:flex-start;margin:0 0 5px;gap:10px}
+.ov-budget-head .ov-section-heading>span{font-size:9px;color:#819388}
+.ov-budget-head p{margin:0;color:#9aaba0;font-size:11px}
+.ov-budget-head>strong{font-size:20px;color:#8ee6ad}
+.ov-budget-track{height:8px;margin:13px 0 10px;overflow:hidden;border-radius:99px;background:#2b3930}
+.ov-budget-track span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#54c985,#9ae7b5);transition:width .3s ease}
+.ov-budget-track span.warn{background:linear-gradient(90deg,#d6a54e,#f0d28b)}.ov-budget-track span.over{background:linear-gradient(90deg,#d45e62,#f18b8b)}
+.ov-budget-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#9aaba0;font-size:10px}
+.ov-list-card{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,#19251e,#141c17)}
+.ov-payment-row,.ov-transaction-row{display:flex;align-items:center;gap:11px;min-width:0;padding:12px 13px;border-bottom:1px solid #29372e}
+.ov-payment-row:last-child,.ov-transaction-row:last-child{border-bottom:0}
+.ov-list-icon{width:34px;height:34px;display:grid;place-items:center;flex:0 0 34px;border-radius:11px;background:#24362a;color:#91dbaa}
+.ov-list-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ov-list-icon.debt{background:#392b2b;color:#e6a0a0}.ov-list-icon.card{background:#25384a;color:#9bc9ed}.ov-list-icon.expense{background:#43292a;color:#ed8e8e}.ov-list-icon.transfer{background:#29352f;color:#aab9b0}
+.ov-payment-copy,.ov-transaction-copy{display:block;min-width:0;flex:1}
+.ov-payment-copy strong,.ov-transaction-copy strong{display:block;overflow:hidden;color:var(--text);font-size:11px;font-weight:720;text-overflow:ellipsis;white-space:nowrap}
+.ov-payment-copy small,.ov-transaction-copy small{display:block;margin-top:3px;color:#87988d;font-size:9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ov-payment-amount{flex:0 0 auto;font-size:11px;font-weight:780;text-align:right;white-space:nowrap}
+.ov-empty-line{padding:18px 13px;color:var(--muted);font-size:11px;text-align:center}
+.balances-hidden .ov-sensitive{filter:blur(7px);user-select:none}
+@media(max-width:700px){
+ .main{padding:calc(14px + var(--safe-top)) calc(12px + var(--safe-right)) calc(105px + var(--safe-bottom)) calc(12px + var(--safe-left))}
+ .ov-header{margin-bottom:15px}.ov-greeting-line{font-size:17px}.ov-avatar-mark{width:39px;height:39px}
+ .ov-balance-card{min-height:158px;padding:18px 17px;border-radius:20px}.ov-wallet-art{width:92px;flex-basis:92px;margin-right:-5px}.ov-balance-number{font-size:clamp(26px,8vw,35px)}
+ .ov-summary-grid{gap:7px}.ov-summary-card{padding:11px 9px 10px;border-radius:14px}.ov-summary-top{gap:5px;font-size:8px;letter-spacing:.3px}.ov-mini-icon{width:22px;height:22px;flex-basis:22px}.ov-mini-icon svg{width:14px;height:14px}.ov-summary-card>strong{font-size:clamp(12px,3.7vw,17px);margin-top:8px}.ov-summary-card>small{font-size:8px}
+ .ov-rent-card{padding:14px 12px;border-radius:17px}.ov-rent-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.ov-rent-metrics>div{padding:9px}.ov-rent-metrics strong{font-size:15px}
+ .ov-two-cards{gap:7px}.ov-info-card{padding:11px 9px;gap:7px;border-radius:14px}.ov-info-icon{width:29px;height:29px;flex-basis:29px}.ov-info-icon svg{width:15px;height:15px}.ov-info-copy strong{font-size:14px}.ov-info-copy small{font-size:9px}.ov-info-copy em{font-size:8px}.ov-chevron{font-size:20px}
+ .ov-quick-actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.ov-quick-actions button{min-height:76px;border-radius:13px}.ov-quick-actions b{font-size:10px}
+ .ov-budget-card{padding:14px 13px}.ov-payment-row,.ov-transaction-row{padding:11px 10px;gap:9px}.ov-payment-amount{font-size:10px}.ov-list-icon{width:31px;height:31px;flex-basis:31px}
+ .mobile{position:fixed;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:0;left:0;right:0;bottom:0;z-index:15;padding:7px calc(8px + var(--safe-right)) calc(7px + var(--safe-bottom)) calc(8px + var(--safe-left));border:1px solid #293a30;border-bottom:0;border-radius:19px 19px 0 0;background:rgba(16,24,19,.96);box-shadow:0 -8px 28px #0006;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+ .mobile button{min-width:0;min-height:49px;padding:4px 1px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;border-radius:11px;background:transparent;color:#819389;font-size:9px;font-weight:650;text-align:center}
+ .mobile button span{display:block;font-size:9px;line-height:1.1;margin:0}.mobile button svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+ .mobile button.active{background:transparent;color:#83e3a6}
+ .mobile button.mobile-add{width:51px;height:51px;min-height:51px;justify-self:center;align-self:center;margin-top:-19px;border:4px solid #101813;border-radius:50%;background:linear-gradient(145deg,#a0efba,#55c983);color:#102619;box-shadow:0 5px 17px #4fd17e44}
+ .mobile button.mobile-add svg{width:25px;height:25px;stroke-width:2.2}
+ .main{padding-bottom:calc(100px + var(--safe-bottom))}
+}
+@media(max-width:360px){.ov-wallet-art{width:72px;flex-basis:72px}.ov-balance-card{padding:16px 13px}.ov-summary-card{padding-left:7px;padding-right:7px}.ov-summary-top{font-size:7px}.ov-info-icon{display:none}}
+@media(min-width:701px){.ov-header{margin-top:0}.ov-balance-card{max-width:100%}.ov-rent-metrics{gap:10px}.ov-quick-actions{max-width:100%}.ov-block{max-width:100%}}
+:root[data-theme="midnight"] .ov-balance-card{background:radial-gradient(ellipse at 90% 5%,#273b6b 0,transparent 42%),linear-gradient(115deg,#171e32,#202e4b 58%,#151d31);border-color:#394c72}
+:root[data-theme="light"] .ov-balance-card{background:radial-gradient(ellipse at 90% 5%,#c7e9d4 0,transparent 42%),linear-gradient(115deg,#e4f3e9,#d8eee0 58%,#eaf5ed);border-color:#c2ddca}
+:root[data-theme="light"] .ov-balance-number{color:#183b28}:root[data-theme="light"] .ov-balance-number small,:root[data-theme="light"] .ov-balance-foot{color:#587463}
+:root[data-theme="light"] .ov-currency-pill{color:#24573a;border-color:#a8cdb3}
+:root[data-theme="light"] .ov-summary-card,:root[data-theme="light"] .ov-info-card,:root[data-theme="light"] .ov-budget-card,:root[data-theme="light"] .ov-list-card{background:#fff;box-shadow:0 6px 20px #1c34400b}
+:root[data-theme="light"] .ov-rent-card{background:linear-gradient(140deg,#fff8e8,#fffdf7);border-color:#e8d7ad}
+:root[data-theme="light"] .ov-rent-title h3{color:#59451f}:root[data-theme="light"] .ov-rent-title p,:root[data-theme="light"] .ov-rent-metrics span,:root[data-theme="light"] .ov-rent-metrics small{color:#8a7449}
+:root[data-theme="light"] .ov-rent-metrics>div{background:#fff9ed;border-color:#ecdfc4}:root[data-theme="light"] .ov-rent-metrics strong{color:#86601c}
+:root[data-theme="light"] .ov-payment-row,:root[data-theme="light"] .ov-transaction-row{border-color:var(--line)}
+:root[data-theme="light"] .ov-payment-copy small,:root[data-theme="light"] .ov-transaction-copy small{color:#71817a}
+:root[data-theme="light"] .mobile{background:rgba(255,255,255,.96);border-color:#d7e0e5}
+:root[data-theme="light"] .mobile button{color:#647680}:root[data-theme="light"] .mobile button.active{color:#168653;background:transparent}:root[data-theme="light"] .mobile button.mobile-add{border-color:#fff}
+.keyboard-open .mobile{display:none!important}
+
 </style>
 </head>
 <body>
 
 <!-- ===== Auth: loading ===== -->
-<div id="authLoading" class="auth-loading" role="status">
-  <div class="logo">F</div>
-  <p id="authLoadingMsg" data-t="checkingSession">Checking secure session…</p>
-</div>
+<div id="authLoading" class="auth-loading hidden" role="status" aria-hidden="true"><div class="logo">F</div><p id="authLoadingMsg">Loading…</p></div>
 
 <!-- ===== Auth: sign-in / register ===== -->
-<section id="authScreen" class="auth-screen hidden" aria-labelledby="authTitle">
+<section id="authScreen" class="auth-screen" aria-labelledby="authTitle">
   <div class="auth-card card">
     <div class="auth-brand"><div class="logo">F</div><div><h1 id="authTitle" data-t="appName">Finance</h1><p class="muted small" data-t="signInSubtitle">Sign in to your private financial records.</p></div></div>
     <div class="auth-tabs" role="tablist">
@@ -280,19 +402,19 @@ input,select,textarea{font-size:16px!important;scroll-margin-bottom:180px}
   <div class="brand"><div class="logo">F</div><span data-t="appName">Finance</span></div>
   <p class="nav-label" data-t="workspace">WORKSPACE</p>
   <nav class="nav" id="sideNav">
-    <button class="active" data-page="overview"><span class="ico">⌂</span><span data-t="overview">Overview</span></button>
-    <button data-page="transactions"><span class="ico">↔</span><span data-t="transactions">Transactions</span></button>
-    <button data-page="accounts"><span class="ico">▣</span><span data-t="accounts">Accounts</span></button>
-    <button data-page="rates"><span class="ico">⇄</span><span data-t="rates">Exchange rates</span></button>
-    <button data-page="budgets"><span class="ico">▤</span><span data-t="budgets">Budgets</span></button>
-    <button data-page="cards"><span class="ico">▭</span><span data-t="cards">Credit cards</span></button>
-    <button data-page="debts"><span class="ico">⇅</span><span data-t="debts">Debts &amp; loans</span></button>
-    <button data-page="rent"><span class="ico">⌂</span><span>Rent</span></button>
-    <button data-page="savings"><span class="ico">◈</span><span data-t="savings">Savings</span></button>
-    <button data-page="reports"><span class="ico">▥</span><span data-t="reports">Reports</span></button>
+    <button class="active" data-page="overview"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/></svg></span><span data-t="overview">Overview</span></button>
+    <button data-page="transactions"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span><span data-t="transactions">Transactions</span></button>
+    <button data-page="accounts"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/></svg></span><span data-t="accounts">Accounts</span></button>
+    <button data-page="rates"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h15l-3-3m4 11H5l3 3"/></svg></span><span data-t="rates">Exchange rates</span></button>
+    <button data-page="budgets"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg></span><span data-t="budgets">Budgets</span></button>
+    <button data-page="cards"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/></svg></span><span data-t="cards">Credit cards</span></button>
+    <button data-page="debts"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16m-3-3 3 3 3-3M17 20V4m-3 3 3-3 3 3"/></svg></span><span data-t="debts">Debts &amp; loans</span></button>
+    <button data-page="rent"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/></svg></span><span>Rent</span></button>
+    <button data-page="savings"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 9-8 9-8-9z"/></svg></span><span data-t="savings">Savings</span></button>
+    <button data-page="reports"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h17M8 15l4-4 3 2 5-6"/></svg></span><span data-t="reports">Reports</span></button>
   </nav>
   <div class="sidebottom">
-    <nav class="nav"><button data-page="settings"><span class="ico">⚙</span><span data-t="settings">Settings</span></button></nav>
+    <nav class="nav"><button data-page="settings"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 13.5 21 15l-2 3-2-.7a8 8 0 0 1-2 1l-.3 2.2h-3.4L11 18.3a8 8 0 0 1-2-1L7 18l-2-3 2-1.5a8 8 0 0 1 0-2L5 10l2-3 2 .7a8 8 0 0 1 2-1L11.3 4h3.4L15 6.7a8 8 0 0 1 2 1l2-.7 2 3-2 1.5a8 8 0 0 1 0 2Z"/></svg></span><span data-t="settings">Settings</span></button></nav>
     <p data-t="tagline">One clear view of your finances.</p>
   </div>
 </aside>
@@ -309,45 +431,51 @@ input,select,textarea{font-size:16px!important;scroll-margin-bottom:180px}
 
 <!-- ===== Overview page ===== -->
 <section class="page active" id="page-overview">
-  <div class="welcome"><div><h2 data-t="financialOverview">Financial overview</h2><div class="muted small" data-t="overviewSubtitle">Personal, Family, and Business — together.</div></div><button class="btn primary" data-page="transactions" data-t="addTransaction">＋ Add transaction</button></div>
+  <header class="ov-header">
+    <div class="ov-greeting"><div class="ov-avatar-mark">F</div><div><div class="ov-greeting-line" id="ovGreeting">Good afternoon</div><div class="ov-date" id="ovTodayDate">Today</div></div></div>
+    <div class="ov-header-actions"><button class="ov-icon-button" id="ovNotifications" type="button" aria-label="Upcoming payments"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i class="ov-notification-dot" id="ovNotificationDot"></i></button><button class="ov-profile" type="button" aria-label="Account" data-page="settings">F</button></div>
+  </header>
   <div class="notice" id="overviewNotice">Loading your records…</div>
-  <div class="overview-section">At a glance</div>
-  <div class="stats">
-    <article class="card"><div class="statlabel"><span class="stat-icon">◉</span><span data-t="totalBalance">Total balance</span></div><div class="statvalue" id="ovTotal">— <small id="ovTotalCurrency" data-t="iqd">IQD</small></div><div class="muted small" id="ovTotalNote">Across IQD accounts</div></article>
-    <article class="card"><div class="statlabel"><span class="stat-icon">↗</span><span data-t="incomeThisMonth">Income this month</span></div><div class="statvalue positive" id="ovIncome">— <small>IQD</small></div><div class="muted small" data-t="recordedIncomeAtSavedRates">Recorded income at saved rates</div></article>
-    <article class="card"><div class="statlabel"><span class="stat-icon">↘</span><span data-t="expensesThisMonth">Expenses this month</span></div><div class="statvalue negative" id="ovExpense">— <small>IQD</small></div><div class="muted small" data-t="cardPurchasesIncluded">Card purchases included; transfers excluded</div></article>
-    <article class="card"><div class="statlabel"><span class="stat-icon">◇</span><span data-t="netSavings">Net savings</span></div><div class="statvalue" id="ovNet">— <small>IQD</small></div><div class="muted small" data-t="incomeThisMonth">Income less expenses this month</div></article>
-  </div>
-  <div class="ov-quick"><button class="btn" data-page="transactions">＋ Add transaction</button><button class="btn" data-page="accounts">▣ Accounts</button><button class="btn" data-page="rent">⌂ Rent &amp; housing</button></div>
-  <div class="overview-section">Your money by space</div>
-  <div class="grid2">
-    <article class="card"><div class="cardhead"><h3 data-t="financialSpaces">Financial spaces</h3><span class="tag" data-t="unifiedLedger">Unified ledger</span></div>
-      <div class="space-list">
-        <div class="space-row"><i class="dot"></i><span data-t="personal">Personal</span> <strong id="spacePersonal">— IQD</strong></div>
-        <div class="space-row"><i class="dot blue"></i><span data-t="family">Family</span> <strong id="spaceFamily">— IQD</strong></div>
-        <div class="space-row"><i class="dot purple"></i><span data-t="business">Business</span> <strong id="spaceBusiness">— IQD</strong></div>
-      </div>
-      <p class="muted small" data-t="spacesNote">Net this month. Spaces are reporting labels, not separate accounts.</p>
-    </article>
-    <article class="card"><div class="cardhead"><h3 data-t="exchangeRates">Exchange rates</h3><span class="tag amber" data-t="manualOnly">Manual only</span></div>
-      <p class="muted small" data-t="enterRatesManually">Enter rates manually on the Exchange rates page. Each transaction preserves its rate permanently.</p>
-      <div class="statvalue" id="ovRateDisplay">— <small>IQD / USD</small></div>
-      <p class="muted small" id="ovRateNote">No rate entered yet</p>
-      <button class="btn" data-page="rates" data-t="configureRates">Configure rates</button>
-    </article>
-  </div>
-  <div class="overview-section">Monthly activity</div>
-  <div class="grid2">
-    <article class="card"><div class="cardhead"><h3 data-t="incomeVsExpenses">Income vs expenses</h3><span class="muted small" data-t="thisMonthIQD">This month, IQD</span></div><div id="ovBars"></div></article>
-    <article class="card"><div class="cardhead"><h3 data-t="recentActivity">Recent activity</h3><button class="btn" data-page="transactions" data-t="viewAll">View all</button></div><div class="rec-list" id="ovRecent"></div></article>
-  </div>
-  <div class="overview-section">Plans &amp; commitments</div>
-  <div class="grid3">
-    <article class="card"><div class="cardhead"><h3 data-t="budgetsLabel">Budgets</h3><span class="tag" id="ovBudgetTag">0 active</span></div><p class="muted small" id="ovBudgetNote">Monthly limits and category spending.</p></article>
-    <article class="card"><div class="cardhead"><h3 data-t="upcomingObligations">Upcoming obligations</h3></div><div class="rec-list" id="ovObligations"></div></article>
-    <article class="card"><div class="cardhead"><h3 data-t="savingsGoals">Savings goals</h3></div><p class="muted small" id="ovGoals">Track targets and contributions.</p></article>
-    <article class="card"><div class="cardhead"><h3>Rent &amp; housing</h3><button class="btn small" data-page="rent">Manage</button></div><div class="statvalue" id="ovRentCount">0</div><p class="muted small">Active rent agreements</p></article>
-  </div>
+
+  <article class="ov-balance-card">
+    <div class="ov-balance-copy"><div class="ov-kicker">TOTAL BALANCE <button class="ov-eye" id="ovBalanceToggle" type="button" aria-label="Hide balances" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div><div class="ov-balance-number ov-sensitive" id="ovTotal">— <small>IQD</small></div><div class="ov-balance-foot"><span class="ov-currency-pill">IQD</span><span id="ovTotalNote">Across IQD accounts</span></div><div class="ov-performance"><span class="ov-performance-arrow">↗</span><span id="ovBalanceChange">Monthly net</span><strong id="ovBalanceChangePct">—</strong></div></div>
+    <div class="ov-wallet-art" aria-hidden="true"><svg viewBox="0 0 116 104"><path d="M18 29 72 12l27 13-55 18z" fill="#b8f4d0" opacity=".22"/><path d="M18 29v48l54 19V47z" fill="#75e0a5" opacity=".22"/><path d="m72 47 27-22v48L72 96z" fill="#75e0a5" opacity=".42"/><path d="m18 29 54 18 27-22M72 47v49" fill="none" stroke="#a8f0c4" stroke-width="2"/><path d="M48 24 76 15l15 7-28 10z" fill="#d8ffe6" opacity=".55"/><circle cx="82" cy="62" r="9" fill="#a8f0c4"/><circle cx="82" cy="62" r="3" fill="#193b2a"/></svg></div>
+  </article>
+
+  <section class="ov-summary-grid" aria-label="Monthly financial summary">
+    <article class="ov-summary-card"><div class="ov-summary-top"><span class="ov-mini-icon income"><svg viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span><span>INCOME</span></div><strong class="positive ov-sensitive" id="ovIncome">—</strong><small>This month · IQD</small></article>
+    <article class="ov-summary-card"><div class="ov-summary-top"><span class="ov-mini-icon expense"><svg viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></span><span>EXPENSES</span></div><strong class="negative ov-sensitive" id="ovExpense">—</strong><small>This month · IQD</small></article>
+    <article class="ov-summary-card"><div class="ov-summary-top"><span class="ov-mini-icon savings"><svg viewBox="0 0 24 24"><path d="M4 16 9 11l4 3 7-8M15 6h5v5"/></svg></span><span>NET SAVINGS</span></div><strong class="ov-sensitive" id="ovNet">—</strong><small>This month · IQD</small></article>
+  </section>
+
+  <section class="ov-rent-card">
+    <div class="ov-rent-heading"><div class="ov-rent-title"><span class="ov-rent-icon"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span><div><h3>Rent overview</h3><p>Rental income &amp; housing payments</p></div></div><button class="ov-text-link" data-page="rent" type="button">Manage <span>↗</span></button></div>
+    <div class="ov-rent-metrics">
+      <div><span>Rent received</span><strong class="ov-sensitive" id="ovRentReceived">—</strong><small>This month</small></div>
+      <div><span>Rent paid</span><strong class="ov-sensitive" id="ovRentPaid">—</strong><small>This month</small></div>
+      <div><span>Next payment</span><strong id="ovRentNextDate">—</strong><small id="ovRentCountdown">No scheduled payment</small></div>
+      <div><span>Outstanding</span><strong class="ov-sensitive" id="ovRentOutstanding">—</strong><small id="ovRentStatus">No unpaid rent</small></div>
+    </div>
+  </section>
+
+  <section class="ov-two-cards">
+    <button class="ov-info-card" data-page="accounts" type="button"><span class="ov-info-icon cash"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18m-5 4h2"/></svg></span><span class="ov-info-copy"><small>Cash &amp; accounts</small><strong class="ov-sensitive" id="ovCashTotal">—</strong><em id="ovAccountCount">0 accounts</em></span><span class="ov-chevron">›</span></button>
+    <button class="ov-info-card" data-page="debts" type="button"><span class="ov-info-icon debt"><svg viewBox="0 0 24 24"><path d="M4 7h16M7 4 4 7l3 3m10 4 3 3-3 3M20 17H4"/></svg></span><span class="ov-info-copy"><small>Outstanding debts</small><strong class="ov-sensitive" id="ovDebtTotal">—</strong><em><span id="ovDebtOwe">—</span> you owe · <span id="ovDebtOwed">—</span> owed to you</em></span><span class="ov-chevron">›</span></button>
+  </section>
+
+  <section class="ov-block"><div class="ov-section-heading"><h3>Quick actions</h3><span>SHORTCUTS</span></div><div class="ov-quick-actions" id="ovQuickActions">
+    <button type="button" data-quick="income"><span class="qa-icon income"><svg viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span><b>Income</b></button>
+    <button type="button" data-quick="expense"><span class="qa-icon expense"><svg viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></span><b>Expense</b></button>
+    <button type="button" data-quick="transfer"><span class="qa-icon transfer"><svg viewBox="0 0 24 24"><path d="M4 8h15l-3-3m4 11H5l3 3"/></svg></span><b>Transfer</b></button>
+    <button type="button" data-quick="rent"><span class="qa-icon rent"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/></svg></span><b>Rent</b></button>
+    <button type="button" data-quick="debt"><span class="qa-icon debt"><svg viewBox="0 0 24 24"><path d="M4 7h16M7 4 4 7l3 3m10 4 3 3-3 3M20 17H4"/></svg></span><b>Loan / Debt</b></button>
+    <button type="button" data-quick="more"><span class="qa-icon more"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></span><b>More</b></button>
+  </div></section>
+
+  <section class="ov-budget-card"><div class="ov-budget-head"><div><div class="ov-section-heading"><h3>Monthly budget</h3><span id="ovBudgetMonth">THIS MONTH</span></div><p id="ovBudgetSpentLabel">Spent — of — IQD</p></div><strong id="ovBudgetPct">—%</strong></div><div class="ov-budget-track"><span id="ovBudgetBar"></span></div><div class="ov-budget-foot"><span id="ovBudgetRemaining">Set a budget to track your month</span><button class="ov-text-link" data-page="budgets" type="button">View budget <span>↗</span></button></div></section>
+
+  <section class="ov-block"><div class="ov-section-heading"><h3>Upcoming payments</h3><button class="ov-text-link" data-page="rent" type="button">View all <span>↗</span></button></div><div class="ov-list-card" id="ovObligations"></div></section>
+  <section class="ov-block"><div class="ov-section-heading"><h3>Recent transactions</h3><button class="ov-text-link" data-page="transactions" type="button">View all <span>↗</span></button></div><div class="ov-list-card" id="ovRecent"></div></section>
 </section>
 
 <!-- ===== Transactions page ===== -->
@@ -518,6 +646,7 @@ input,select,textarea{font-size:16px!important;scroll-margin-bottom:180px}
   <article class="card form-card hidden" id="rentFormCard" style="margin-top:14px"><div class="cardhead"><h3 id="rentFormTitle">New rent agreement</h3><button class="btn" type="button" id="rentCancel">Close</button></div>
     <form id="rentForm" class="formgrid" novalidate>
       <div class="formgroup"><label for="rentName">Property / landlord</label><input class="field" id="rentName" maxlength="100" placeholder="Apartment or landlord" required></div>
+      <div class="formgroup"><label for="rentDirection">Agreement type</label><select class="field" id="rentDirection"><option value="pay">I pay rent</option><option value="receive">I receive rent</option></select></div>
       <div class="formgroup"><label for="rentAmount">Rent amount</label><input class="field" id="rentAmount" type="number" min="0.01" step="any" required placeholder="0"></div>
       <div class="formgroup"><label for="rentCurrency">Currency</label><select class="field" id="rentCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
       <div class="formgroup"><label for="rentDue">Next due date</label><input class="field" id="rentDue" type="date" required></div>
@@ -610,12 +739,12 @@ input,select,textarea{font-size:16px!important;scroll-margin-bottom:180px}
 </main>
 
 <!-- ===== Mobile bottom navigation ===== -->
-<nav class="mobile" id="mobileNav">
-  <button class="active" data-page="overview"><span>⌂</span>Home</button>
-  <button data-page="transactions"><span>↔</span>Activity</button>
-  <button data-page="budgets"><span>▤</span>Budgets</button>
-  <button data-page="rent"><span>⌂</span>Rent</button>
-  <button data-page="settings"><span>⚙</span>Settings</button>
+<nav class="mobile" id="mobileNav" aria-label="Main navigation">
+  <button class="active" data-page="overview" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/></svg><span>Overview</span></button>
+  <button data-page="transactions" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Activity</span></button>
+  <button class="mobile-add" id="mobileAddButton" type="button" aria-label="Add transaction"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+  <button data-page="reports" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h17M8 15l4-4 3 2 5-6"/></svg><span>Reports</span></button>
+  <button data-page="settings" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.8 1l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 2Z"/></svg><span>Settings</span></button>
 </nav>
 </div><!-- end appShell -->
 
@@ -634,6 +763,7 @@ function go(page) {
   document.querySelectorAll("[data-page]").forEach(x => x.classList.toggle("active", x.dataset.page === page));
   const titleEl = document.getElementById("pageTitle");
   if (titleEl) titleEl.textContent = PAGE_TITLES[page];
+  document.body.dataset.currentPage = page;
   history.replaceState(null, "", "#" + page);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -675,9 +805,11 @@ route();
 // Safety net: surface module-load errors instead of leaving an unexplained spinner.
 function showFirebaseStartupError(detail) {
   if (document.body.dataset.authReady === "1") return;
-  const message = document.getElementById("authLoadingMsg");
-  if (message) message.textContent = detail ||
-    "Secure sign-in could not start. Check your connection, then reload the page.";
+  const message = document.getElementById("authMessage");
+  if (message) {
+    message.textContent = detail || "Sign-in could not initialize. Check your connection and reload.";
+    message.className = "auth-message error";
+  }
 }
 window.addEventListener("error", event => {
   if (event.target && event.target.tagName === "SCRIPT" && event.target.type === "module") {
@@ -690,11 +822,6 @@ window.addEventListener("unhandledrejection", event => {
     showFirebaseStartupError("Firebase could not initialize. Check your connection or browser privacy settings, then reload.");
   }
 });
-setTimeout(() => {
-  if (document.body.dataset.authReady !== "1") {
-    showFirebaseStartupError("Secure sign-in could not load. Check your internet connection or browser privacy settings, then reload the page.");
-  }
-}, 15000);
 </script>
 
 <!-- ===== Optional feature libraries (loaded globally) ===== -->
@@ -885,14 +1012,14 @@ function showApp(user) {
   clearAuthMessage();
 }
 
-function showAuthScreen() {
+function showAuthScreen(clearFields = true) {
   ui.loading.classList.add("hidden");
   ui.app.classList.add("hidden");
   ui.screen.classList.remove("hidden");
   ui.accountEmail.textContent = "";
   ui.protectionStatus.textContent = "Not signed in";
   ui.protectionStatus.className = "tag amber";
-  clearPasswordFields();
+  if (clearFields) clearPasswordFields();
 }
 
 setPersistence(auth, browserLocalPersistence).catch(err => {
@@ -917,7 +1044,7 @@ onAuthStateChanged(auth, async user => {
     showApp(user);
     if (first) startDataForUser(user.uid);
   } else {
-    showAuthScreen();
+    showAuthScreen(signedInOnce);
     stopListeners();
     if (signedInOnce) { await wipeLocalData(); location.reload(); }
   }
@@ -1005,7 +1132,6 @@ let currentLanguage = "en";
 const STRINGS = {
   en: {
     appTitle: "Finance — Personal Finance",
-    checkingSession: "Checking secure session…",
     appName: "Finance",
     signInSubtitle: "Sign in to your private financial records.",
     signIn: "Sign in",
@@ -2188,7 +2314,7 @@ function refreshAll() {
 
 function renderSelectors() {
   const categories = [...new Set(
-    [...state.transactions.map(t => t.category), ...state.budgets.map(b => b.category)].filter(Boolean)
+    ["Rent", "Rental income", ...state.transactions.map(t => t.category), ...state.budgets.map(b => b.category)].filter(Boolean)
   )].sort();
   $("categoryList").replaceChildren(...categories.map(c => h("option", { value: c })));
   buildTxOptions();
@@ -2200,68 +2326,136 @@ function setStat(id, valueCents, currency = "IQD") {
 
 function renderOverview() {
   const bal = computeBalances();
-  const iqdAccounts = state.accounts.filter(a => a.currency === "IQD");
-  setStat("ovTotal", iqdAccounts.reduce((s, a) => s + balanceOf(bal, "account", a.id), 0));
-  $("ovTotalNote").textContent = `Across ${iqdAccounts.length} IQD account(s). Other currencies on Accounts page.`;
-
   const m = monthTotals();
+  const now = new Date();
+  const hour = now.getHours();
+  const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+  const locale = currentLanguage === "ar" ? "ar" : currentLanguage === "ku" ? "ckb" : "en";
+  const dateText = new Intl.DateTimeFormat(locale, { weekday: "long", month: "long", day: "numeric", year: "numeric" }).format(now);
+  if ($("ovGreeting")) $("ovGreeting").textContent = greeting;
+  if ($("ovTodayDate")) $("ovTodayDate").textContent = dateText;
+
+  const currencyRate = currency => currency === "IQD" ? 1 : Number(state.rates.find(r => r.currency === currency)?.buyRate || 0);
+  const toIqdCents = (amount, currency) => Math.round(Number(amount || 0) * currencyRate(currency) * 100);
+  const unconvertedAccounts = state.accounts.filter(a => a.currency !== "IQD" && !currencyRate(a.currency)).length;
+  const accountTotal = state.accounts.reduce((sum, a) => {
+    const rate = currencyRate(a.currency);
+    return sum + (rate > 0 ? Math.round(balanceOf(bal, "account", a.id) * rate) : 0);
+  }, 0);
+  setStat("ovTotal", accountTotal);
+  $("ovTotalNote").textContent = unconvertedAccounts ? `${unconvertedAccounts} foreign-currency account(s) excluded · add rates` : `All ${state.accounts.length} account(s), converted to IQD at saved rates`;
   setStat("ovIncome", m.income);
   setStat("ovExpense", m.expense);
   setStat("ovNet", m.net);
-  for (const sp of ["personal", "family", "business"]) {
-    const net = m.bySpace[sp].income - m.bySpace[sp].expense;
-    $("space" + cap(sp)).replaceChildren(fmtC(net), " IQD");
-  }
+  $("ovNet").classList.toggle("positive", m.net >= 0);
+  $("ovNet").classList.toggle("negative", m.net < 0);
+  const netPct = m.income > 0 ? Math.round((m.net / m.income) * 100) : 0;
+  $("ovBalanceChange").textContent = `${m.net < 0 ? "Monthly deficit" : "Monthly net"} · ${fmtC(Math.abs(m.net))} IQD`;
+  $("ovBalanceChangePct").textContent = `${m.net < 0 ? "−" : "+"}${Math.abs(netPct)}%`;
+  $("ovBalanceChangePct").className = m.net < 0 ? "negative" : "positive";
 
-  // Latest USD rate for overview card
-  const usdRate = state.rates.find(r => r.currency === "USD");
-  if (usdRate) {
-    $("ovRateDisplay").replaceChildren(fmt(usdRate.buyRate), h("small", { text: " IQD / USD" }));
-    $("ovRateNote").textContent = `${SOURCE_LABEL[usdRate.source] || usdRate.source} · ${usdRate.date}`;
+  const currentMonth = todayYM();
+  const rentTx = state.transactions.filter(t => /rent|rental|housing/i.test(`${t.category || ""} ${t.description || ""}`) && t.date?.slice(0, 7) === currentMonth);
+  const receivedTx = rentTx.filter(t => t.type === "income");
+  const paidTx = rentTx.filter(t => t.type === "expense");
+  const trackedReceived = state.rents.filter(r => r.direction === "receive" && r.paidForDue?.slice(0, 7) === currentMonth)
+    .reduce((sum, r) => sum + toIqdCents(r.amount, r.currency), 0);
+  const trackedPaid = state.rents.filter(r => (r.direction || "pay") === "pay" && r.paidForDue?.slice(0, 7) === currentMonth)
+    .reduce((sum, r) => sum + toIqdCents(r.amount, r.currency), 0);
+  const receivedRent = receivedTx.length ? receivedTx.reduce((sum, t) => sum + cents(t.amountIQD), 0) : trackedReceived;
+  const paidRent = paidTx.length ? paidTx.reduce((sum, t) => sum + cents(t.amountIQD), 0) : trackedPaid;
+  $("ovRentReceived").textContent = `${fmtC(receivedRent)} IQD`;
+  $("ovRentPaid").textContent = `${fmtC(paidRent)} IQD`;
+
+  const activeRents = state.rents.filter(r => r.active !== false);
+  const unpaidRent = activeRents.filter(r => (r.direction || "pay") === "pay" && r.nextDue && r.paidForDue !== r.nextDue);
+  const outstandingRent = unpaidRent.reduce((sum, r) => sum + toIqdCents(r.amount, r.currency), 0);
+  $("ovRentOutstanding").textContent = `${fmtC(outstandingRent)} IQD`;
+  $("ovRentStatus").textContent = unpaidRent.length ? `${unpaidRent.length} unpaid agreement${unpaidRent.length === 1 ? "" : "s"}` : "All tracked rent paid";
+  const nextRent = unpaidRent.slice().sort((a, b) => String(a.nextDue).localeCompare(String(b.nextDue)))[0];
+  if (nextRent) {
+    const due = new Date(`${nextRent.nextDue}T12:00:00`);
+    const diff = Math.ceil((due - new Date(`${todayStr()}T12:00:00`)) / 86400000);
+    $("ovRentNextDate").textContent = new Intl.DateTimeFormat(locale, { month: "short", day: "numeric" }).format(due);
+    $("ovRentCountdown").textContent = diff < 0 ? `${Math.abs(diff)} day${Math.abs(diff) === 1 ? "" : "s"} overdue` : diff === 0 ? "Due today" : `In ${diff} day${diff === 1 ? "" : "s"}`;
   } else {
-    $("ovRateDisplay").replaceChildren("— ", h("small", { text: "IQD / USD" }));
-    $("ovRateNote").textContent = "No rate entered yet";
+    $("ovRentNextDate").textContent = "—";
+    $("ovRentCountdown").textContent = "No scheduled payment";
   }
 
-  const max = Math.max(m.income, m.expense, 1);
-  $("ovBars").replaceChildren(barRow("Income", m.income, max, ""), barRow("Expenses", m.expense, max, "warn"));
+  $("ovCashTotal").textContent = `${fmtC(accountTotal)} IQD`;
+  $("ovAccountCount").textContent = `${state.accounts.length} account${state.accounts.length === 1 ? "" : "s"}`;
+  const owe = state.debts.filter(d => d.direction === "owe").reduce((sum, d) => sum + (currencyRate(d.currency) ? Math.round(balanceOf(bal, "debt", d.id) * currencyRate(d.currency)) : 0), 0);
+  const owed = state.debts.filter(d => d.direction === "owed").reduce((sum, d) => sum + (currencyRate(d.currency) ? Math.round(balanceOf(bal, "debt", d.id) * currencyRate(d.currency)) : 0), 0);
+  $("ovDebtTotal").textContent = `${fmtC(owe + owed)} IQD`;
+  $("ovDebtOwe").textContent = `${fmtC(owe)} IQD`;
+  $("ovDebtOwed").textContent = `${fmtC(owed)} IQD`;
 
-  const recent = state.transactions.slice(0, 5);
-  $("ovRecent").replaceChildren(...(recent.length
-    ? recent.map(compactTxRow)
-    : [emptyBlock("No transactions yet", "Income, expenses, and transfers will appear here.")]));
+  // Monthly budget: prefer an overall budget; otherwise summarize category budgets.
+  const overallBudget = state.budgets.find(b => b.scope === "overall" && b.space === "all");
+  const budgetItems = overallBudget ? [overallBudget] : state.budgets.filter(b => b.scope === "category");
+  const budgetLimit = budgetItems.reduce((sum, b) => sum + cents(b.limit), 0);
+  const budgetUsed = budgetItems.reduce((sum, b) => sum + budgetSpent(b), 0);
+  const budgetPct = budgetLimit > 0 ? Math.round((budgetUsed / budgetLimit) * 100) : 0;
+  const budgetLabel = new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(now);
+  $("ovBudgetMonth").textContent = budgetLabel.toUpperCase();
+  $("ovBudgetSpentLabel").textContent = budgetLimit ? `Spent ${fmtC(budgetUsed)} of ${fmtC(budgetLimit)} IQD` : "No monthly budget set";
+  $("ovBudgetPct").textContent = budgetLimit ? `${budgetPct}%` : "—";
+  $("ovBudgetBar").style.width = `${Math.min(100, budgetPct)}%`;
+  $("ovBudgetBar").className = budgetPct >= 100 ? "over" : budgetPct >= 80 ? "warn" : "";
+  $("ovBudgetRemaining").textContent = budgetLimit ? `${fmtC(Math.max(0, budgetLimit - budgetUsed))} IQD remaining` : "Create an overall or category budget to track spending";
 
+  const dueDateForDay = day => {
+    const d = new Date();
+    const safeDay = Math.max(1, Math.min(31, Number(day) || 1));
+    let candidate = new Date(d.getFullYear(), d.getMonth(), Math.min(safeDay, new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate()), 12);
+    if (candidate < new Date(`${todayStr()}T00:00:00`)) candidate = new Date(d.getFullYear(), d.getMonth() + 1, Math.min(safeDay, new Date(d.getFullYear(), d.getMonth() + 2, 0).getDate()), 12);
+    return `${candidate.getFullYear()}-${pad2(candidate.getMonth() + 1)}-${pad2(candidate.getDate())}`;
+  };
   const obligations = [
-    ...state.debts.filter(d => d.direction === "owe" && balanceOf(bal, "debt", d.id) > 0 && d.dueDate)
-      .map(d => ({ date: d.dueDate, text: `${d.name}: ${fmtC(balanceOf(bal, "debt", d.id))} ${d.currency}` })),
-    ...state.cards.filter(c => balanceOf(bal, "card", c.id) > 0)
-      .map(c => ({ date: `day ${c.dueDay}`, text: `${c.name} card payment: ${fmtC(balanceOf(bal, "card", c.id))} ${c.currency}` }))
+    ...unpaidRent.map(r => ({ date: r.nextDue, name: r.name || "Rent", amount: toIqdCents(r.amount, r.currency), currency: "IQD", kind: "rent", status: r.nextDue < todayStr() ? "Overdue" : "Upcoming" })),
+    ...state.debts.filter(d => d.direction === "owe" && d.dueDate && balanceOf(bal, "debt", d.id) > 0).map(d => ({ date: d.dueDate, name: d.name || "Loan payment", amount: d.currency === "IQD" ? balanceOf(bal, "debt", d.id) : toIqdCents(balanceOf(bal, "debt", d.id) / 100, d.currency), currency: "IQD", kind: "debt", status: d.dueDate < todayStr() ? "Overdue" : "Upcoming" })),
+    ...state.cards.filter(c => balanceOf(bal, "card", c.id) > 0 && c.dueDay).map(c => ({ date: dueDateForDay(c.dueDay), name: `${c.name || "Credit card"} payment`, amount: c.currency === "IQD" ? balanceOf(bal, "card", c.id) : toIqdCents(balanceOf(bal, "card", c.id) / 100, c.currency), currency: "IQD", kind: "card", status: "Upcoming" }))
   ].sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  const obligationsEl = $("ovObligations");
+  obligationsEl.replaceChildren(...(obligations.length ? obligations.slice(0, 6).map(o => {
+    const row = h("div", { class: "ov-payment-row" },
+      h("span", { class: `ov-list-icon ${o.kind}` }, makeOverviewIcon(o.kind)),
+      h("span", { class: "ov-payment-copy" }, h("strong", { text: o.name }), h("small", { text: `${o.date} · ${o.status}` })),
+      h("strong", { class: `ov-payment-amount ${o.status === "Overdue" ? "negative" : ""}`, text: `${fmtC(o.amount)} ${o.currency}` }));
+    return row;
+  }) : [h("div", { class: "ov-empty-line", text: "No upcoming rent, card, or loan payments." })]));
 
-  $("ovObligations").replaceChildren(...(obligations.length
-    ? obligations.slice(0, 6).map(o => h("div", { class: "rec-row" },
-        h("div", { class: "rec-main", text: o.text }),
-        h("div", { class: "rec-amount muted small", text: o.date })))
-    : [h("p", { class: "muted small", text: "No upcoming card payments or debt due dates." })]));
-
-  $("ovBudgetTag").textContent = `${state.budgets.length} active`;
-  const overall = state.budgets.find(b => b.scope === "overall" && b.space === "all");
-  $("ovBudgetNote").textContent = overall
-    ? `Overall limit: ${fmtC(budgetSpent(overall))} of ${fmt(overall.limit)} IQD used this month.`
-    : "Monthly limits and category spending.";
-
-  const saved = state.savings.filter(s => s.currency === "IQD").reduce((s, g) => s + balanceOf(bal, "savings", g.id), 0);
-  $("ovGoals").textContent = state.savings.length
-    ? `${state.savings.length} goal(s). ${fmtC(saved)} IQD saved in IQD goals.`
-    : "Track targets and contributions.";
+  const recent = state.transactions.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || ""))).slice(0, 5);
+  $("ovRecent").replaceChildren(...(recent.length ? recent.map(compactTxRow) : [h("div", { class: "ov-empty-line", text: "Your latest transactions will appear here." })]));
+  const hasDue = obligations.some(o => o.date <= addDays(todayStr(), 7));
+  $("ovNotificationDot").classList.toggle("hidden", !hasDue);
 
   const allLoaded = RECORD_COLLECTIONS.every(n => loaded[n]);
   if (allLoaded) {
     const empty = !state.accounts.length && !state.transactions.length;
     setOverviewNotice(empty
-      ? "No records yet. Start by adding your accounts and their opening balances on the Accounts page."
-      : "Showing your saved records. Balances are calculated from your transactions.");
+      ? "No records yet. Add accounts and transactions to see your financial overview."
+      : "Your overview is calculated from your saved accounts, transactions, budgets, rent agreements, cards, and debts.");
   }
+}
+
+function makeOverviewIcon(kind) {
+  const paths = {
+    rent: ["M3 10 12 3l9 7v10h-6v-7H9v7H3z"],
+    debt: ["M4 7h16M7 4 4 7l3 3m10 4 3 3-3 3M20 17H4"],
+    card: ["M3 6h18v12H3z", "M3 10h18"],
+    income: ["M12 19V5m-6 6 6-6 6 6"],
+    expense: ["M12 5v14m-6-6 6 6 6-6"],
+    transfer: ["M4 8h15l-3-3m4 11H5l3 3"]
+  };
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 24 24"); svg.setAttribute("aria-hidden", "true");
+  for (const d of (paths[kind] || paths.card)) {
+    const path = document.createElementNS(ns, "path"); path.setAttribute("d", d); svg.append(path);
+  }
+  return svg;
 }
 
 function barRow(label, value, max, cls) {
@@ -2275,14 +2469,15 @@ function barRow(label, value, max, cls) {
 
 function compactTxRow(t) {
   const sign = t.type === "income" ? "+" : t.type === "expense" ? "−" : "";
-  const cls  = t.type === "income" ? "positive" : t.type === "expense" ? "negative" : "muted";
-  return h("div", { class: "rec-row" },
-    h("div", { class: "rec-main" },
+  const cls = t.type === "income" ? "positive" : t.type === "expense" ? "negative" : "muted";
+  const icon = t.type === "income" ? "income" : t.type === "expense" ? "expense" : "transfer";
+  return h("div", { class: "ov-transaction-row" },
+    h("span", { class: `ov-list-icon ${icon}` }, makeOverviewIcon(icon)),
+    h("div", { class: "ov-transaction-copy" },
       h("strong", { text: t.description || TYPE_LABEL[t.type] }),
-      h("div",    { class: "sub", text: `${t.date} · ${TYPE_LABEL[t.type]}` })),
-    h("div", { class: `rec-amount ${cls}`, text: `${sign}${fmt(t.amount)} ${t.currency}` }));
+      h("small", { text: `${t.date || ""} · ${t.category || TYPE_LABEL[t.type] || "Transaction"}` })),
+    h("strong", { class: `ov-payment-amount ${cls} ov-sensitive`, text: `${sign}${fmt(t.amount)} ${t.currency}` }));
 }
-
 function txAccountLabel(t) {
   if (t.type === "transfer") return `${entityName(t.fromKind, t.fromId)} → ${entityName(t.toKind, t.toId)}`;
   if (t.type === "income")   return entityName(t.toKind,   t.toId);
@@ -2915,11 +3110,11 @@ function renderRents() {
     const overdue = r.active !== false && r.nextDue < today && r.paidForDue !== r.nextDue;
     const paid = r.paidForDue === r.nextDue;
     const dueSoon = r.active !== false && !paid && r.nextDue >= today && r.nextDue <= addDays(today,7);
-    const status = paid ? "✓ Paid this cycle" : overdue ? "Overdue" : dueSoon ? "Due soon" : "Upcoming";
+    const status = paid ? (r.direction === "receive" ? "✓ Received this cycle" : "✓ Paid this cycle") : overdue ? "Overdue" : dueSoon ? "Due soon" : "Upcoming";
     return h("div", {class:"rec-row"},
-      h("div", {class:"rec-main"}, h("strong", {text:r.name}), h("div", {class:"sub", text:`${r.frequency || "monthly"} · due ${r.nextDue}${r.notes ? " · " + r.notes : ""}` })),
+      h("div", {class:"rec-main"}, h("strong", {text:r.name}), h("div", {class:"sub", text:`${r.direction === "receive" ? "Rent receivable" : "Rent payable"} · ${r.frequency || "monthly"} · due ${r.nextDue}${r.notes ? " · " + r.notes : ""}` })),
       h("div", {class:`rec-amount ${overdue ? "negative" : paid ? "positive" : ""}`}, `${fmt(r.amount)} ${r.currency}`, h("div", {class:"sub", text:status})),
-      h("div", {class:"rec-actions"}, ...(r.active !== false ? [h("button", {class:"btn small", type:"button", onclick:()=>markRentPaid(r.id)}, "Mark paid")] : []), h("button", {class:"btn small", type:"button", onclick:()=>openRentForm(r.id)}, "Edit"), h("button", {class:"btn small", type:"button", onclick:()=>deleteRent(r.id)}, "Delete"))
+      h("div", {class:"rec-actions"}, ...(r.active !== false ? [h("button", {class:"btn small", type:"button", onclick:()=>markRentPaid(r.id)}, r.direction === "receive" ? "Mark received" : "Mark paid")] : []), h("button", {class:"btn small", type:"button", onclick:()=>openRentForm(r.id)}, "Edit"), h("button", {class:"btn small", type:"button", onclick:()=>deleteRent(r.id)}, "Delete"))
     );
   }) : [emptyBlock("No rent agreements yet", "Add your rent amount and next due date to keep housing commitments visible.")]));
 }
@@ -2927,7 +3122,7 @@ function addDays(date, days) { const d = new Date(date + "T12:00:00"); d.setDate
 function openRentForm(id) {
   const r = id ? state.rents.find(x=>x.id===id) : null; $("rentForm").reset(); editing.rent = r ? r.id : null;
   $("rentFormTitle").textContent = r ? "Edit rent agreement" : "New rent agreement"; $("rentSubmit").textContent = r ? "Save changes" : "Save rent agreement";
-  $("rentName").value = r?.name || ""; $("rentAmount").value = r?.amount ?? ""; $("rentCurrency").value = r?.currency || "IQD"; $("rentDue").value = r?.nextDue || todayStr(); $("rentFrequency").value = r?.frequency || "monthly"; $("rentNotes").value = r?.notes || ""; clearFormError("rentError"); openCard("rentFormCard");
+  $("rentName").value = r?.name || ""; $("rentDirection").value = r?.direction || "pay"; $("rentAmount").value = r?.amount ?? ""; $("rentCurrency").value = r?.currency || "IQD"; $("rentDue").value = r?.nextDue || todayStr(); $("rentFrequency").value = r?.frequency || "monthly"; $("rentNotes").value = r?.notes || ""; clearFormError("rentError"); openCard("rentFormCard");
 }
 function saveRent(e) {
   e.preventDefault(); clearFormError("rentError"); const name=$("rentName").value.trim(), amount=numOrNaN($("rentAmount").value), due=$("rentDue").value;
@@ -2935,12 +3130,12 @@ function saveRent(e) {
   if (!(amount>0)) return showFormError("rentError", "Enter a rent amount greater than zero.");
   if (!isDate(due)) return showFormError("rentError", "Choose a valid next due date.");
   const old = editing.rent ? state.rents.find(x=>x.id===editing.rent) : null;
-  writeRecord("rents", editing.rent, {name:name.slice(0,100), amount, currency:$("rentCurrency").value, nextDue:due, frequency:$("rentFrequency").value, notes:$("rentNotes").value.trim().slice(0,500), active:true, paidForDue:old?.paidForDue || ""}, "rentError");
+  writeRecord("rents", editing.rent, {name:name.slice(0,100), direction:$("rentDirection").value || "pay", amount, currency:$("rentCurrency").value, nextDue:due, frequency:$("rentFrequency").value, notes:$("rentNotes").value.trim().slice(0,500), active:true, paidForDue:old?.paidForDue || ""}, "rentError");
   editing.rent=null; closeCard("rentFormCard");
 }
 function markRentPaid(id) {
   const r=state.rents.find(x=>x.id===id); if(!r || r.paidForDue===r.nextDue) return;
-  if(!confirm(`Mark ${r.name} rent for ${r.nextDue} as paid? This updates the rent tracker only; add a separate expense transaction to update account balances.`)) return;
+  if(!confirm(`Mark ${r.name} rent for ${r.nextDue} as ${r.direction === "receive" ? "received" : "paid"}? This updates the rent tracker only; record the matching transaction separately to update account balances.`)) return;
   writeRecord("rents", id, {...r, paidForDue:r.nextDue, nextDue:addRentInterval(r.nextDue,r.frequency || "monthly")}, "rentError");
 }
 function deleteRent(id) { const r=state.rents.find(x=>x.id===id); if(!r) return; if(confirm(`Delete rent agreement for ${r.name}?`)) removeRecord("rents",id,`rent agreement "${r.name}"`); }
@@ -3203,6 +3398,33 @@ $("txClearDates").addEventListener("click", () => {
   renderTransactions();
 });
 $("txExportBtn").addEventListener("click", exportTransactions);
+
+// Overview shortcuts and compact mobile navigation actions.
+function openQuickAction(action) {
+  if (action === "rent") { go("rent"); openRentForm(null); return; }
+  if (action === "debt") { go("debts"); openDebtForm(null); return; }
+  if (action === "more") { go("accounts"); return; }
+  go("transactions");
+  openNewTx();
+  if (["income", "expense", "transfer"].includes(action)) {
+    txEls.type.value = action;
+    updateTxFormUI();
+  }
+}
+$("ovQuickActions").addEventListener("click", e => {
+  const action = e.target.closest("[data-quick]")?.dataset.quick;
+  if (action) openQuickAction(action);
+});
+$("mobileAddButton").addEventListener("click", () => openQuickAction("expense"));
+$("ovBalanceToggle").addEventListener("click", () => {
+  const hidden = $("page-overview").classList.toggle("balances-hidden");
+  $("ovBalanceToggle").setAttribute("aria-pressed", String(hidden));
+  $("ovBalanceToggle").setAttribute("aria-label", hidden ? "Show balances" : "Hide balances");
+});
+$("ovNotifications").addEventListener("click", () => {
+  go("overview");
+  requestAnimationFrame(() => $("ovObligations").scrollIntoView({ behavior: "smooth", block: "center" }));
+});
 
 $("addAccountBtn").addEventListener("click", () => openAccountForm(null));
 $("accountCancel").addEventListener("click", () => { editing.account = null; closeCard("accountFormCard"); });
