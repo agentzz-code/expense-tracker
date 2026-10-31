@@ -33,6 +33,8 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .topright{display:flex;gap:10px;align-items:center}
 .pill,.tag{border:1px solid var(--line);background:#17231b;border-radius:30px;padding:8px 12px;color:var(--muted);font-size:11px}
 .avatar{width:38px;height:38px;border-radius:50%;border:1px solid #3b5945;background:#213a2b;color:var(--green);font-weight:800}
+.exchange-icon{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:var(--surface2);color:var(--amber);display:grid;place-items:center;transition:transform .18s ease,filter .18s ease}.exchange-icon:hover{transform:translateY(-2px) rotate(-5deg);filter:brightness(1.15)}.exchange-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rate-highlight{border-color:#66572e;background:radial-gradient(ellipse at 100% 0,#4c3b1d55,transparent 55%),linear-gradient(145deg,#211e16,#171b16)}.rate-pair{display:flex;justify-content:space-between;gap:12px;align-items:baseline}.rate-pair strong{font-size:20px}.rate-meta{color:var(--muted);font-size:11px}.rate-diff{font-size:12px;color:var(--amber)}.rate-widget{margin:0 0 13px}.rate-widget .cardhead{margin-bottom:9px}
 
 /* ===== Pages ===== */
 .page{display:none;animation:fade .2s ease}.page.active{display:block}
@@ -424,6 +426,7 @@ body[data-current-page="overview"] .main > .top{display:none}
   <div><p class="eyebrow" data-t="yourFinances">YOUR FINANCES</p><h1 id="pageTitle" data-t="overview">Overview</h1></div>
   <div class="topright">
     <span class="pill" data-t="iqdPrimaryCurrency">IQD · Primary currency</span>
+    <button class="exchange-icon" id="headerRatesButton" type="button" aria-label="Exchange Rates" title="Exchange Rates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M16 7.5c0-1.4-1.5-2.5-4-2.5s-4 1.1-4 2.5 1.3 2.2 4 3 4 1.6 4 3-1.5 2.5-4 2.5-4-1.1-4-2.5"/></svg></button>
     <button class="avatar" title="Owner account" data-t="ownerAccount">F</button>
     <button class="btn" id="signOutBtn" type="button" data-t="signOut">Sign out</button>
   </div>
@@ -446,6 +449,13 @@ body[data-current-page="overview"] .main > .top{display:none}
     <article class="ov-summary-card"><div class="ov-summary-top"><span class="ov-mini-icon income"><svg viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span><span>INCOME</span></div><strong class="positive ov-sensitive" id="ovIncome">—</strong><small>This month · IQD</small></article>
     <article class="ov-summary-card"><div class="ov-summary-top"><span class="ov-mini-icon expense"><svg viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></span><span>EXPENSES</span></div><strong class="negative ov-sensitive" id="ovExpense">—</strong><small>This month · IQD</small></article>
     <article class="ov-summary-card"><div class="ov-summary-top"><span class="ov-mini-icon savings"><svg viewBox="0 0 24 24"><path d="M4 16 9 11l4 3 7-8M15 6h5v5"/></svg></span><span>NET SAVINGS</span></div><strong class="ov-sensitive" id="ovNet">—</strong><small>This month · IQD</small></article>
+  </section>
+
+  <section class="card rate-widget" id="overviewRatesWidget" role="button" tabindex="0" aria-label="Exchange Rates">
+    <div class="cardhead"><h3>Exchange rates</h3><button class="ov-text-link" id="overviewRatesButton" type="button">View all ↗</button></div>
+    <div class="rate-pair"><span>USD / IQD official</span><strong id="ovOfficialRate">—</strong></div>
+    <div class="rate-pair"><span>USD / IQD market</span><strong id="ovMarketRate">—</strong></div>
+    <div class="rate-meta" id="ovRatesMeta">Updating automatically…</div>
   </section>
 
   <section class="ov-rent-card">
@@ -545,13 +555,15 @@ body[data-current-page="overview"] .main > .top{display:none}
 
 <!-- ===== Exchange rates page ===== -->
 <section class="page" id="page-rates">
-  <div class="section-head"><div><h2 class="section-title">Exchange rates</h2><p class="section-desc">Enter and track rates manually. Each transaction permanently preserves its rate.</p></div><button class="btn primary" id="addRateBtn">＋ Enter rate</button></div>
-  <div class="notice">These rates are for reference and for transactions. Changing a rate here never alters historical transaction values — each transaction's saved rate is permanent.</div>
+  <div class="section-head"><div><h2 class="section-title">Exchange rates</h2><p class="section-desc">Verified rates are refreshed automatically and historical transaction snapshots never change.</p></div><button class="btn" id="refreshRatesBtn" type="button">↻ Refresh now</button></div>
+  <div class="notice" id="ratesStatus">Automatic rates use public data where available. CBI-published values are clearly identified; market values remain separate.</div>
   <div class="grid3" id="rateStatGrid">
-    <article class="card"><div class="statlabel">USD / IQD</div><div class="statvalue" id="rateUSD">— <small>IQD</small></div><p class="muted small" id="rateUSDNote">Not entered</p></article>
+    <article class="card rate-highlight"><div class="statlabel">CBI Official Rate · USD / IQD</div><div class="statvalue" id="rateUSD">— <small>IQD</small></div><p class="muted small" id="rateUSDNote">Waiting for verified data</p></article>
+    <article class="card rate-highlight"><div class="statlabel">Market Rate · USD / IQD</div><div class="statvalue" id="rateUSDMarket">— <small>IQD</small></div><p class="muted small" id="rateUSDMarketNote">Not available</p></article>
     <article class="card"><div class="statlabel">EUR / IQD</div><div class="statvalue" id="rateEUR">— <small>IQD</small></div><p class="muted small" id="rateEURNote">Not entered</p></article>
     <article class="card"><div class="statlabel">TRY / IQD</div><div class="statvalue" id="rateTRY">— <small>IQD</small></div><p class="muted small" id="rateTRYNote">Not entered</p></article>
   </div>
+  <article class="card" style="margin-top:14px"><div class="cardhead"><h3>Currency converter</h3><span class="muted small" id="converterRateLabel">Uses the latest saved rate</span></div><div class="formgrid"><div class="formgroup"><label for="convAmount">Amount</label><input class="field" id="convAmount" type="number" min="0" step="any" value="1"></div><div class="formgroup"><label for="convFrom">From</label><select class="field" id="convFrom"><option>USD</option><option>EUR</option><option>GBP</option><option>TRY</option><option>IQD</option></select></div><div class="formgroup"><label for="convTo">To</label><select class="field" id="convTo"><option>IQD</option><option>USD</option><option>EUR</option><option>GBP</option><option>TRY</option></select></div><div class="formgroup"><label for="convMode">Rate type</label><select class="field" id="convMode"><option value="official">Official</option><option value="market">Market</option></select></div><div class="formgroup full"><div class="statvalue" id="convResult">—</div></div></div></article>
   <article class="card form-card hidden" id="rateFormCard" style="margin-top:14px">
     <div class="cardhead"><h3 id="rateFormTitle">Enter rate</h3><button class="btn" type="button" id="rateCancel">Close</button></div>
     <form id="rateForm" class="formgrid" novalidate>
@@ -741,7 +753,7 @@ body[data-current-page="overview"] .main > .top{display:none}
 <!-- ===== Mobile bottom navigation ===== -->
 <nav class="mobile" id="mobileNav" aria-label="Main navigation">
   <button class="active" data-page="overview" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/></svg><span>Overview</span></button>
-  <button data-page="transactions" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Activity</span></button>
+  <button data-page="rent" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/></svg><span>Rent</span></button>
   <button class="mobile-add" id="mobileAddButton" type="button" aria-label="Add transaction"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
   <button data-page="reports" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h17M8 15l4-4 3 2 5-6"/></svg><span>Reports</span></button>
   <button data-page="settings" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.8-1l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-2l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.8 1l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 2Z"/></svg><span>Settings</span></button>
@@ -1117,6 +1129,36 @@ const ACCOUNT_TYPE_LABEL = { cash: "Cash", bank: "Bank", other: "Other" };
 const DIRECTION_LABEL = { owe: "I owe", owed: "Owed to me" };
 const KIND_COLLECTION = { account: "accounts", card: "cards", savings: "savings", debt: "debts" };
 const SOURCE_LABEL = { official: "Official", market: "Iraqi market", manual: "Manual" };
+
+// Automatic market feed. The provider is recorded separately from the rate source;
+// saved values are never overwritten by a failed or malformed response.
+let ratesRefreshInFlight = null;
+async function refreshAutomaticRates(force = false) {
+  if (!uid || ratesRefreshInFlight) return ratesRefreshInFlight;
+  const cachedAt = Number(localStorage.getItem("finance-rates-refresh-at") || 0);
+  if (!force && Date.now() - cachedAt < 12 * 60 * 60 * 1000) return;
+  ratesRefreshInFlight = (async () => {
+    try {
+      const response = await fetch("https://open.er-api.com/v6/latest/USD", { cache: "no-store" });
+      if (!response.ok) throw new Error("rate provider unavailable");
+      const payload = await response.json();
+      const iqd = Number(payload?.rates?.IQD);
+      if (!(iqd > 0) || !Number.isFinite(iqd)) throw new Error("invalid rate response");
+      const date = payload.time_last_update_utc ? new Date(payload.time_last_update_utc).toISOString().slice(0, 10) : todayStr();
+      const id = `auto-market-USD-${date}`;
+      const current = state.rates.find(r => r.id === id);
+      if (!current || Number(current.buyRate) !== iqd) {
+        writeRecord("rates", id, { currency: "USD", source: "market", provider: "Open Exchange Rates public feed", buyRate: iqd, sellRate: iqd, date, confirmedDate: date, retrievedAt: new Date().toISOString(), status: "verified-provider", notes: "Market reference feed; not a CBI official rate." }, null);
+      }
+      localStorage.setItem("finance-rates-refresh-at", String(Date.now()));
+      toast("Exchange rates updated.", true);
+    } catch (err) {
+      console.warn("Automatic rate refresh failed; keeping saved rates.", err);
+      const status = $("ratesStatus"); if (status) status.textContent = "Could not refresh automatically. Your last saved rates are still being used.";
+    } finally { ratesRefreshInFlight = null; renderRates(); renderOverviewRates(); }
+  })();
+  return ratesRefreshInFlight;
+}
 
 // ============================================================
 // Internationalization (English / Arabic / Kurdish Sorani) + RTL
@@ -2171,6 +2213,7 @@ function startDataForUser(userId) {
       refreshAll();
     }, err => handleListenError(name, err)));
   }
+  refreshAutomaticRates();
 }
 
 async function ensureUserDocuments() {
@@ -2300,6 +2343,7 @@ function refreshAll() {
   if (!uid) return;
   renderSelectors();
   renderOverview();
+  renderOverviewRates();
   renderTransactions();
   renderAccounts();
   renderBudgets();
@@ -2676,8 +2720,15 @@ function renderSavings() {
 }
 
 function renderRates() {
-  // Summary cards for USD, EUR, TRY
+  const official = state.rates.find(x => x.currency === "USD" && x.source === "official") || state.rates.find(x => x.currency === "USD" && x.source === "manual");
+  const market = state.rates.find(x => x.currency === "USD" && x.source === "market");
+  const officialEl = $("rateUSD"), marketEl = $("rateUSDMarket");
+  if (officialEl) officialEl.replaceChildren(official ? fmt(official.buyRate) : "— ", h("small", { text: " IQD" }));
+  if ($("rateUSDNote")) $("rateUSDNote").textContent = official ? `${official.source === "official" ? "CBI Official Rate" : "Saved reference"} · ${official.date}` : "No verified CBI value saved";
+  if (marketEl) marketEl.replaceChildren(market ? fmt(market.buyRate) : "— ", h("small", { text: " IQD" }));
+  if ($("rateUSDMarketNote")) $("rateUSDMarketNote").textContent = market ? `${market.provider || "Market provider"} · ${market.date}` : "Not available";
   for (const cur of ["USD", "EUR", "TRY"]) {
+    if (cur === "USD") continue;
     const r = state.rates.find(x => x.currency === cur);
     const statEl = $(`rate${cur}`);
     const noteEl = $(`rate${cur}Note`);
@@ -2690,7 +2741,9 @@ function renderRates() {
     }
   }
 
-  // Rate history list
+  const diff = official && market ? market.buyRate - official.buyRate : null;
+  const status = $("ratesStatus"); if (status && diff !== null) status.textContent = `Market difference: ${fmt(diff)} IQD (${fmt((diff / official.buyRate) * 100)}%). Last update: ${market.retrievedAt ? new Date(market.retrievedAt).toLocaleString() : market.date}.`;
+  renderConverter(official, market);
   $("rateList").replaceChildren(...(state.rates.length
     ? state.rates.map(r => h("div", { class: "rec-row" },
         h("div", { class: "rec-main" },
@@ -2701,7 +2754,27 @@ function renderRates() {
           h("div", { class: "sub", text: `Sell ${fmt(r.sellRate)} IQD` })),
         h("div", { class: "rec-actions" },
           h("button", { class: "btn small", type: "button", onclick: () => deleteRate(r.id) }, "Delete"))))
-    : [emptyBlock("No rates recorded", "Enter rates for reference and to use when adding foreign-currency transactions.")]));
+    : [emptyBlock("No rates recorded", "Automatic rates will appear after the next successful refresh.")]));
+}
+
+function renderOverviewRates() {
+  const official = state.rates.find(x => x.currency === "USD" && x.source === "official") || state.rates.find(x => x.currency === "USD" && x.source === "manual");
+  const market = state.rates.find(x => x.currency === "USD" && x.source === "market");
+  if ($("ovOfficialRate")) $("ovOfficialRate").textContent = official ? `${fmt(official.buyRate)} IQD` : "—";
+  if ($("ovMarketRate")) $("ovMarketRate").textContent = market ? `${fmt(market.buyRate)} IQD` : "—";
+  if ($("ovRatesMeta")) $("ovRatesMeta").textContent = market ? `Updated ${market.date} · ${market.provider || "market provider"}` : "Waiting for automatic update…";
+}
+
+function renderConverter(official, market) {
+  const amount = Number($("convAmount")?.value || 0), from = $("convFrom")?.value, to = $("convTo")?.value, mode = $("convMode")?.value || "official";
+  const base = mode === "market" ? market : official;
+  const result = $("convResult"), label = $("converterRateLabel"); if (!result) return;
+  if (!(amount >= 0) || !from || !to || (from !== to && !base)) { result.textContent = "—"; if (label) label.textContent = "No verified rate available for this pair"; return; }
+  const usdToIqd = from === "IQD" ? 1 / (base?.buyRate || 1) : from === "USD" ? 1 : null;
+  const toIqd = to === "IQD" ? (base?.buyRate || 1) : to === "USD" ? 1 : null;
+  if (usdToIqd === null || toIqd === null) { result.textContent = "—"; if (label) label.textContent = "Only verified USD/IQD conversion is available"; return; }
+  result.textContent = `${fmt(amount * (from === "IQD" ? 1 / (base.buyRate || 1) : 1) * (to === "IQD" ? (base?.buyRate || 1) : 1 / (base?.buyRate || 1)))} ${to}`;
+  if (label) label.textContent = `${mode === "market" ? "Market" : "Official"} USD/IQD rate used: ${fmt(base.buyRate)} IQD`;
 }
 
 function renderReports() {
@@ -2900,10 +2973,8 @@ function saveTransaction(e) {
   const date    = txEls.date.value;
   const desc    = txEls.desc.value.trim();
 
-  if (type === "income"   && !toEnt) return fail("Choose the account that receives the income.");
-  if (type === "expense"  && !(fromEnt && (from.kind === "account" || from.kind === "card"))) return fail("Choose the account or card you paid from.");
-  if (type === "transfer" && !fromEnt) return fail("Choose where the money comes from.");
-  if (type === "transfer" && !toEnt)   return fail("Choose where the money goes.");
+  if (type === "transfer" && !fromEnt) return fail("Choose where the money comes from for a transfer.");
+  if (type === "transfer" && !toEnt)   return fail("Choose where the money goes for a transfer.");
   if (type === "transfer" && from.kind === to.kind && from.id === to.id) return fail("A transfer needs two different places.");
   if (type === "transfer" && to.kind === "card" && from.kind !== "account") return fail("Card repayments must come from an account.");
   if (type === "transfer" && from.kind === "debt" && fromEnt.direction !== "owed") return fail("Only money owed to you can be collected from a debt.");
@@ -2911,7 +2982,7 @@ function saveTransaction(e) {
   if (!isDate(date))    return fail("Choose a valid date.");
   if (!(amount > 0))    return fail("Enter an amount greater than zero.");
 
-  const currency    = type === "income" ? toEnt.currency : fromEnt.currency;
+  const currency    = type === "income" ? (toEnt?.currency || txEls.currency.value) : (fromEnt?.currency || txEls.currency.value);
   const toCurrency  = type === "transfer" ? toEnt.currency : currency;
   let toAmount = amount;
   if (toCurrency !== currency) {
@@ -3460,8 +3531,19 @@ $("reportSpace")?.addEventListener("change",  renderReports);
 
 $("language").addEventListener("change", e => setLanguage(e.target.value));
 
+$("headerRatesButton")?.addEventListener("click", () => go("rates"));
+$("overviewRatesButton")?.addEventListener("click", e => { e.stopPropagation(); go("rates"); });
+$("overviewRatesWidget")?.addEventListener("click", () => go("rates"));
+$("overviewRatesWidget")?.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go("rates"); } });
+$("refreshRatesBtn")?.addEventListener("click", () => refreshAutomaticRates(true));
+["convAmount", "convFrom", "convTo", "convMode"].forEach(id => $(id)?.addEventListener("input", () => renderConverter(
+  state.rates.find(x => x.currency === "USD" && x.source === "official") || state.rates.find(x => x.currency === "USD" && x.source === "manual"),
+  state.rates.find(x => x.currency === "USD" && x.source === "market")
+)));
+
 window.addEventListener("online",  updateSyncStatus);
 window.addEventListener("offline", updateSyncStatus);
+window.addEventListener("online", () => refreshAutomaticRates(true));
 </script>
 </body>
 </html>
