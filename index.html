@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#101713">
-<title>Finance — Personal Finance</title>
+<title data-t="appTitle">Finance — Personal Finance</title>
 <style>
 /* ===== Design tokens ===== */
 :root{color-scheme:dark;--bg:#0d1410;--surface:#151f19;--surface2:#1b2921;--line:#293a30;--text:#eef5ef;--muted:#91a398;--green:#75e0a5;--red:#f08080;--amber:#e9c27c;--blue:#88b8ed;--r:18px}
@@ -159,6 +159,42 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
 }
 .hidden{display:none!important}
 .footer{text-align:center;color:#65766b;font-size:10px;padding:30px 0 5px}
+
+/* ===== RTL overrides (Arabic / Kurdish Sorani) ===== */
+[dir="rtl"] body{text-align:right}
+[dir="rtl"] .sidebar{inset:0 0 0 auto;left:auto;right:0;border-right:none;border-left:1px solid var(--line)}
+[dir="rtl"] .main{margin-left:0;margin-right:248px}
+[dir="rtl"] .nav button,.mobile button{text-align:right}
+[dir="rtl"] .nav .ico{margin-left:8px;margin-right:0}
+[dir="rtl"] .topright{flex-direction:row-reverse}
+[dir="rtl"] .topright .btn{margin-left:10px;margin-right:0}
+[dir="rtl"] .space-row strong{margin-left:auto;margin-right:auto}
+[dir="rtl"] .space-row{flex-direction:row-reverse}
+[dir="rtl"] .space-row .dot{margin-left:8px;margin-right:0}
+[dir="rtl"] .table-actions,.amount{text-align:left}
+[dir="rtl"] th,td{text-align:right}
+[dir="rtl"] .rec-row{grid-template-columns:auto minmax(0,1fr) minmax(0,1.4fr)}
+[dir="rtl"] .rec-actions{justify-content:flex-start}
+[dir="rtl"] .rec-amount{text-align:left}
+[dir="rtl"] .rec-main{text-align:right}
+[dir="rtl"] .cardhead{flex-direction:row-reverse}
+[dir="rtl"] .cardhead h3{margin:0 12px 0 0}
+[dir="rtl"] .field::placeholder{text-align:right}
+[dir="rtl"] .btn{text-align:right}
+[dir="rtl"] .auth-tabs{flex-direction:row-reverse}
+[dir="rtl"] .auth-form .field{text-align:right}
+[dir="rtl"] .formgroup label{text-align:right}
+[dir="rtl"] .hint{text-align:right}
+[dir="rtl"] .muted{text-align:right}
+[dir="rtl"] .empty{text-align:right}
+[dir="rtl"] .progress{/* keep left-to-right fill */ }
+[dir="rtl"] .mobile{left:auto;right:10px}
+[dir="rtl"] .avatar{margin-left:10px;margin-right:0}
+[dir="rtl"] .top{flex-direction:row-reverse;justify-content:space-between}
+[dir="rtl"] .eyebrow,.top h1{text-align:right}
+[dir="rtl"] .welcome{flex-direction:row-reverse}
+[dir="rtl"] .toolbar{flex-direction:row-reverse}
+[dir="rtl"] .form-actions{flex-direction:row-reverse}
 </style>
 </head>
 <body>
@@ -166,28 +202,28 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
 <!-- ===== Auth: loading ===== -->
 <div id="authLoading" class="auth-loading" role="status">
   <div class="logo">F</div>
-  <p id="authLoadingMsg">Checking secure session…</p>
+  <p id="authLoadingMsg" data-t="checkingSession">Checking secure session…</p>
 </div>
 
 <!-- ===== Auth: sign-in / register ===== -->
 <section id="authScreen" class="auth-screen hidden" aria-labelledby="authTitle">
   <div class="auth-card card">
-    <div class="auth-brand"><div class="logo">F</div><div><h1 id="authTitle">Finance</h1><p class="muted small">Sign in to your private financial records.</p></div></div>
+    <div class="auth-brand"><div class="logo">F</div><div><h1 id="authTitle" data-t="appName">Finance</h1><p class="muted small" data-t="signInSubtitle">Sign in to your private financial records.</p></div></div>
     <div class="auth-tabs" role="tablist">
-      <button type="button" role="tab" id="tabSignIn" class="active" aria-selected="true" aria-controls="signInForm" data-label="Sign in">Sign in</button>
-      <button type="button" role="tab" id="tabRegister" aria-selected="false" aria-controls="registerForm" data-label="Create account">Create account</button>
+      <button type="button" role="tab" id="tabSignIn" class="active" aria-selected="true" aria-controls="signInForm" data-label="Sign in" data-t="signIn">Sign in</button>
+      <button type="button" role="tab" id="tabRegister" aria-selected="false" aria-controls="registerForm" data-label="Create account" data-t="createAccount">Create account</button>
     </div>
     <div id="authMessage" class="auth-message hidden" role="alert"></div>
     <form id="signInForm" class="auth-form" novalidate>
-      <div class="formgroup"><label for="signInEmail">Email</label><input id="signInEmail" class="field" type="email" autocomplete="username" required></div>
-      <div class="formgroup"><label for="signInPassword">Password</label><input id="signInPassword" class="field" type="password" autocomplete="current-password" required></div>
-      <button id="signInSubmit" class="btn primary auth-submit" type="submit" data-label="Sign in">Sign in</button>
+      <div class="formgroup"><label for="signInEmail" data-t="email">Email</label><input id="signInEmail" class="field" type="email" autocomplete="username" required></div>
+      <div class="formgroup"><label for="signInPassword" data-t="password">Password</label><input id="signInPassword" class="field" type="password" autocomplete="current-password" required></div>
+      <button id="signInSubmit" class="btn primary auth-submit" type="submit" data-label="Sign in" data-t="signInSubmit">Sign in</button>
     </form>
     <form id="registerForm" class="auth-form hidden" novalidate>
-      <div class="formgroup"><label for="registerEmail">Email</label><input id="registerEmail" class="field" type="email" autocomplete="email" required></div>
-      <div class="formgroup"><label for="registerPassword">Password</label><input id="registerPassword" class="field" type="password" autocomplete="new-password" required><p class="auth-hint">At least 10 characters, including letters and numbers.</p></div>
-      <div class="formgroup"><label for="registerConfirm">Confirm password</label><input id="registerConfirm" class="field" type="password" autocomplete="new-password" required></div>
-      <button id="registerSubmit" class="btn primary auth-submit" type="submit" data-label="Create account">Create account</button>
+      <div class="formgroup"><label for="registerEmail" data-t="email">Email</label><input id="registerEmail" class="field" type="email" autocomplete="email" required></div>
+      <div class="formgroup"><label for="registerPassword" data-t="password">Password</label><input id="registerPassword" class="field" type="password" autocomplete="new-password" required><p class="auth-hint" data-t="passwordHint">At least 10 characters, including letters and numbers.</p></div>
+      <div class="formgroup"><label for="registerConfirm" data-t="confirmPassword">Confirm password</label><input id="registerConfirm" class="field" type="password" autocomplete="new-password" required></div>
+      <button id="registerSubmit" class="btn primary auth-submit" type="submit" data-label="Create account" data-t="registerSubmit">Create account</button>
     </form>
   </div>
 </section>
@@ -195,103 +231,106 @@ th{color:#8fa195;font-weight:600}td{color:#dce7de}
 <!-- ===== App shell ===== -->
 <div class="app hidden" id="appShell">
 <aside class="sidebar">
-  <div class="brand"><div class="logo">F</div>Finance</div>
-  <p class="nav-label">WORKSPACE</p>
+  <div class="brand"><div class="logo">F</div><span data-t="appName">Finance</span></div>
+  <p class="nav-label" data-t="workspace">WORKSPACE</p>
   <nav class="nav" id="sideNav">
-    <button class="active" data-page="overview"><span class="ico">⌂</span>Overview</button>
-    <button data-page="transactions"><span class="ico">↔</span>Transactions</button>
-    <button data-page="accounts"><span class="ico">▣</span>Accounts</button>
-    <button data-page="rates"><span class="ico">⇄</span>Exchange rates</button>
-    <button data-page="budgets"><span class="ico">▤</span>Budgets</button>
-    <button data-page="cards"><span class="ico">▭</span>Credit cards</button>
-    <button data-page="debts"><span class="ico">⇅</span>Debts &amp; loans</button>
-    <button data-page="savings"><span class="ico">◈</span>Savings</button>
-    <button data-page="reports"><span class="ico">▥</span>Reports</button>
+    <button class="active" data-page="overview"><span class="ico">⌂</span><span data-t="overview">Overview</span></button>
+    <button data-page="transactions"><span class="ico">↔</span><span data-t="transactions">Transactions</span></button>
+    <button data-page="accounts"><span class="ico">▣</span><span data-t="accounts">Accounts</span></button>
+    <button data-page="rates"><span class="ico">⇄</span><span data-t="rates">Exchange rates</span></button>
+    <button data-page="budgets"><span class="ico">▤</span><span data-t="budgets">Budgets</span></button>
+    <button data-page="cards"><span class="ico">▭</span><span data-t="cards">Credit cards</span></button>
+    <button data-page="debts"><span class="ico">⇅</span><span data-t="debts">Debts &amp; loans</span></button>
+    <button data-page="savings"><span class="ico">◈</span><span data-t="savings">Savings</span></button>
+    <button data-page="reports"><span class="ico">▥</span><span data-t="reports">Reports</span></button>
   </nav>
   <div class="sidebottom">
-    <nav class="nav"><button data-page="settings"><span class="ico">⚙</span>Settings</button></nav>
-    <p>One clear view of your finances.</p>
+    <nav class="nav"><button data-page="settings"><span class="ico">⚙</span><span data-t="settings">Settings</span></button></nav>
+    <p data-t="tagline">One clear view of your finances.</p>
   </div>
 </aside>
 
 <main class="main">
 <header class="top">
-  <div><p class="eyebrow">YOUR FINANCES</p><h1 id="pageTitle">Overview</h1></div>
+  <div><p class="eyebrow" data-t="yourFinances">YOUR FINANCES</p><h1 id="pageTitle" data-t="overview">Overview</h1></div>
   <div class="topright">
-    <span class="pill">IQD · Primary currency</span>
-    <button class="avatar" title="Owner account">F</button>
-    <button class="btn" id="signOutBtn" type="button">Sign out</button>
+    <span class="pill" data-t="iqdPrimaryCurrency">IQD · Primary currency</span>
+    <button class="avatar" title="Owner account" data-t="ownerAccount">F</button>
+    <button class="btn" id="signOutBtn" type="button" data-t="signOut">Sign out</button>
   </div>
 </header>
 
 <!-- ===== Overview page ===== -->
 <section class="page active" id="page-overview">
-  <div class="welcome"><div><h2>Financial overview</h2><div class="muted small">Personal, Family, and Business — together.</div></div><button class="btn primary" data-page="transactions">＋ Add transaction</button></div>
+  <div class="welcome"><div><h2 data-t="financialOverview">Financial overview</h2><div class="muted small" data-t="overviewSubtitle">Personal, Family, and Business — together.</div></div><button class="btn primary" data-page="transactions" data-t="addTransaction">＋ Add transaction</button></div>
   <div class="notice" id="overviewNotice">Loading your records…</div>
   <div class="stats">
-    <article class="card"><div class="statlabel">Total balance</div><div class="statvalue" id="ovTotal">— <small>IQD</small></div><div class="muted small" id="ovTotalNote">Across IQD accounts</div></article>
-    <article class="card"><div class="statlabel">Income this month</div><div class="statvalue positive" id="ovIncome">— <small>IQD</small></div><div class="muted small">Recorded income at saved rates</div></article>
-    <article class="card"><div class="statlabel">Expenses this month</div><div class="statvalue negative" id="ovExpense">— <small>IQD</small></div><div class="muted small">Card purchases included; transfers excluded</div></article>
-    <article class="card"><div class="statlabel">Net savings</div><div class="statvalue" id="ovNet">— <small>IQD</small></div><div class="muted small">Income less expenses this month</div></article>
+    <article class="card"><div class="statlabel" data-t="totalBalance">Total balance</div><div class="statvalue" id="ovTotal">— <small id="ovTotalCurrency" data-t="iqd">IQD</small></div><div class="muted small" id="ovTotalNote">Across IQD accounts</div></article>
+    <article class="card"><div class="statlabel" data-t="incomeThisMonth">Income this month</div><div class="statvalue positive" id="ovIncome">— <small>IQD</small></div><div class="muted small" data-t="recordedIncomeAtSavedRates">Recorded income at saved rates</div></article>
+    <article class="card"><div class="statlabel" data-t="expensesThisMonth">Expenses this month</div><div class="statvalue negative" id="ovExpense">— <small>IQD</small></div><div class="muted small" data-t="cardPurchasesIncluded">Card purchases included; transfers excluded</div></article>
+    <article class="card"><div class="statlabel" data-t="netSavings">Net savings</div><div class="statvalue" id="ovNet">— <small>IQD</small></div><div class="muted small" data-t="incomeThisMonth">Income less expenses this month</div></article>
   </div>
   <div class="grid2">
-    <article class="card"><div class="cardhead"><h3>Financial spaces</h3><span class="tag">Unified ledger</span></div>
+    <article class="card"><div class="cardhead"><h3 data-t="financialSpaces">Financial spaces</h3><span class="tag" data-t="unifiedLedger">Unified ledger</span></div>
       <div class="space-list">
-        <div class="space-row"><i class="dot"></i>Personal <strong id="spacePersonal">— IQD</strong></div>
-        <div class="space-row"><i class="dot blue"></i>Family <strong id="spaceFamily">— IQD</strong></div>
-        <div class="space-row"><i class="dot purple"></i>Business <strong id="spaceBusiness">— IQD</strong></div>
+        <div class="space-row"><i class="dot"></i><span data-t="personal">Personal</span> <strong id="spacePersonal">— IQD</strong></div>
+        <div class="space-row"><i class="dot blue"></i><span data-t="family">Family</span> <strong id="spaceFamily">— IQD</strong></div>
+        <div class="space-row"><i class="dot purple"></i><span data-t="business">Business</span> <strong id="spaceBusiness">— IQD</strong></div>
       </div>
-      <p class="muted small">Net this month. Spaces are reporting labels, not separate accounts.</p>
+      <p class="muted small" data-t="spacesNote">Net this month. Spaces are reporting labels, not separate accounts.</p>
     </article>
-    <article class="card"><div class="cardhead"><h3>Exchange rates</h3><span class="tag amber">Manual only</span></div>
-      <p class="muted small">Enter rates manually on the Exchange rates page. Each transaction preserves its rate permanently.</p>
+    <article class="card"><div class="cardhead"><h3 data-t="exchangeRates">Exchange rates</h3><span class="tag amber" data-t="manualOnly">Manual only</span></div>
+      <p class="muted small" data-t="enterRatesManually">Enter rates manually on the Exchange rates page. Each transaction preserves its rate permanently.</p>
       <div class="statvalue" id="ovRateDisplay">— <small>IQD / USD</small></div>
       <p class="muted small" id="ovRateNote">No rate entered yet</p>
-      <button class="btn" data-page="rates">Configure rates</button>
+      <button class="btn" data-page="rates" data-t="configureRates">Configure rates</button>
     </article>
   </div>
   <div class="grid2">
-    <article class="card"><div class="cardhead"><h3>Income vs expenses</h3><span class="muted small">This month, IQD</span></div><div id="ovBars"></div></article>
-    <article class="card"><div class="cardhead"><h3>Recent activity</h3><button class="btn" data-page="transactions">View all</button></div><div class="rec-list" id="ovRecent"></div></article>
+    <article class="card"><div class="cardhead"><h3 data-t="incomeVsExpenses">Income vs expenses</h3><span class="muted small" data-t="thisMonthIQD">This month, IQD</span></div><div id="ovBars"></div></article>
+    <article class="card"><div class="cardhead"><h3 data-t="recentActivity">Recent activity</h3><button class="btn" data-page="transactions" data-t="viewAll">View all</button></div><div class="rec-list" id="ovRecent"></div></article>
   </div>
   <div class="grid3">
-    <article class="card"><div class="cardhead"><h3>Budgets</h3><span class="tag" id="ovBudgetTag">0 active</span></div><p class="muted small" id="ovBudgetNote">Monthly limits and category spending.</p></article>
-    <article class="card"><div class="cardhead"><h3>Upcoming obligations</h3></div><div class="rec-list" id="ovObligations"></div></article>
-    <article class="card"><div class="cardhead"><h3>Savings goals</h3></div><p class="muted small" id="ovGoals">Track targets and contributions.</p></article>
+    <article class="card"><div class="cardhead"><h3 data-t="budgetsLabel">Budgets</h3><span class="tag" id="ovBudgetTag">0 active</span></div><p class="muted small" id="ovBudgetNote">Monthly limits and category spending.</p></article>
+    <article class="card"><div class="cardhead"><h3 data-t="upcomingObligations">Upcoming obligations</h3></div><div class="rec-list" id="ovObligations"></div></article>
+    <article class="card"><div class="cardhead"><h3 data-t="savingsGoals">Savings goals</h3></div><p class="muted small" id="ovGoals">Track targets and contributions.</p></article>
   </div>
 </section>
 
 <!-- ===== Transactions page ===== -->
 <section class="page" id="page-transactions">
-  <div class="section-head"><div><h2 class="section-title">Transactions</h2><p class="section-desc">Income, expenses, and transfers in one searchable history.</p></div><button class="btn primary" id="showTxForm">＋ New transaction</button></div>
-  <div class="notice">Saved to your private account. Balances are calculated from these records. Foreign-currency entries keep the exchange rate you entered at the time and never change later.</div>
+  <div class="section-head"><div><h2 class="section-title" data-t="transactionsTitle">Transactions</h2><p class="section-desc" data-t="transactionsSubtitle">Income, expenses, and transfers in one searchable history.</p></div><button class="btn primary" id="showTxForm" data-t="newTransaction">＋ New transaction</button></div>
+  <div class="notice" data-t="txSavedNotice">Saved to your private account. Balances are calculated from these records. Foreign-currency entries keep the exchange rate you entered at the time and never change later.</div>
   <div class="card hidden" id="txForm">
-    <div class="cardhead"><h3 id="txFormTitle">New transaction</h3><button class="btn" id="hideTxForm" type="button">Close</button></div>
+    <div class="cardhead"><h3 id="txFormTitle" data-t="newTx">New transaction</h3><button class="btn" id="hideTxForm" type="button" data-t="close">Close</button></div>
     <form id="transactionForm" class="formgrid" novalidate>
-      <div class="formgroup"><label for="txType">Type</label><select class="field" id="txType"><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select></div>
-      <div class="formgroup"><label for="txAmount">Amount</label><input class="field" id="txAmount" type="number" min="0" step="any" placeholder="0.00" required></div>
-      <div class="formgroup"><label for="txCurrency">Currency</label><select class="field" id="txCurrency"><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select></div>
-      <div class="formgroup"><label for="txDate">Date</label><input class="field" id="txDate" type="date" required></div>
-      <div class="formgroup"><label for="txSpace">Financial space</label><select class="field" id="txSpace"><option value="personal">Personal</option><option value="family">Family</option><option value="business">Business</option></select></div>
-      <div class="formgroup"><label for="txCategory">Category</label><input class="field" id="txCategory" list="categoryList" maxlength="60" placeholder="Choose or create category"><datalist id="categoryList"></datalist></div>
-      <div class="formgroup" id="txFromGroup"><label for="txFrom" id="txFromLabel">Paid from</label><select class="field" id="txFrom"></select></div>
-      <div class="formgroup" id="txToGroup"><label for="txTo" id="txToLabel">To</label><select class="field" id="txTo"></select></div>
-      <div class="formgroup hidden" id="txToAmountGroup"><label for="txToAmount" id="txToAmountLabel">Amount received</label><input class="field" id="txToAmount" type="number" min="0" step="any" placeholder="0.00"></div>
-      <div class="formgroup hidden" id="txRateGroup"><label for="txRate" id="txRateLabel">Exchange rate used</label><input class="field" id="txRate" type="number" min="0" step="any" placeholder="Enter the rate you actually used"><p class="hint">Saved with this entry. Entering a new rate later never changes history.</p></div>
-      <div class="formgroup"><label for="txPayment">Payment method</label><select class="field" id="txPayment"><option value="cash">Cash</option><option value="bank">Bank transfer</option><option value="debit">Debit card</option><option value="credit">Credit card</option><option value="other">Other</option></select></div>
-      <div class="formgroup full"><label for="txDesc">Description / notes</label><textarea class="field" id="txDesc" rows="2" maxlength="500" placeholder="Optional details"></textarea></div>
-      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="txSubmit">Save transaction</button><button class="btn" type="button" id="txCancel">Cancel</button></div>
+      <div class="formgroup"><label for="txType" data-t="type">Type</label><select class="field" id="txType"><option value="expense" data-t="expense">Expense</option><option value="income" data-t="income">Income</option><option value="transfer" data-t="transfer">Transfer</option></select></div>
+      <div class="formgroup"><label for="txAmount" data-t="amount">Amount</label><input class="field" id="txAmount" type="number" min="0" step="any" placeholder="0.00" required></div>
+      <div class="formgroup"><label for="txCurrency" data-t="currency">Currency</label><select class="field" id="txCurrency"><option data-t="iqd">IQD</option><option data-t="usd">USD</option><option data-t="eur">EUR</option><option data-t="tryCur">TRY</option><option data-t="gbp">GBP</option></select></div>
+      <div class="formgroup"><label for="txDate" data-t="txDate">Date</label><input class="field" id="txDate" type="date" required></div>
+      <div class="formgroup"><label for="txSpace" data-t="financialSpace">Financial space</label><select class="field" id="txSpace"><option value="personal" data-t="personal">Personal</option><option value="family" data-t="family">Family</option><option value="business" data-t="business">Business</option></select></div>
+      <div class="formgroup"><label for="txCategory" data-t="txCategory">Category</label><input class="field" id="txCategory" list="categoryList" maxlength="60" placeholder="Choose or create category"><datalist id="categoryList"></datalist></div>
+      <div class="formgroup" id="txFromGroup"><label for="txFrom" id="txFromLabel" data-t="paidFrom">Paid from</label><select class="field" id="txFrom"></select></div>
+      <div class="formgroup" id="txToGroup"><label for="txTo" id="txToLabel" data-t="toLabel">To</label><select class="field" id="txTo"></select></div>
+      <div class="formgroup hidden" id="txToAmountGroup"><label for="txToAmount" id="txToAmountLabel" data-t="amountReceived">Amount received</label><input class="field" id="txToAmount" type="number" min="0" step="any" placeholder="0.00"></div>
+      <div class="formgroup hidden" id="txRateGroup"><label for="txRate" id="txRateLabel" data-t="exchangeRateUsed">Exchange rate used</label><input class="field" id="txRate" type="number" min="0" step="any" placeholder="Enter the rate you actually used"><p class="hint" data-t="rateSavedForever">Saved with this entry. Entering a new rate later never changes history.</p></div>
+      <div class="formgroup"><label for="txPayment" data-t="paymentMethod">Payment method</label><select class="field" id="txPayment"><option value="cash" data-t="cash">Cash</option><option value="bank" data-t="bankTransfer">Bank transfer</option><option value="debit" data-t="debitCard">Debit card</option><option value="credit" data-t="creditCard">Credit card</option><option value="other" data-t="other">Other</option></select></div>
+      <div class="formgroup full"><label for="txDesc" data-t="descriptionNotes">Description / notes</label><textarea class="field" id="txDesc" rows="2" maxlength="500" placeholder="Optional details"></textarea></div>
+      <div class="formgroup full form-actions"><button class="btn primary" type="submit" id="txSubmit" data-t="saveTransaction">Save transaction</button><button class="btn" type="button" id="txCancel" data-t="txCancel">Cancel</button></div>
     </form>
     <div class="auth-message error hidden" id="txError" role="alert"></div>
   </div>
   <div class="toolbar">
     <input class="field" id="txSearch" placeholder="Search transactions…" style="flex:1">
-    <select class="field" id="txFilterType"><option value="all">All types</option><option value="income">Income</option><option value="expense">Expense</option><option value="transfer">Transfer</option></select>
-    <select class="field" id="txFilterSpace"><option value="all">All spaces</option><option value="personal">Personal</option><option value="family">Family</option><option value="business">Business</option></select>
-    <select class="field" id="txFilterCurrency"><option value="all">All currencies</option><option>IQD</option><option>USD</option><option>EUR</option><option>TRY</option><option>GBP</option></select>
+    <select class="field" id="txFilterType"><option value="all" data-t="allTypes">All types</option><option value="income" data-t="income">Income</option><option value="expense" data-t="expense">Expense</option><option value="transfer" data-t="transfer">Transfer</option></select>
+    <select class="field" id="txFilterSpace"><option value="all" data-t="allSpaces">All spaces</option><option value="personal" data-t="personal">Personal</option><option value="family" data-t="family">Family</option><option value="business" data-t="business">Business</option></select>
+    <select class="field" id="txFilterCurrency"><option value="all" data-t="allCurrencies">All currencies</option><option data-t="iqd">IQD</option><option data-t="usd">USD</option><option data-t="eur">EUR</option><option data-t="tryCur">TRY</option><option data-t="gbp">GBP</option></select>
+    <label class="field" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span data-t="fromDate">From</span><input class="field" id="txFromDate" type="date" style="height:34px;padding:0 8px"></label>
+    <label class="field" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)"><span data-t="toDate">To</span><input class="field" id="txToDate" type="date" style="height:34px;padding:0 8px"></label>
+    <button class="btn" id="txClearDates" data-t="clearFilters">Clear filters</button>
   </div>
-  <div class="card tablewrap"><table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Space</th><th>Account</th><th class="amount">Amount</th><th></th></tr></thead><tbody id="txTableBody"><tr><td colspan="7" class="muted" style="text-align:center;padding:35px">Loading transactions…</td></tr></tbody></table></div>
-  <p class="muted small">Planned: receipt and invoice attachments, custom categories and subcategories, date-range filters, CSV/XLSX/PDF exports.</p>
+  <div class="card tablewrap"><table><thead><tr><th data-t="tableDate">Date</th><th data-t="tableDescription">Description</th><th data-t="tableCategory">Category</th><th data-t="tableSpace">Space</th><th data-t="tableAccount">Account</th><th class="amount" data-t="tableAmount">Amount</th><th></th></tr></thead><tbody id="txTableBody"><tr><td colspan="7" class="muted" style="text-align:center;padding:35px" data-t="loadingTransactions">Loading transactions…</td></tr></tbody></table></div>
+  <p class="muted small" data-t="txPlanned">Attachments, recurring transactions, date-range filters, and CSV/XLSX/PDF exports are available from the toolbar and transaction rows.</p>
 </section>
 
 <!-- ===== Accounts page ===== -->
@@ -534,6 +573,12 @@ setTimeout(() => {
 }, 15000);
 </script>
 
+<!-- ===== Optional feature libraries (loaded globally) ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.20.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
 <!-- ===== Firebase application (type=module) ===== -->
 <script type="module">
 // ============================================================
@@ -566,6 +611,14 @@ import {
   terminate,
   clearIndexedDbPersistence
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+  listAll
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 // ============================================================
 // Firebase init
@@ -586,6 +639,7 @@ const auth = getAuth(firebaseApp);
 const db = initializeFirestore(firebaseApp, {
   localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
 });
+const storage = getStorage(firebaseApp);
 
 // ============================================================
 // Auth UI helpers
@@ -802,6 +856,897 @@ const DIRECTION_LABEL = { owe: "I owe", owed: "Owed to me" };
 const KIND_COLLECTION = { account: "accounts", card: "cards", savings: "savings", debt: "debts" };
 const SOURCE_LABEL = { official: "Official", market: "Iraqi market", manual: "Manual" };
 
+// ============================================================
+// Internationalization (English / Arabic / Kurdish Sorani) + RTL
+// ============================================================
+const LANGUAGES = {
+  en: { name: "English", dir: "ltr" },
+  ar: { name: "العربية", dir: "rtl" },
+  ku: { name: "کوردی سۆرانی", dir: "rtl" }
+};
+
+let currentLanguage = "en";
+
+const STRINGS = {
+  en: {
+    appTitle: "Finance — Personal Finance",
+    checkingSession: "Checking secure session…",
+    appName: "Finance",
+    signInSubtitle: "Sign in to your private financial records.",
+    signIn: "Sign in",
+    createAccount: "Create account",
+    email: "Email",
+    password: "Password",
+    passwordHint: "At least 10 characters, including letters and numbers.",
+    confirmPassword: "Confirm password",
+    signInSubmit: "Sign in",
+    registerSubmit: "Create account",
+    workspace: "WORKSPACE",
+    overview: "Overview",
+    transactions: "Transactions",
+    accounts: "Accounts",
+    rates: "Exchange rates",
+    budgets: "Budgets",
+    cards: "Credit cards",
+    debts: "Debts & loans",
+    savings: "Savings",
+    reports: "Reports",
+    settings: "Settings",
+    tagline: "One clear view of your finances.",
+    yourFinances: "YOUR FINANCES",
+    iqdPrimaryCurrency: "IQD · Primary currency",
+    ownerAccount: "Owner account",
+    signOut: "Sign out",
+    addTransaction: "＋ Add transaction",
+    financialOverview: "Financial overview",
+    overviewSubtitle: "Personal, Family, and Business — together.",
+    loadingRecords: "Loading your records…",
+    totalBalance: "Total balance",
+    iqd: "IQD",
+    acrossIQDAccounts: "Across IQD accounts",
+    incomeThisMonth: "Income this month",
+    expensesThisMonth: "Expenses this month",
+    netSavings: "Net savings",
+    recordedIncomeAtSavedRates: "Recorded income at saved rates",
+    cardPurchasesIncluded: "Card purchases included; transfers excluded",
+    financialSpaces: "Financial spaces",
+    unifiedLedger: "Unified ledger",
+    personal: "Personal",
+    family: "Family",
+    business: "Business",
+    spacesNote: "Net this month. Spaces are reporting labels, not separate accounts.",
+    exchangeRates: "Exchange rates",
+    manualOnly: "Manual only",
+    enterRatesManually: "Enter rates manually on the Exchange rates page. Each transaction preserves its rate permanently.",
+    configureRates: "Configure rates",
+    incomeVsExpenses: "Income vs expenses",
+    thisMonthIQD: "This month, IQD",
+    recentActivity: "Recent activity",
+    viewAll: "View all",
+    budgetsLabel: "Budgets",
+    budgetNote: "Monthly limits and category spending.",
+    upcomingObligations: "Upcoming obligations",
+    savingsGoals: "Savings goals",
+    trackTargets: "Track targets and contributions.",
+    transactionsTitle: "Transactions",
+    transactionsSubtitle: "Income, expenses, and transfers in one searchable history.",
+    newTransaction: "＋ New transaction",
+    txSavedNotice: "Saved to your private account. Balances are calculated from these records. Foreign-currency entries keep the exchange rate you entered at the time and never change later.",
+    newTx: "New transaction",
+    close: "Close",
+    type: "Type",
+    expense: "Expense",
+    income: "Income",
+    transfer: "Transfer",
+    amount: "Amount",
+    currency: "Currency",
+    usd: "USD",
+    eur: "EUR",
+    tryCur: "TRY",
+    gbp: "GBP",
+    txDate: "Date",
+    financialSpace: "Financial space",
+    txCategory: "Category",
+    chooseOrCreateCategory: "Choose or create category",
+    paidFrom: "Paid from",
+    toLabel: "To",
+    amountReceived: "Amount received",
+    exchangeRateUsed: "Exchange rate used",
+    rateSavedForever: "Saved with this entry. Entering a new rate later never changes history.",
+    paymentMethod: "Payment method",
+    cash: "Cash",
+    bankTransfer: "Bank transfer",
+    debitCard: "Debit card",
+    creditCard: "Credit card",
+    other: "Other",
+    descriptionNotes: "Description / notes",
+    saveTransaction: "Save transaction",
+    txCancel: "Cancel",
+    searchTransactions: "Search transactions…",
+    allTypes: "All types",
+    allSpaces: "All spaces",
+    allCurrencies: "All currencies",
+    tableDate: "Date",
+    tableDescription: "Description",
+    tableCategory: "Category",
+    tableSpace: "Space",
+    tableAccount: "Account",
+    tableAmount: "Amount",
+    edit: "Edit",
+    delete: "Delete",
+    loadingTransactions: "Loading transactions…",
+    noTransactions: "No transactions recorded yet. Add your first one.",
+    noTransactionsMatch: "No transactions match these filters.",
+    accountsTitle: "Accounts",
+    accountsSubtitle: "Cash and multiple bank accounts, shown separately and combined.",
+    addAccount: "＋ Add account",
+    cashOnHand: "Cash on hand",
+    bankAccounts: "Bank accounts",
+    combinedBalance: "Combined balance",
+    noCashAccounts: "No cash accounts yet",
+    bankAccountsAdded: "Bank accounts added",
+    combinedNote: "IQD accounts only until exchange rates are connected",
+    newAccount: "New account",
+    accountName: "Account name",
+    accountType: "Type",
+    accountCurrency: "Currency",
+    openingBalance: "Opening balance",
+    saveAccount: "Save account",
+    accountCancel: "Close",
+    accountList: "Account list",
+    multipleCurrencies: "Multiple currencies",
+    transfersReconciliation: "Transfers & reconciliation",
+    transfersNote: "Transfers between owned accounts are recorded on the Transactions page and never count as income or expenses.",
+    reconciliationNote: "Reconciliation and cross-currency fee tracking are planned.",
+    ratesTitle: "Exchange rates",
+    ratesSubtitle: "Enter and track rates manually. Each transaction permanently preserves its rate.",
+    addRate: "＋ Enter rate",
+    ratesNotice: "These rates are for reference and for transactions. Changing a rate here never alters historical transaction values — each transaction's saved rate is permanent.",
+    usdIQD: "USD / IQD",
+    eurIQD: "EUR / IQD",
+    tryIQD: "TRY / IQD",
+    notEntered: "Not entered",
+    enterRate: "Enter rate",
+    rateCurrency: "Currency",
+    rateSource: "Source",
+    buyRate: "Buy rate (IQD per 1 unit)",
+    sellRate: "Sell rate (IQD per 1 unit)",
+    effectiveDate: "Effective date",
+    rateNotes: "Notes (optional)",
+    saveRate: "Save rate",
+    rateCancel: "Close",
+    rateHistory: "Rate history",
+    rateHistoryNote: "Each transaction you create preserves the rate you enter at that moment. Rates recorded here are saved for reference.",
+    noRates: "No rates recorded",
+    ratesEmptyText: "Enter rates for reference and to use when adding foreign-currency transactions.",
+    budgetsTitle: "Budgets",
+    budgetsSubtitle: "Plan spending by month and category.",
+    addBudget: "＋ Create budget",
+    monthlySpendingLimit: "Monthly spending limit",
+    categoryBudgets: "Category budgets",
+    noOverallBudget: "No overall budget configured",
+    categoryLimits: "Category limits with remaining amounts and warnings.",
+    newBudget: "New budget",
+    budgetType: "Budget type",
+    overallMonthlyLimit: "Overall monthly limit",
+    categoryLimit: "Category limit",
+    budgetSpace: "Financial space",
+    allSpaces: "All spaces",
+    budgetCategory: "Category",
+    categoryPlaceholder: "e.g. Food",
+    monthlyLimit: "Monthly limit (IQD)",
+    saveBudget: "Save budget",
+    budgetCancel: "Close",
+    budgetsThisMonth: "Budgets this month",
+    budgetsNote: "Counts expenses and card purchases only. Transfers and repayments are excluded.",
+    noBudgets: "No budgets yet",
+    noBudgetsText: "Set an overall monthly limit or a category limit.",
+    cardsTitle: "Credit cards",
+    cardsSubtitle: "Track balances, statements, and repayments.",
+    addCard: "＋ Add credit card",
+    cardsNotice: "Card purchases count as expenses once. Repayments are transfers from an account to the card and are not counted as expenses.",
+    outstanding: "Outstanding (IQD cards)",
+    availableCredit: "Available credit (IQD cards)",
+    cardsCount: "Cards",
+    owedOnIQDCards: "Owed on IQD cards",
+    limitLessOutstanding: "Limit less outstanding",
+    newCard: "New credit card",
+    cardName: "Card name",
+    cardCurrency: "Currency",
+    creditLimit: "Credit limit",
+    outstandingBalance: "Outstanding balance now",
+    statementDay: "Statement day (1–31)",
+    dueDay: "Due day (1–31)",
+    saveCard: "Save card",
+    cardCancel: "Close",
+    yourCards: "Your cards",
+    cardsEmptyText: "Fees, interest, and minimum payments are planned.",
+    debtsTitle: "Debts & loans",
+    debtsSubtitle: "Money owed to you and money you owe.",
+    addDebt: "＋ Add debt",
+    youOwe: "You owe (IQD)",
+    owedToYou: "Owed to you (IQD)",
+    remainingBalance: "Remaining balance",
+    newDebt: "New debt or loan",
+    personLender: "Person or lender",
+    direction: "Direction",
+    iOweThis: "I owe this",
+    owedToMe: "Owed to me",
+    debtCurrency: "Currency",
+    originalAmount: "Original amount",
+    dueDate: "Due date (optional)",
+    debtNotes: "Notes",
+    saveDebt: "Save debt",
+    debtCancel: "Close",
+    debtsLoans: "Debts and loans",
+    debtsEmptyText: "Record repayments as transfers from an account to a debt you owe, or from a debt owed to you into an account.",
+    savingsTitle: "Savings goals",
+    savingsSubtitle: "Give every goal a clear target.",
+    addGoal: "＋ Create goal",
+    saved: "Saved (IQD goals)",
+    goalsCount: "Goals",
+    savedNote: "Opening amount plus contributions less withdrawals",
+    goalsCreated: "Goals created",
+    newGoal: "New savings goal",
+    goalName: "Goal name",
+    goalCurrency: "Currency",
+    targetAmount: "Target amount",
+    alreadySaved: "Already saved",
+    targetDate: "Target date (optional)",
+    saveGoal: "Save goal",
+    goalCancel: "Close",
+    yourGoals: "Your goals",
+    savingsNote: "Add money to a goal with a transfer from an account to the goal. Withdraw with a transfer from the goal to an account. Savings are never counted as expenses.",
+    reportsTitle: "Reports & analytics",
+    reportsSubtitle: "Understand income, expenses, and trends.",
+    iqdrReporting: "IQD reporting",
+    reportPeriod: "Period",
+    reportSpace: "Space",
+    income: "Income",
+    expenses: "Expenses",
+    net: "Net",
+    transactionsCount: "Transactions",
+    spendingByCategory: "Spending by category",
+    byFinancialSpace: "By financial space",
+    noExpenseData: "No expense data for this period.",
+    uncategorised: "Uncategorised",
+    settingsTitle: "Settings",
+    settingsSubtitle: "Security, preferences, and data management.",
+    accountProtection: "Account protection",
+    notConfigured: "Not configured",
+    accountEmailLabel: "Signed in as {email}",
+    firebaseAuthNote: "Firebase Authentication with owner-only Firestore permissions. Only the signed-in owner can read or write their financial records.",
+    syncStatus: "Sync status",
+    connecting: "Connecting…",
+    language: "Language",
+    primaryCurrency: "Primary currency",
+    fullTranslationPlanned: "Full Arabic and Sorani translation and RTL layouts are applied.",
+    backupRecovery: "Backup & recovery",
+    backupNote: "All records sync automatically to your Firebase account. Firestore offline persistence keeps a local copy for when you are without internet. Full export (CSV/JSON) is planned.",
+    offlineSync: "Offline & sync",
+    offlineNote: "The app uses Firestore's offline persistence. Changes made without internet are queued and synced automatically when you reconnect. No data is lost.",
+    export: "Export",
+    exportTransactions: "Export transactions",
+    exportFormat: "Format",
+    exportCsv: "CSV",
+    exportXlsx: "XLSX (Excel)",
+    exportPdf: "PDF",
+    exportDateRange: "Date range",
+    exportFrom: "From",
+    exportTo: "To",
+    exportAllRecords: "Export all records",
+    exporting: "Exporting…",
+    exportDone: "Exported successfully.",
+    attachments: "Attachments",
+    addAttachment: "Add receipt / invoice",
+    chooseFile: "Choose file",
+    noAttachments: "No attachments",
+    receiptInvoice: "Receipt / invoice",
+    recurring: "Recurring",
+    recurringTransactions: "Recurring transactions",
+    addRecurring: "＋ Add recurring transaction",
+    frequency: "Frequency",
+    weekly: "Weekly",
+    monthly: "Monthly",
+    yearly: "Yearly",
+    startDate: "Start date",
+    endDate: "End date",
+    nextDue: "Next due",
+    generateNow: "Generate due now",
+    recurringNote: "Recurring transactions are created automatically on their due date and appear as normal transactions.",
+    dateRange: "Date range",
+    fromDate: "From date",
+    toDate: "To date",
+    clearFilters: "Clear filters",
+    noRecurring: "No recurring transactions set up.",
+    syncing: "Syncing changes to your account…",
+    allSaved: "All changes saved to your account.",
+    offline: "Offline. Changes are saved on this device and will sync when you reconnect.",
+    accessDenied: "Access denied. This account is not authorized to view these records.",
+    connectionProblem: "Connection problem. Showing the last saved records on this device.",
+    noRecordsYet: "No records yet. Start by adding your accounts and their opening balances on the Accounts page.",
+    showingSavedRecords: "Showing your saved records. Balances are calculated from your transactions.",
+    signedInAs: "Signed in as {email}",
+    notSignedIn: "Not signed in",
+    youAreNotSignedIn: "You are not signed in.",
+    entrySaved: "Transaction saved.",
+    savedOnDevice: "Saved on this device. It will sync when you reconnect.",
+    rateSaved: "Rate saved.",
+    chooseAccountIncome: "Choose the account that receives the income.",
+    chooseAccountExpense: "Choose the account or card you paid from.",
+    chooseFromTransfer: "Choose where the money comes from.",
+    chooseToTransfer: "Choose where the money goes.",
+    differentPlaces: "A transfer needs two different places.",
+    cardRepaymentFromAccount: "Card repayments must come from an account.",
+    collectFromOwedDebt: "Only money owed to you can be collected from a debt.",
+    payToOweDebt: "Payments can only go to debts you owe.",
+    validDate: "Choose a valid date.",
+    amountGreaterZero: "Enter an amount greater than zero.",
+    enterToAmount: "Enter the amount received in {currency}.",
+    enterRateForCurrency: "Enter the exchange rate used for {currency} (IQD per 1 {currency}). It is saved with this entry and never changes later.",
+    enterAccountName: "Enter an account name.",
+    enterOpeningBalance: "Enter the opening balance (use 0 if none).",
+    enterCardName: "Enter a name for the card.",
+    enterCreditLimit: "Enter the credit limit (0 or more).",
+    enterOwedAmount: "Enter the amount currently owed (0 or more).",
+    statementDueDay: "Statement and due days must be between 1 and 31.",
+    enterPersonLender: "Enter the person or lender.",
+    enterOriginalAmount: "Enter an original amount greater than zero.",
+    validDueDate: "Choose a valid due date or leave it empty.",
+    enterGoalName: "Enter a goal name.",
+    enterTargetAmount: "Enter a target amount greater than zero.",
+    enterSavedAmount: "Enter the amount already saved (0 or more).",
+    validTargetDate: "Choose a valid target date or leave it empty.",
+    categoryAlreadyExists: "A budget with this type, space, and category already exists. Edit that one instead.",
+    enterCategoryName: "Enter the category name.",
+    enterLimitGreaterZero: "Enter a monthly limit greater than zero.",
+    deleteConfirm: "Delete {label}? This cannot be undone.",
+    accountUsedByTransactions: "This account is used by transactions. Delete or edit those transactions first.",
+    cardUsedByTransactions: "This card has transactions. Delete or edit those transactions first.",
+    debtUsedByTransactions: "This debt has repayments recorded. Delete or edit those transactions first.",
+    goalUsedByTransactions: "This goal has contributions or withdrawals. Delete or edit those transactions first.",
+    accountDeleted: "deleted",
+    confirmation: "Delete",
+    footer: "Finance · Personal financial records · All data is private and stored in your own Firebase account.",
+    accountProtectionAmber: "Not configured",
+    protectionSignedIn: "Signed in",
+    noUpcoming: "No upcoming card payments or debt due dates.",
+    goalsPlural: "{n} goal(s). {saved} IQD saved in IQD goals.",
+    trackTargetsEmpty: "Track targets and contributions.",
+    overallLimitUsed: "Overall limit: {spent} of {limit} IQD used this month.",
+    overMonthlyLimit: "Over the monthly limit.",
+    nearLimit: "Near limit",
+    onTrack: "On track",
+    exceeded: "Exceeded",
+    spentOfLimit: "{spent} of {limit} IQD · remaining {remaining} IQD",
+    incomeExpense: "Income {income} · Expense {expense}",
+    percent: "{pct}%",
+    targetDateLabel: "target {date}",
+    originalCurrency: "original {amount} {currency}",
+    dueLabel: "due {date}",
+    remainingLabel: "remaining",
+    owedLabel: "owed",
+    savedOfTarget: "{saved} of {target} {currency}",
+    limitCurrency: "{limit} {currency}",
+    balanceCurrency: "balance {amount}",
+    owedCurrency: "owed {amount}",
+    savedCurrency: "saved {amount}",
+    typeCurrency: "{type} · {currency} · balance {amount}",
+    cardCurrency: "{name} card · {currency} · owed {amount}",
+    savingsCurrency: "{name} goal · {currency} · saved {amount}",
+    debtCurrency: "{name} · {currency} · remaining {amount}",
+    incomeLabel: "+ {amount} {currency}",
+    expenseLabel: "− {amount} {currency}",
+    dateType: "{date} · {type}",
+    approxIQD: "≈ {amount} IQD at saved rate {rate}",
+    fromTo: "{from} → {to}",
+    buyRateIQD: "Buy {rate} IQD",
+    sellRateIQD: "Sell {rate} IQD",
+    noGoalsYet: "No savings goals yet",
+    noGoalsText: "Create a goal with a target amount and an optional target date.",
+    sourceOfficial: "Official",
+    sourceMarket: "Iraqi market",
+    sourceManual: "Manual",
+    sourceRateDate: "{source} · {date}",
+    acctTypeCash: "Cash",
+    acctTypeBank: "Bank",
+    acctTypeOther: "Other",
+    directionOwe: "I owe",
+    directionOwed: "Owed to me",
+    cashIqds: "{n} IQD cash account(s)",
+    cardStatementDue: "Statement day {statement} · due day {due}",
+    accountsPlural: "{n} IQD account(s). Other currencies on Accounts page.",
+    rateNote: "{source} · {date}",
+    monthlySpent: "Spent this month, counting expenses and card purchases.",
+    transactionsPlural: "{n} active",
+    budgetOverallNoteFallback: "Monthly limits and category spending.",
+    transactionsHeader: "Income, expenses, and transfers in one searchable history.",
+    receiptInvoicePlural: "Receipt / invoice",
+    attachmentAdded: "Attachment added.",
+    attachmentRemoved: "Attachment removed.",
+    uploadFailed: "Upload failed. Please try again.",
+    downloadAttachment: "Download",
+    recurringGenerated: "{n} recurring transaction(s) generated.",
+    recurringNoneDue: "No recurring transactions are due right now.",
+    periodThisMonth: "This month",
+    periodThisYear: "This year",
+    customRange: "Custom range",
+    monthToMonth: "Month-to-month comparisons are planned."
+  },
+  ar: {
+    appTitle: "المالية — إدارة المال الشخصية",
+    checkingSession: "جاري التحقق من الجلسة الآمنة…",
+    appName: "المالية",
+    signInSubtitle: "سجل الدخول إلى سجلاتك المالية الخاصة.",
+    signIn: "تسجيل الدخول",
+    createAccount: "إنشاء حساب",
+    email: "البريد الإلكتروني",
+    password: "كلمة المرور",
+    passwordHint: "10 أحرف على الأقل، تشمل أحرفًا وأرقامًا.",
+    confirmPassword: "تأكيد كلمة المرور",
+    signInSubmit: "تسجيل الدخول",
+    registerSubmit: "إنشاء حساب",
+    workspace: "مساحة العمل",
+    overview: "نظرة عامة",
+    transactions: "المعاملات",
+    accounts: "الحسابات",
+    rates: "أسعار الصرف",
+    budgets: "الميزانيات",
+    cards: "بطاقات الائتمان",
+    debts: "الديون والقروض",
+    savings: "الأهداف الادخارية",
+    reports: "التقارير",
+    settings: "الإعدادات",
+    tagline: "نظرة واضحة واحدة على أموالك.",
+    yourFinances: "أموالك",
+    iqdPrimaryCurrency: "دينار عراقي · العملة الأساسية",
+    ownerAccount: "حساب المالك",
+    signOut: "تسجيل الخروج",
+    addTransaction: "＋ إضافة معاملة",
+    financialOverview: "نظرة عامة مالية",
+    overviewSubtitle: "الشخصي، والعائلي، والتجاري — معًا.",
+    loadingRecords: "جاري تحميل السجلات…",
+    totalBalance: "الرصيد الإجمالي",
+    iqd: "دينار عراقي",
+    acrossIQDAccounts: " Across الحسابات بالدينار العراقي",
+    incomeThisMonth: "الإيرادات هذا الشهر",
+    expensesThisMonth: "المصروفات هذا الشهر",
+    netSavings: "صافي المدخرات",
+    recordedIncomeAtSavedRates: "الإيرادات المسجلة بأسعار الصرف المحفوظة",
+    cardPurchasesIncluded: "مشتريات البطاقات مشمولة؛ التحويلات مستثناة",
+    financialSpaces: "المساحات المالية",
+    unifiedLedger: "دفتر الأستاذ الموحد",
+    personal: "شخصي",
+    family: "عائلي",
+    business: "تجاري",
+    spacesNote: "صافي هذا الشهر. المساحات هي تصنيفات إعداد التقارير، وليست حسابات منفصلة.",
+    exchangeRates: "أسعار الصرف",
+    manualOnly: "يدوي فقط",
+    enterRatesManually: "أدخل الأسعار يدويًا على صفحة أسعار الصرف. تحتفظ كل معاملة بسعر الصرف الخاص بها بشكل دائم.",
+    configureRates: "تكوين الأسعار",
+    incomeVsExpenses: "الإيرادات مقابل المصروفات",
+    thisMonthIQD: "هذا الشهر، دينار عراقي",
+    recentActivity: "النشاط الأخير",
+    viewAll: "عرض الكل",
+    budgetsLabel: "الميزانيات",
+    budgetNote: "حدود شهرية وإنفاق حسب الفئة.",
+    upcomingObligations: "الالتزامات القادمة",
+    savingsGoals: "الأهداف الادخارية",
+    trackTargets: "تتبع الأهداف والمساهمات.",
+    transactionsTitle: "المعاملات",
+    transactionsSubtitle: "الإيرادات والمصروفات والتحويلات في سجل واحد قابل للبحث.",
+    newTransaction: "＋ معاملة جديدة",
+    txSavedNotice: "تم الحفظ في حسابك الخاص. يتم حساب الأرصدة من هذه السجلات. تحتفظ entrées بالعملة الأجنبية بسعر الصرف الذي أدخلته في الوقت نفسه ولا تتغير لاحقًا.",
+    newTx: "معاملة جديدة",
+    close: "إغلاق",
+    type: "النوع",
+    expense: "مصروف",
+    income: "إيراد",
+    transfer: "تحويل",
+    amount: "المبلغ",
+    currency: "العملة",
+    usd: "USD",
+    eur: "EUR",
+    tryCur: "TRY",
+    gbp: "GBP",
+    txDate: "التاريخ",
+    financialSpace: "المساحة المالية",
+    txCategory: "الفئة",
+    chooseOrCreateCategory: "اختر أو أنشئ فئة",
+    paidFrom: "مدفوع من",
+    toLabel: "إلى",
+    amountReceived: "المبلغ المستلم",
+    exchangeRateUsed: "سعر الصرف المستخدم",
+    rateSavedForever: "يتم الحفظ مع هذه المدخلات. إدخال سعر جديد لاحقًا لا يغير السجل السابق.",
+    paymentMethod: "طريقة الدفع",
+    cash: "نقدًا",
+    bankTransfer: "تحويل بنكي",
+    debitCard: "بطاقة خصم",
+    creditCard: "بطاقة ائتمان",
+    other: "أخرى",
+    descriptionNotes: "وصف / ملاحظات",
+    saveTransaction: "حفظ المعاملة",
+    txCancel: "إلغاء",
+    searchTransactions: "البحث في المعاملات…",
+    allTypes: "جميع الأنواع",
+    allSpaces: "جميع المساحات",
+    allCurrencies: "جميع العملات",
+    tableDate: "التاريخ",
+    tableDescription: "الوصف",
+    tableCategory: "الفئة",
+    tableSpace: "المساحة",
+    tableAccount: "الحساب",
+    tableAmount: "المبلغ",
+    edit: "تعديل",
+    delete: "حذف",
+    loadingTransactions: "جاري تحميل المعاملات…",
+    noTransactions: "لم يتم تسجيل أي معاملات بعد. أضف معاملتك الأولى.",
+    noTransactionsMatch: "لا توجد معاملات تطابق هذه الفلاتر.",
+    accountsTitle: "الحسابات",
+    accountsSubtitle: "النقدية والحسابات البنكية المتعددة، منفصلة ومجتمعة.",
+    addAccount: "＋ إضافة حساب",
+    cashOnHand: "النقد المتوفر",
+    bankAccounts: "الحسابات البنكية",
+    combinedBalance: "الرصيد المجمّع",
+    noCashAccounts: "لا توجد حسابات نقدية بعد",
+    bankAccountsAdded: "تمت إضافة الحسابات البنكية",
+    combinedNote: "الحسابات بالدينار العراقي فقط حتى يتم ربط أسعار الصرف",
+    newAccount: "حساب جديد",
+    accountName: "اسم الحساب",
+    accountType: "النوع",
+    accountCurrency: "العملة",
+    openingBalance: "الرصيد الافتتاحي",
+    saveAccount: "حفظ الحساب",
+    accountCancel: "إغلاق",
+    accountList: "قائمة الحسابات",
+    multipleCurrencies: "عملات متعددة",
+    transfersReconciliation: "التحويلات والمطابقة",
+    transfersNote: "يتم تسجيل التحويلات بين الحسابات المملوكة على صفحة المعاملات ولا تُحتسب إيرادات أو مصروفات أبدًا.",
+    reconciliationNote: "المطابقة وتتبع رسوم تحويل العملات مخطط لها.",
+    ratesTitle: "أسعار الصرف",
+    ratesSubtitle: "أدخل وتتبع الأسعار يدويًا. تحتفظ كل معاملة بسعرها بشكل دائم.",
+    addRate: "＋ إدخال سعر",
+    ratesNotice: "هذه الأسعار للمرجع والمعاملات. تغيير سعر هنا لا يغير قيم المعاملات السابقة — كل معاملة تحتفظ بسعرها المحفوظ.",
+    usdIQD: "USD / IQD",
+    eurIQD: "EUR / IQD",
+    tryIQD: "TRY / IQD",
+    notEntered: "غير مدخَل",
+    enterRate: "إدخال سعر",
+    rateCurrency: "العملة",
+    rateSource: "المصدر",
+    buyRate: "سعر الشراء (دينار عراقي لكل وحدة)",
+    sellRate: "سعر البيع (دينار عراقي لكل وحدة)",
+    effectiveDate: "تاريخ السريان",
+    rateNotes: "ملاحظات (اختياري)",
+    saveRate: "حفظ السعر",
+    rateCancel: "إغلاق",
+    rateHistory: "تاريخ الأسعار",
+    rateHistoryNote: "تحفظ كل تنشئها السعر الذي تدخله في تلك اللحظة. تُحفظ الأسعار المسجلة للمرجع.",
+    noRates: "لا توجد أسعار مسجلة",
+    ratesEmptyText: "أدخل أسعار للمرجع ولاستخدامها عند إضافة معاملات بالعملات الأجنبية.",
+    budgetsTitle: "الميزانيات",
+    budgetsSubtitle: "خطط الإنفاق حسب الشهر والفئة.",
+    addBudget: "＋ إنشاء ميزانية",
+    monthlySpendingLimit: "الحد الأقصى للإنفاق الشهري",
+    categoryBudgets: "ميزانيات الفئات",
+    noOverallBudget: "لم يتم تكوين حد إجمالي",
+    categoryLimits: "حدود فئات مع مبالغ متبقية وتنبيهات.",
+    newBudget: "ميزانية جديدة",
+    budgetType: "نوع الميزانية",
+    overallMonthlyLimit: "الحد الشهري الإجمالي",
+    categoryLimit: "حد الفئة",
+    budgetSpace: "المساحة المالية",
+    allSpaces: "جميع المساحات",
+    budgetCategory: "الفئة",
+    categoryPlaceholder: "مثال: طعام",
+    monthlyLimit: "الحد الشهري (دينار عراقي)",
+    saveBudget: "حفظ الميزانية",
+    budgetCancel: "إغلاق",
+    budgetsThisMonth: "الميزانيات هذا الشهر",
+    budgetsNote: "تحتسب المصروفات ومشتريات البطاقات فقط. التحويلات والسدادات مستثناة.",
+    noBudgets: "لا توجد ميزانيات بعد",
+    noBudgetsText: "حدد حدًا شهريًا إجماليًا أو حدًا للفئة.",
+    cardsTitle: "بطاقات الائتمان",
+    cardsSubtitle: "تتبع الأرصدة والكشوفات والسدادات.",
+    addCard: "＋ إضافة بطاقة ائتمان",
+    cardsNotice: "تحتسب مشتريات البطاقات كمصروف مرة واحدة. سدادات البطاقات هي تحويلات من حساب إلى البطاقة ولا تحتسب كمصروفات.",
+    outstanding: "المستحق (بطاقات بالدينار)",
+    availableCredit: "الائتمان المتاح (بطاقات بالدينار)",
+    cardsCount: "البطاقات",
+    owedOnIQDCards: "مستحق على بطاقات بالدينار",
+    limitLessOutstanding: "الحد ناقص المستحق",
+    newCard: "بطاقة ائتمان جديدة",
+    cardName: "اسم البطاقة",
+    cardCurrency: "العملة",
+    creditLimit: "الحد الائتماني",
+    outstandingBalance: "الرصيد المستحق الآن",
+    statementDay: "يوم الكشف (1–31)",
+    dueDay: "يوم الاستحقاق (1–31)",
+    saveCard: "حفظ البطاقة",
+    cardCancel: "إغلاق",
+    yourCards: "بطاقاتك",
+    cardsEmptyText: "الرسوم والفوائد والحد الأدنى للسداد مخطط لها.",
+    debtsTitle: "الديون والقروض",
+    debtsSubtitle: "أموال مستحقة عليك وأموال مستحقة لك.",
+    addDebt: "＋ إضافة دين",
+    youOwe: "مستحق عليك (دينار)",
+    owedToYou: "مستحق لك (دينار)",
+    remainingBalance: "الرصيد المتبقي",
+    newDebt: "دين أو قرض جديد",
+    personLender: "الشخص أو الممول",
+    direction: "الاتجاه",
+    iOweThis: "أنا مستحق هذا",
+    owedToMe: "مستحق لي",
+    debtCurrency: "العملة",
+    originalAmount: "المبلغ الأصلي",
+    dueDate: "تاريخ الاستحقاق (اختياري)",
+    debtNotes: "ملاحظات",
+    saveDebt: "حفظ الدين",
+    debtCancel: "إغلاق",
+    debtsLoans: "الديون والقروض",
+    debtsEmptyText: "سجل السدادات كتحويلات من حساب إلى دين مستحق عليك، أو من دين مستحق لك إلى حساب.",
+    savingsTitle: "الأهداف الادخارية",
+    savingsSubtitle: "أعطِ كل هدف هدفًا واضحًا.",
+    addGoal: "＋ إنشاء هدف",
+    saved: "المدخر (أهداف بالدينار)",
+    goalsCount: "الأهداف",
+    savedNote: "المبلغ الافتتاحي زائد المساهمات ناقص عمليات السحب",
+    goalsCreated: "تم إنشاء الأهداف",
+    newGoal: "هدف ادخاري جديد",
+    goalName: "اسم الهدف",
+    goalCurrency: "العملة",
+    targetAmount: "المبلغ المستهدف",
+    alreadySaved: "مُدخر مسبقًا",
+    targetDate: "تاريخ الهدف (اختياري)",
+    saveGoal: "حفظ الهدف",
+    goalCancel: "إغلاق",
+    yourGoals: "أهدافك",
+    savingsNote: "أضف مالًا لهدف بتحويل من حساب إلى الهدف. اسحب بتحويل من الهدف إلى حساب. لا تُحتسب الادخارات كمصروفات أبدًا.",
+    reportsTitle: "التقارير والتحليلات",
+    reportsSubtitle: "افهم الإيرادات والمصروفات والاتجاهات.",
+    iqdrReporting: "إعداد التقارير بالدينار",
+    reportPeriod: "الفترة",
+    reportSpace: "المساحة",
+    income: "إيرادات",
+    expenses: "مصروفات",
+    net: "صافي",
+    transactionsCount: "المعاملات",
+    spendingByCategory: "الإنفاق حسب الفئة",
+    byFinancialSpace: "حسب المساحة المالية",
+    noExpenseData: "لا توجد بيانات إنفاق لهذه الفترة.",
+    uncategorised: "غير مصنف",
+    settingsTitle: "الإعدادات",
+    settingsSubtitle: "الأمان والتفضيلات وإدارة البيانات.",
+    accountProtection: "حماية الحساب",
+    notConfigured: "لم يتم التكوين",
+    accountEmailLabel: "مسجل الدخول باسم {email}",
+    firebaseAuthNote: "مصادقة Firebase مع أذونات Firestore خاصة بالمالك فقط. يمكن للمالك الموقّع دخوله فقط قراءة وكتابة سجلاته المالية.",
+    syncStatus: "حالة المزامنة",
+    connecting: "جارٍ الاتصال…",
+    language: "اللغة",
+    primaryCurrency: "العملة الأساسية",
+    fullTranslationPlanned: "تم تطبيق الترجمات الكاملة للعربية والكردية السوراني وتخطيطات RTL.",
+    backupRecovery: "النسخ الاحتياطي والاستعادة",
+    backupNote: "تتم مزامنة جميع السجلات تلقائيًا إلى حساب Firebase الخاص بك. يحتفظ Firestore بالPersistence غير المتصل بنسخة محلية عندما تكون دون اتصال.",
+    offlineSync: "بدون اتصال والمزامنة",
+    offlineNote: "يستخدم التطبيق Persistence Firestore غير المتصل. التغييرات التي تُجرى دون اتصال تُطرد وتُزامن تلقائيًا عند إعادة الاتصال. لا تُفقد أي بيانات.",
+    export: "تصدير",
+    exportTransactions: "تصدير المعاملات",
+    exportFormat: "الصيغة",
+    exportCsv: "CSV",
+    exportXlsx: "XLSX (إكسل)",
+    exportPdf: "PDF",
+    exportDateRange: "نطاق التاريخ",
+    exportFrom: "من",
+    exportTo: "إلى",
+    exportAllRecords: "تصدير جميع السجلات",
+    exporting: "جاري التصدير…",
+    exportDone: "تم التصدير بنجاح.",
+    attachments: "المرفقات",
+    addAttachment: "إضافة إيصال / فاتورة",
+    chooseFile: "اختر ملفًا",
+    noAttachments: "لا توجد مرفقات",
+    receiptInvoice: "إيصال / فاتورة",
+    recurring: "متكرر",
+    recurringTransactions: "المعاملات المتكررة",
+    addRecurring: "＋ إضافة معاملة متكررة",
+    frequency: "التكرار",
+    weekly: "أسبوعيًا",
+    monthly: "شهريًا",
+    yearly: "سنويًا",
+    startDate: "تاريخ البدء",
+    endDate: "تاريخ الانتهاء",
+    nextDue: "التالي للاستحقاق",
+    generateNow: "إنشاء المستحق الآن",
+    recurringNote: "تُنشأ المعاملات المتكررة تلقائيًا في تاريخ استحقاقها وتظهر كمعاملات عادية.",
+    dateRange: "نطاق التاريخ",
+    fromDate: "تاريخ البدء",
+    toDate: "تاريخ الانتهاء",
+    clearFilters: "مسح الفلاتر",
+    noRecurring: "لا توجد معاملات متكررة مُعدة بعد.",
+    syncing: "جاري مزامنة التغييرات إلى حسابك…",
+    allSaved: "تم حفظ جميع التغييرات إلى حسابك.",
+    offline: "بدون اتصال. التغييرات محفوظة على هذا الجهاز وستتم مزامنتها عند إعادة الاتصال.",
+    accessDenied: "تم رفض الوصول. هذا الحساب غير مصرح له بعرض هذه السجلات.",
+    connectionProblem: "مشكلة في الاتصال. يتم عرض آخر السجلات المحفوظة على هذا الجهاز.",
+    noRecordsYet: "لا توجد سجلات بعد. ابدأ بإضافة حساباتك وأرصدتها الافتتاحية على صفحة الحسابات.",
+    showingSavedRecords: "يتم عرض السجلات المحفوظة الخاصة بك. تُحسب الأرصدة من معاملاتك.",
+    signedInAs: "مسجل الدخول باسم {email}",
+    notSignedIn: "غير مسجل الدخول",
+    youAreNotSignedIn: "أنت غير مسجل الدخول.",
+    entrySaved: "تم حفظ المعاملة.",
+    savedOnDevice: "تم الحفظ على هذا الجهاز. سيتم المزامنة عند إعادة الاتصال.",
+    rateSaved: "تم حفظ السعر.",
+    chooseAccountIncome: "اختر الحساب الذي تستلم الإيراد إليه.",
+    chooseAccountExpense: "اختر الحساب أو البطاقة الذي دفعت منه.",
+    chooseFromTransfer: "اختر مصدر المال.",
+    chooseToTransfer: "اختر وجهة المال.",
+    differentPlaces: "يحتاج التحويل إلى مكانين مختلفين.",
+    cardRepaymentFromAccount: "يجب أن تأتي سدادات البطاقة من حساب.",
+    collectFromOwedDebt: "يمكن فقط استلام المال المستحق لك من دين.",
+    payToOweDebt: "يمكن فقط إرسال المدفوعات إلى ديون مستحقة عليك.",
+    validDate: "اختر تاريخًا صحيحًا.",
+    amountGreaterZero: "أدخل مبلغًا أكبر من صفر.",
+    enterToAmount: "أدخل المبلغ المستلم بـ {currency}.",
+    enterRateForCurrency: "أدخل سعر الصرف المستخدم لـ {currency} (دينار عراقي لكل 1 {currency}). يتم الحفظ مع هذه المدخلة ولا يتغير لاحقًا.",
+    enterAccountName: "أدخل اسم الحساب.",
+    enterOpeningBalance: "أدخل الرصيد الافتتاحي (استخدم 0 إذا لم يكن هناك شيء).",
+    enterCardName: "أدخل اسمًا للبطاقة.",
+    enterCreditLimit: "أدخل الحد الائتماني (0 أو أكثر).",
+    enterOwedAmount: "أدخل المبلغ المستحق حاليًا (0 أو أكثر).",
+    statementDueDay: "يجب أن يكون يوم الكشف ويوم الاستحقاق بين 1 و 31.",
+    enterPersonLender: "أدخل الشخص أو الممول.",
+    enterOriginalAmount: "أدخل المبلغ الأصلي أكبر من صفر.",
+    validDueDate: "اختر تاريخ استحقاق صحيحًا أو اتركه فارغًا.",
+    enterGoalName: "أدخل اسم الهدف.",
+    enterTargetAmount: "أدخل المبلغ المستهدف أكبر من صفر.",
+    enterSavedAmount: "أدخل المبلغ المدخر مسبقًا (0 أو أكثر).",
+    validTargetDate: "اختر تاريخ هدف صحيحًا أو اتركه فارغًا.",
+    categoryAlreadyExists: "ميزانية من هذا النوع والمساحة والفئة موجودة بالفعل. عدّل تلك الميزانية بدلاً من ذلك.",
+    enterCategoryName: "أدخل اسم الفئة.",
+    enterLimitGreaterZero: "أدخل حدًا شهريًا أكبر من صفر.",
+    deleteConfirm: "حذف {label}؟ لا يمكن التراجع عن ذلك.",
+    accountUsedByTransactions: "هذا الحساب مستخدم من معاملات. احذف أو حرر تلك المعاملات أولاً.",
+    cardUsedByTransactions: "هذه البطاقة بها معاملات. احذف أو حرر تلك المعاملات أولاً.",
+    debtUsedByTransactions: "لهذا الدين سدادات مسجلة. احذف أو حرر تلك المعاملات أولاً.",
+    goalUsedByTransactions: "لهذا الهدف مساهمات أو سحبات مسجلة. احذف أو حرر تلك المعاملات أولاً.",
+    accountDeleted: "تم الحذف",
+    confirmation: "حذف",
+    footer: "المالية · سجلات مالية شخصية · كل البيانات خاصة ومخزنة في حساب Firebase الخاص بك.",
+    accountProtectionAmber: "لم يتم التكوين",
+    protectionSignedIn: "مسجل الدخول",
+    noUpcoming: "لا توجد سدادات بطاقات قادمة أو تواريخ استحقاق ديون.",
+    goalsPlural: "{n} هدف(أهداف). {saved} دينار عراقي مدخر في أهداف بالدينار.",
+    trackTargetsEmpty: "تتبع الأهداف والمساهمات.",
+    overallLimitUsed: "الحد الإجمالي: {spent} من {limit} دينار عراقي مستخدمة هذا الشهر.",
+    overMonthlyLimit: "تجاوزت الحد الشهري.",
+    nearLimit: "قرب الحد",
+    onTrack: "على المسار الصحيح",
+    exceeded: "تجاوز",
+    spentOfLimit: "{spent} من {limit} دينار عراقي · المتبقي {remaining} دينار عراقي",
+    incomeExpense: "إيرادات {income} · مصروفات {expense}",
+    percent: "{pct}%",
+    targetDateLabel: "الهدف {date}",
+    originalCurrency: "الأصلي {amount} {currency}",
+    dueLabel: "استحقاق {date}",
+    remainingLabel: "متبقي",
+    owedLabel: "مستحق",
+    savedOfTarget: "{saved} من {target} {currency}",
+    limitCurrency: "{limit} {currency}",
+    balanceCurrency: "الرصيد {amount}",
+    owedCurrency: "مستحق {amount}",
+    savedCurrency: "مدخر {amount}",
+    typeCurrency: "{type} · {currency} · الرصيد {amount}",
+    cardCurrency: "{name} بطاقة · {currency} · مستحق {amount}",
+    savingsCurrency: "{name} هدف · {currency} · مدخر {amount}",
+    debtCurrency: "{name} · {currency} · المتبقي {amount}",
+    incomeLabel: "+ {amount} {currency}",
+    expenseLabel: "− {amount} {currency}",
+    dateType: "{date} · {type}",
+    approxIQD: "≈ {amount} دينار عراقي بسعر الصرف المحفوظ {rate}",
+    fromTo: "{from} → {to}",
+    buyRateIQD: "شراء {rate} دينار عراقي",
+    sellRateIQD: "بيع {rate} دينار عراقي",
+    noGoalsYet: "لا توجد أهداف ادخارية بعد",
+    noGoalsText: "أنشئ هدفًا بمبلغ مستهدف وتاريخ هدف اختياري.",
+    sourceOfficial: "رسمي",
+    sourceMarket: "السوق العراقي",
+    sourceManual: "يدوي",
+    sourceRateDate: "{source} · {date}",
+    acctTypeCash: "نقدي",
+    acctTypeBank: "بنكي",
+    acctTypeOther: "أخرى",
+    directionOwe: "أنا مستحق",
+    directionOwed: "مستحق لي",
+    cashIqds: "{n} حساب نقدي بالدينار",
+    cardStatementDue: "يوم الكشف {statement} · يوم الاستحقاق {due}",
+    accountsPlural: "{n} حساب بالدينار. العملات الأخرى على صفحة الحسابات.",
+    rateNote: "{source} · {date}",
+    monthlySpent: "الإنفاق هذا الشهر، مع احتساب المصروفات ومشتريات البطاقات.",
+    transactionsPlural: "{n} نشطة",
+    budgetOverallNoteFallback: "حدود شهرية وإنفاق حسب الفئة.",
+    transactionsHeader: "الإيرادات والمصروفات والتحويلات في سجل واحد قابل للبحث.",
+    receiptInvoicePlural: "إيصال / فاتورة",
+    attachmentAdded: "تمت إضافة المرفق.",
+    attachmentRemoved: "تمت إزالة المرفق.",
+    uploadFailed: "فشل الرفع. يرجى المحاولة مرة أخرى.",
+    downloadAttachment: "تنزيل",
+    recurringGenerated: "تم إنشاء {n} معاملة متكررة.",
+    recurringNoneDue: "لا توجد معاملات متكررة مستحقة الآن.",
+    periodThisMonth: "هذا الشهر",
+    periodThisYear: "هذا العام",
+    customRange: "نطاق مخصص",
+    monthToMonth: "مقارنات شهرًا بعد شهر مخطط لها."
+  },
+  ku: {
+    appTitle: "مالی — ناردنی پارهی کەسی",
+    checkingSession: "لێدوانکردنی شێوەی بەرهەمەوە…",
+    appName: "مالی",
+    signInSubtitle: "بچۆنە ژوورەوە بۆ ناردنی کەسییەکەت.",
+    signIn: "چوونەژوورەوە",
+    createAccount: "هیژماری نوێ دروست بکە",
+    email: "ئیمەیڵ",
+    password: "تێپەڕە",
+    passwordHint: "کامیان ١٠ نووسە، لە همی نووسە و ژمارە.",
+    confirmPassword: "تێپەڕەی بەدروستی",
+    signInSubmit: "چوونەژوورەوە",
+    registerSubmit: "هیژماری نوێ دروست بکە",
+    workspace: "ناوەی کار",
+    overview: "ژێرهەوە",
+    transactions: "لاوه‌كردنەکان",
+    accounts: "هیژماركان",
+    rates: "نرخه‌كانی گۆڕانکاری",
+    budgets: "بڕی بۆکارهێنان",
+    cards: "كارتە кредиت",
+    debts: "پارەدان و کارەبايەتی",
+    savings: "پارەبەخراو",
+    reports: "گەڕانەکان",
+    settings: "رێگەپێدان",
+    tagline: "یانەکەم بینینەی کاری."
+  }
+};
+
+// Current language (loaded from Firestore prefs on sign-in).
+function t(key, params = {}) {
+  let str = (STRINGS[currentLanguage] && STRINGS[currentLanguage][key])
+    || (STRINGS.en && STRINGS.en[key])
+    || key;
+  return str.replace(/\{(\w+)\}/g, (m, p) => params[p] !== undefined ? params[p] : m);
+}
+
+function applyDirection() {
+  const dir = LANGUAGES[currentLanguage]?.dir || "ltr";
+  document.documentElement.dir = dir;
+  document.body.dir = dir;
+  document.documentElement.lang = currentLanguage;
+  const sel = $("language");
+  if (sel) sel.value = currentLanguage;
+}
+
+async function setLanguage(lang) {
+  if (!LANGUAGES[lang]) return;
+  currentLanguage = lang;
+  applyDirection();
+  if (uid) {
+    writeRecord("settings", "prefs", { language: lang, primaryCurrency: "IQD" }, null);
+  }
+  refreshAll();
+}
+
+async function loadSavedLanguage() {
+  if (!uid) return;
+  try {
+    const prefsDoc = userDoc("settings", "prefs");
+    const snap = await getDoc(prefsDoc);
+    if (snap.exists() && snap.data().language && LANGUAGES[snap.data().language]) {
+      currentLanguage = snap.data().language;
+      applyDirection();
+    }
+  } catch (err) {
+    console.warn("Could not load language preference:", err && err.code);
+  }
+}
+
 // DOM builder: text is always text, never HTML.
 function h(tag, props, ...children) {
   const node = document.createElement(tag);
@@ -951,6 +1896,7 @@ async function ensureUserDocuments() {
     if (!(await getDoc(prefs)).exists()) {
       await setDoc(prefs, { uid, language: "en", primaryCurrency: "IQD", createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
     }
+    await loadSavedLanguage();
   } catch (err) {
     console.warn("Account setup not complete yet:", err && err.code);
   }
@@ -1938,12 +2884,7 @@ $("rateForm").addEventListener("submit", saveRate);
 $("reportPeriod")?.addEventListener("change", renderReports);
 $("reportSpace")?.addEventListener("change",  renderReports);
 
-$("language").addEventListener("change", e => {
-  if (e.target.value !== "en") {
-    alert("Arabic and Kurdish Sorani translations and RTL support are planned for the localization phase.");
-    e.target.value = "en";
-  }
-});
+$("language").addEventListener("change", e => setLanguage(e.target.value));
 
 window.addEventListener("online",  updateSyncStatus);
 window.addEventListener("offline", updateSyncStatus);
